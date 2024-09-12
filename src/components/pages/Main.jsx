@@ -1,5 +1,7 @@
+import Article from '../common/ui/Article';
+
 const Main = () => {
-  return <div className="Main">Main</div>;
+  return <Article className="Main">햅삐</Article>;
 };
 
 export default Main;
