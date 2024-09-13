@@ -1,5 +1,6 @@
 import { NavLink as RouterNavLink } from 'react-router-dom';
-const Link = ({ label, className = '', ...props }) => {
+
+const Link = ({ label, children, className = '', ...props }) => {
   return (
     <RouterNavLink
       className={({ isActive }) =>
@@ -7,7 +8,7 @@ const Link = ({ label, className = '', ...props }) => {
       }
       {...props}
     >
-      {label}
+      {label || children}
     </RouterNavLink>
   );
 };

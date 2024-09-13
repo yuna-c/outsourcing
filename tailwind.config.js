@@ -28,7 +28,8 @@ export default {
         'custom-teal': '#50B498',
         'custom-mint': '#9BDBA6',
         'custom-yellow': '#DEF9C4',
-        'custom-palemint': '#E9EFEC'
+        'custom-palemint': '#E9EFEC',
+        'custom-gray': '#ededed'
       }
     }
   },

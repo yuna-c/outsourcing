@@ -1,19 +1,39 @@
 import { HiMenu, HiX } from 'react-icons/hi';
-import { useState } from 'react';
+import { FaPills } from 'react-icons/fa';
+import { useState, useRef, useEffect } from 'react';
 import Button from './ui/Button';
 import Link from './ui/Link';
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleClickOutside = (event) => {
+    if (navRef.current && !navRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <nav aria-label="Global" className="relative flex items-center justify-between mx-auto md:px-2 Nav">
-      <div className="flex items-center Logo">
-        <Link to="/" label="홈" />
+    <nav
+      ref={navRef}
+      className="fixed z-10 left-0 right-0 top-6 flex items-center justify-between px-6 py-2 w-[90%] md:w-[80%] lg:w-[50%] xl:w-[30%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out"
+    >
+      <div className="flex items-center">
+        <Link to="/">
+          <FaPills className="text-3xl text-black" />
+        </Link>
       </div>
 
       <button onClick={toggleMenu} className="text-3xl md:hidden focus:outline-none" aria-label="Toggle menu">
@@ -22,9 +42,8 @@ const Nav = () => {
 
       <ul
         className={`${
-          isOpen ? 'block' : 'hidden'
-        } md:flex items-center justify-between absolute top-14 left-0 right-0 z-10 w-full rounded-md border border-black 
-        md:space-y-0 space-y-4 md:border-0 md:w-auto md:static md:p-0 p-3 bg-white md:bg-transparent transition-all duration-300 ease-in-out`}
+          isOpen ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 lg:opacity-100 md:opacity-100'
+        } md:flex items-center absolute md:relative top-14 md:top-0 left-0 right-0 z-10 md:p-0 py-3 px-2 w-full md:w-auto md:space-y-0 space-y-2 rounded-xl border md:border-0 bg-custom-gray md:bg-transparent transition-all duration-800 ease-in-out`}
       >
         <li className="mx-3">
           <Link to="/sample" label="샘플" />
