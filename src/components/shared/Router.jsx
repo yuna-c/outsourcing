@@ -8,6 +8,7 @@ import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
+import Detail from '../pages/Detail';
 
 const Router = () => {
   const publicRoutes = [
@@ -34,6 +35,10 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
+    },
+    {
+      path: '/detail',
+      element: <Detail />
     }
   ];
 
