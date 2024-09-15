@@ -7,6 +7,7 @@ import Sample from '../pages/Sample';
 import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from './ProtectedRoute';
+import Search from '../pages/Search';
 
 const Router = () => {
   const publicRoutes = [
@@ -29,6 +30,10 @@ const Router = () => {
     {
       path: '/sample',
       element: <Sample />
+    },
+    {
+      path: '/search',
+      element: <Search />
     }
   ];
 
