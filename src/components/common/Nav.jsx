@@ -3,10 +3,19 @@ import { FaPills } from 'react-icons/fa';
 import { useState, useRef, useEffect } from 'react';
 import Button from './ui/Button';
 import Link from './ui/Link';
+import { useLogout } from '../../core/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
+  const { accessToken, nickname, clearAuth } = useLogout();
+
+  const onHandleLogout = () => {
+    clearAuth();
+    navigate('/');
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -45,18 +54,36 @@ const Nav = () => {
           isOpen ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 lg:opacity-100 md:opacity-100'
         } md:flex items-center absolute md:relative top-14 md:top-0 left-0 right-0 z-10 md:p-0 py-3 px-2 w-full md:w-auto md:space-y-0 space-y-2 rounded-xl border md:border-0 bg-custom-gray md:bg-transparent transition-all duration-800 ease-in-out`}
       >
-        <li className="mx-3">
-          <Link to="/sample" label="샘플" />
-        </li>
-        <li className="mx-3">
-          <Link to="/login" label="로그인" />
-        </li>
-        <li className="mx-3">
-          <Link to="/signUp" label="회원가입" />
-        </li>
-        <li className="flex items-center ml-2">
-          <Button className="px-3 py-1 text-base">로그아웃</Button>
-        </li>
+        {accessToken ? (
+          <>
+            <li className="mx-3">
+              <Link to="/sample" label="샘플" />
+            </li>
+            <li className="mx-3">
+              <Link to="/examProfile" label="프로필" />
+            </li>
+            <li className="flex items-center ml-2">
+              <p className="px-3 py-1">
+                <span className="flex">
+                  <img src="" alt="" />
+                </span>
+                <span className="text-customPink"> {nickname} 님</span>
+              </p>
+              <Button onClick={onHandleLogout} className="px-3 py-1 text-base">
+                로그아웃
+              </Button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="mx-3">
+              <Link to="/login" label="로그인" />
+            </li>
+            <li className="mx-3">
+              <Link to="/signUp" label="회원가입" />
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
