@@ -44,6 +44,10 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
+        },
+        {
+          path: 'mypage',
+          element: <MyPage />
         }
       ]
     },
