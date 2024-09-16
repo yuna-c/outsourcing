@@ -44,20 +44,16 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
-        },
-        {
-          path: 'mypage',
-          element: <MyPage />
         }
       ]
     },
     {
-      path: '/examProfile',
+      path: '/mypage',
       element: <ProtectedRoute />,
       children: [
         {
           path: '',
-          element: <ExamProfile />
+          element: <MyPage />
         }
       ]
     }
