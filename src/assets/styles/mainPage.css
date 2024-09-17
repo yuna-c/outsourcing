@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+  @apply mx-auto border border-red-500;
+}
+.current_parmacies {
+  @apply min-h-[450px];
+}
+.pharmacy_selector_container {
+  @apply flex items-center justify-center flex-col h-28 gap-3;
+}
+.pharmacy_selector_title {
+  @apply font-bold text-center;
+}
+.select_region {
+  @apply pr-3 font-semibold;
+}
+.slider_container {
+  @apply text-center box-border;
+}
+.slider_item {
+  @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)]  h-[300px] relative rounded-[15px];
+}
+.slider_item_tag {
+  @apply bg-custom-deepgreen text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute;
+}
+.slider_item .slider_text_area {
+  @apply top-[90px] mx-auto left-[50%] translate-x-[-50%] w-[80%] leading-[40px] absolute overflow-hidden
+  whitespace-nowrap text-ellipsis;
+}
+.slider_item h3 {
+  @apply text-[23px] font-extrabold;
+}
+.highlight {
+  @apply inline bg-custom-mint px-[2px] rounded-[8px];
+}
+.address {
+  @apply text-[14px] leading-[20px] pt-[10px];
+}
+.slider_item button {
+  @apply absolute bottom-[30px] translate-x-[-50%]
+  py-[5px] px-[10px] bg-custom-teal min-w-[151px];
+}
+
+.current_parmacies select {
+  @apply border border-gray-500 w-[100px];
+}
+.slick-slide {
+  @apply px-[10px] pt-[5px];
+}
+.slick-prev:before,
+.slick-next:before {
+  @apply text-custom-deepgreen;
+}
+
+.block-text {
+  @apply max-w-[200px] overflow-hidden whitespace-nowrap text-ellipsis;
+}
