@@ -7,3 +7,8 @@ export const auth = axios.create({
 export const api = axios.create({
   baseURL: 'http://localhost:5000'
 });
+
+export const fetchPharmacies = async () => {
+  const response = await axios.get('http://localhost:5000/pharmacies');
+  return response.data;
+};
