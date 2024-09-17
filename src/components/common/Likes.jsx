@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useAuthStore from '../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
+import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 
 const Likes = () => {
@@ -104,9 +105,12 @@ const Likes = () => {
 
   return (
     <div className="relative">
-      <ul>
+      <ul className="border border-black rounded p-4 mb-4 flex justify-between items-center">
         {likedPharmacies.length === 0 ? (
-          <div>아직 좋아요한 약국이 없어요!</div>
+          <div className="flex gap-4 items-center">
+            <IoHeartDislikeCircleSharp size={45} />
+            <span className="font-bold text-xl">아직 좋아요한 약국이 없어요!</span>
+          </div>
         ) : (
           pharmacies
             .filter((pharmacy) => likedPharmacies.includes(pharmacy.name))

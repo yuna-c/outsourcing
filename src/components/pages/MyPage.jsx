@@ -36,29 +36,36 @@ const MyPage = () => {
       <div className="text-center mb-4">
         {/* 로그인한 사용자의 프로필 이미지 */}
         <img
-          src={avatar || '/default-avatar.png'} // 기본 프로필 이미지 사용
-          alt="User Profile image"
-          className="rounded-full w-48 h-48 mx-auto border-4 border-blue-500"
+          src={
+            avatar ||
+            'https://vmswxqpplehaedyndokq.supabase.co/storage/v1/object/public/profile/PSM_Dprofile.png?t=2024-09-17T15%3A11%3A53.550Z'
+          } // 기본 프로필 이미지 사용
+          alt="default Profile image"
+          className="rounded-full w-48 h-48 mx-auto border-4 border-custom-teal"
         />
         {/* 로그인한 사용자의 닉네임 */}
         <p className="mt-4 text-4xl">{nickname || 'Guest'}</p>
       </div>
-      <nav className="flex m-0">
+      <nav className="flex justify-center m-0 max-w-[500px] w-[100%]">
         <button
           onClick={() => handleTabChange('likes')}
-          className={`px-16 py-3 rounded-s-full ${currentTab === 'likes' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`w-[50%] px-16 py-3 rounded-s-full ${
+            currentTab === 'likes' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+          }`}
         >
           Likes
         </button>
-        <button
+        {/* <button
           onClick={() => handleTabChange('review')}
           className={`px-16 py-3 rounded-none ${currentTab === 'review' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
         >
           Review
-        </button>
+        </button> */}
         <button
           onClick={() => handleTabChange('profile')}
-          className={`px-16 py-3 rounded-r-full ${currentTab === 'profile' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`w-[50%] px-16 py-3 rounded-r-full ${
+            currentTab === 'profile' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+          }`}
         >
           Profile
         </button>

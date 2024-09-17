@@ -33,26 +33,24 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-4 mx-auto max-w-4xl">
+    <div className="relative max-w-[500px] mx-auto">
       {/* 프로필 이미지 업데이트 */}
-      <div className="text-center mb-6">
-        {/* <img
-          src={avatar || 'default-avatar.png'}
-          alt="Profile"
-          className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-        /> */}
+      <div>
+        <label htmlFor="nickname" className="font-bold text-xl">
+          프로필
+        </label>
         <input
           type="file"
           accept="image/*"
           onChange={handleFileChange}
-          className="mb-4 border border-gray-300 py-2 px-4 rounded-md"
+          className=" mt-2 mb-4 border border-black py-3 px-4 rounded w-[100%]"
         />
       </div>
 
       {/* 닉네임 업데이트 */}
-      <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-4 ">
         <div>
-          <label htmlFor="nickname" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="nickname" className="font-bold text-xl">
             닉네임
           </label>
           <input
@@ -60,17 +58,18 @@ const Profile = () => {
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 block w-full px-3 py-4 border border-black rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         </div>
-
-        <button
-          type="button"
-          onClick={handleNicknameChange}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          닉네임 변경하기
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={handleNicknameChange}
+            className="w-28 h-10 bg-custom-teal text-white py-2 px-4 rounded-md hover:bg-custom-green focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            변경하기
+          </button>
+        </div>
       </form>
     </div>
   );
