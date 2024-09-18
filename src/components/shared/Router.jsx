@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound';
 import Layout from '../common/Layout';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
+import Detail from '../pages/Detail';
 import ExamProfile from '../pages/ExamProfile';
 
 const Router = () => {
@@ -32,6 +33,10 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
+    },
+    {
+      path: '/detail',
+      element: <Detail />
     }
   ];
 
