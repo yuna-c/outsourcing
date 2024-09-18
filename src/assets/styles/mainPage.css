@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .main {
-  @apply mx-auto border border-red-500;
+  @apply mx-auto border;
 }
 .current_parmacies {
   @apply min-h-[450px];
@@ -56,7 +56,7 @@
 }
 
 .block-text {
-  @apply max-w-[200px] overflow-hidden whitespace-nowrap text-ellipsis;
+  @apply max-w-[100%] overflow-hidden whitespace-nowrap text-ellipsis;
 }
 
 /* main_banner css start */

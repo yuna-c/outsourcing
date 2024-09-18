@@ -76,12 +76,13 @@ const Main = () => {
     <Article className="main">
       {/* 배너 부분 */}
       <Banner handleSubmit={handleSubmit} query={query} setQuery={setQuery} />
+      <div className="max-w-[80%] mx-auto">
+        {/* 지금 영업중인 약국 */}
+        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} />
 
-      {/* 지금 영업중인 약국 */}
-      <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} />
-
-      {/* 주말 영업하는 약국 */}
-      <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} />
+        {/* 주말 영업하는 약국 */}
+        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} />
+      </div>
     </Article>
   );
 };
