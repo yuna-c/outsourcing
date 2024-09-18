@@ -8,11 +8,8 @@ import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
-<<<<<<< HEAD
 import Detail from '../pages/Detail';
-=======
 import ExamProfile from '../pages/ExamProfile';
->>>>>>> 2fff760772dff6f45d753aef967fd7e0402b1f04
 
 const Router = () => {
   const publicRoutes = [
@@ -37,7 +34,7 @@ const Router = () => {
       element: <Search />
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       element: <Detail />
     }
   ];
