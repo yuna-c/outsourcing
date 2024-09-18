@@ -7,7 +7,7 @@ import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
-export default function Signup() {
+export default function SignUp() {
   const [formData, setFormData] = useState({ id: '', password: '', nickname: '' });
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth); // use setAuth from the store
@@ -64,7 +64,7 @@ export default function Signup() {
   };
 
   return (
-    <Article className="SignUp">
+    <Article className="w-full xl:w-xl-1/2-important SignUp">
       <h1 className="mb-6 text-2xl font-bold">회원가입</h1>
 
       <form onSubmit={onHandleSubmit} className="w-full space-y-4">

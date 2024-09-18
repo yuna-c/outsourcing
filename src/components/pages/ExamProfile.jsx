@@ -32,7 +32,7 @@ const ExamProfile = () => {
   };
 
   return (
-    <Article className="Profile">
+    <Article className="w-full xl:w-xl-1/2-important Profile">
       <h1 className="mb-6 text-2xl font-bold">프로필 업데이트</h1>
 
       <form onSubmit={(e) => e.preventDefault()} className="w-full space-y-4">

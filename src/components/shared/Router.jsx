@@ -1,16 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import Layout from '../common/Layout';
+
 import Main from './../pages/Main';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
-import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
-import Search from '../pages/Search';
-import ProtectedRoute from './ProtectedRoute';
 import ExamProfile from '../pages/ExamProfile';
 
-import Github from '../pages/Github';
+import GuestRoute from './GuestRoute';
+import ProtectedRoute from './ProtectedRoute';
+import Kakao from '../pages/Kakao';
 
 const Router = () => {
   const publicRoutes = [
@@ -24,19 +25,33 @@ const Router = () => {
   const guestRoutes = [
     {
       path: '/signIn',
-      element: <SignIn />
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <SignIn />
+        }
+      ]
     },
     {
       path: '/signUp',
-      element: <SignUp />
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <SignUp />
+        }
+      ]
     },
     {
-      path: '/search',
-      element: <Search />
-    },
-    {
-      path: '/Github',
-      element: <Github />
+      path: '/kakao',
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <Kakao />
+        }
+      ]
     }
   ];
 

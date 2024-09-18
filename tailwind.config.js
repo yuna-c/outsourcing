@@ -30,6 +30,9 @@ export default {
         'custom-yellow': '#DEF9C4',
         'custom-palemint': '#E9EFEC',
         'custom-gray': '#ededed'
+      },
+      width: {
+        'xl-1/2-important': '50% !important'
       }
     }
   },
