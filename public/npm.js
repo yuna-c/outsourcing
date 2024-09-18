@@ -5,3 +5,5 @@
 // yarn json-server db.json --port 5000
 
 // npx tailwindcss init -p
+
+// yarn add @supabase/supabase-js

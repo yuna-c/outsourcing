@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import useAuthStore from '../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
+import { api } from '../../core/instance/axiosInstance';
 
 const Likes = () => {
   const { user, setUser } = useAuthStore((state) => ({
@@ -20,7 +20,7 @@ const Likes = () => {
   useEffect(() => {
     const fetchPharmacies = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/pharmacies');
+        const response = await api.get(`/pharmacies`);
         setPharmacies(response.data);
         setLoading(false);
       } catch (error) {
@@ -57,7 +57,7 @@ const Likes = () => {
   // 좋아요 업데이트 요청 함수
   const updateLikes = async (updatedLikes) => {
     try {
-      await axios.patch(`http://localhost:5000/users/${user.userId}`, {
+      await api.patch(`/users/${user.userId}`, {
         likedPharmacies: updatedLikes
       });
       // Zustand 상태 업데이트
@@ -105,11 +105,11 @@ const Likes = () => {
 
   return (
     <div className="relative">
-      <ul className="border border-black rounded p-4 mb-4 flex justify-between items-center">
+      <ul className="flex items-center justify-between p-4 mb-4 border border-black rounded">
         {likedPharmacies.length === 0 ? (
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <IoHeartDislikeCircleSharp size={45} />
-            <span className="font-bold text-xl">아직 좋아요한 약국이 없어요!</span>
+            <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
         ) : (
           pharmacies
@@ -117,9 +117,9 @@ const Likes = () => {
             .map((pharmacy) => (
               <li
                 key={pharmacy.name}
-                className="border border-gray-600 rounded p-4 mb-4 flex justify-between items-center"
+                className="flex items-center justify-between p-4 mb-4 border border-gray-600 rounded"
               >
-                <div className="flex gap-4 items-center">
+                <div className="flex items-center gap-4">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -132,9 +132,9 @@ const Likes = () => {
                     />
                   </button>
                   <div>
-                    <span className="font-bold text-xl">{pharmacy.name}</span>
+                    <span className="text-xl font-bold">{pharmacy.name}</span>
                     <p className="text-gray-600">{pharmacy.address}</p>
-                    <p className="font-bold text-xl mt-5 text-black">{pharmacy.time}</p>
+                    <p className="mt-5 text-xl font-bold text-black">{pharmacy.time}</p>
                   </div>
                 </div>
                 <div className="relative">
@@ -148,16 +148,16 @@ const Likes = () => {
                     <HiOutlineDotsVertical size={24} />
                   </button>
                   {showDeleteOptions === pharmacy.name && (
-                    <div className="absolute top-8 right-0 bg-white border border-gray-300 rounded shadow-lg z-10">
+                    <div className="absolute right-0 z-10 bg-white border border-gray-300 rounded shadow-lg top-8">
                       <button
                         onClick={() => handleDelete(pharmacy.name)}
-                        className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100"
                       >
                         삭제
                       </button>
                       <button
                         onClick={() => handleShare(pharmacy.name)}
-                        className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100"
                       >
                         공유
                       </button>
