@@ -3037,7 +3037,7 @@ vite@^5.4.5:
   version "5.4.4"
   resolved "https://registry.npmjs.org/vite/-/vite-5.4.4.tgz"
   integrity sha512-RHFCkULitycHVTtelJ6jQLd+KSAAzOgEYorV32R2q++M6COBjKJR6BxqClwp5sf0XaBDjVMuJ9wnNfyAJwjMkA==
->>>>>>> 4ced877047dcaeb34915c24cfd4e95b49a7b96b3
+>>>>>>> 3bba960b5c86a5fbcef44f516de51e8ae6e1aad8
   dependencies:
     esbuild "^0.21.3"
     postcss "^8.4.43"
