@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import Button from './Button';
 
-function SliderResponse({ pharmacies = [] }) {
+function SliderResponse({ pharmacies = [], tag }) {
   // 슬라이더 설정
   const settings = {
     dots: false,
@@ -51,7 +51,7 @@ function SliderResponse({ pharmacies = [] }) {
         <Slider {...settings} className="pt-5">
           {pharmacies.map((item) => (
             <div key={item.name} className="slider_item">
-              <span className="slider_item_tag">야간</span>
+              <span className="slider_item_tag">{tag}</span>
               <div className=" slider_text_area">
                 <h3>{item.name}</h3>
                 <p className="highlight">{item.time}</p>

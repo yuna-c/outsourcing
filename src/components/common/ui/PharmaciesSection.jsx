@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SelectBox from './SelectBox';
 import SliderResponse from './SliderResponse';
 
-const PharmaciesSection = ({ title, pharmacies, REGIONS }) => {
+const PharmaciesSection = ({ title, pharmacies, REGIONS, tag }) => {
   const [selectedRegion, setSelectedRegion] = useState('');
   return (
     <div className="current_pharmacies">
@@ -13,6 +13,7 @@ const PharmaciesSection = ({ title, pharmacies, REGIONS }) => {
       </div>
       <SliderResponse
         pharmacies={selectedRegion ? pharmacies.filter((item) => item.region.includes(selectedRegion)) : pharmacies}
+        tag={tag}
       />
     </div>
   );

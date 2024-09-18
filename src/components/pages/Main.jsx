@@ -51,7 +51,9 @@ const Main = () => {
 
   // 주말 운영 약국
   const filterWeekendPharmacies = () => {
-    const filteredWeekendPharmacies = data.filter((item) => item.time.includes('토') || item.time.includes('일'));
+    const filteredWeekendPharmacies = data.filter(
+      (item) => (item.time.includes('토') || item.time.includes('일')) && !item.time.includes('미운영')
+    );
     setWeekendPharmacies(filteredWeekendPharmacies);
     console.log('주말영업중약국:', filteredWeekendPharmacies);
   };
@@ -78,10 +80,10 @@ const Main = () => {
       <Banner handleSubmit={handleSubmit} query={query} setQuery={setQuery} />
       <div className="max-w-[80%] mx-auto">
         {/* 지금 영업중인 약국 */}
-        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} />
+        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
         {/* 주말 영업하는 약국 */}
-        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} />
+        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
       </div>
     </Article>
   );
