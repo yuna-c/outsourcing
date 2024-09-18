@@ -4,8 +4,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 function SliderResponse({ pharmacies = [], tag }) {
+  const navigate = useNavigate();
   // 슬라이더 설정
   const settings = {
     dots: false,
@@ -44,7 +46,10 @@ function SliderResponse({ pharmacies = [], tag }) {
       }
     ]
   };
-
+  // 약국 자세히 보기 버튼 클릭 시 해당 약국 ID를 사용하여 상세 페이지로 이동
+  const handleDetailClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
   return (
     <div className="slider_container">
       {pharmacies.length > 0 ? ( // 아이템이 있을 때만 슬라이더 렌더링
@@ -57,7 +62,7 @@ function SliderResponse({ pharmacies = [], tag }) {
                 <p className="highlight">{item.time}</p>
                 <p className="address block-text">{item.address}</p>
               </div>
-              <Button>약국 자세히 보기 &gt;&gt;</Button>
+              <Button onClick={() => handleDetailClick(item.id)}>약국 자세히 보기 &gt;&gt;</Button>
             </div>
           ))}
         </Slider>
