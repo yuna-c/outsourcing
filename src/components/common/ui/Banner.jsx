@@ -7,12 +7,18 @@ import mainDoctor from '/src/assets/images/main_doctor.png';
 import mainBanner from '/src/assets/images/main_banner.png';
 import './../../../assets/styles/mainPage.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Banner = () => {
+const Banner = ({ data }) => {
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  // 검색어 입력 시 해당하는 링크로 이동
   const handleSubmit = (e) => {
     e.preventDefault();
-    // API를 호출하여 검색 결과 가져오는 로직 추가
+    if (query) {
+      navigate(`/search?keyword=${encodeURIComponent(query)}&filter=name`);
+    }
   };
   return (
     <div className="main_banner " style={{ backgroundImage: `url(${mainBanner})` }}>
