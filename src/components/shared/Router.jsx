@@ -34,7 +34,7 @@ const Router = () => {
       element: <Search />
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       element: <Detail />
     }
   ];
