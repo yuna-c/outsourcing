@@ -2,16 +2,19 @@ import React from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import Button from './Button';
 
+import mainIcon from '/src/assets/images/main_icon.png';
+import mainDoctor from '/src/assets/images/main_doctor.png';
+import mainBanner from '/src/assets/images/main_banner.png';
+
 const Banner = ({ handleSubmit, query, setQuery }) => {
   return (
-    <div className="main_banner relative overflow-hidden border rounded-lg bg-[url('/public/main_banner.png')] h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center">
+    <div
+      className="main_banner relative overflow-hidden border rounded-lg h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center"
+      style={{ backgroundImage: `url(${mainBanner})` }}
+    >
+      <img src={mainIcon} alt="banner_icon" className="icon absolute left-5 top-5 w-[150px] md:w-[200px]" />
       <img
-        src="/public/main_icon.png"
-        alt="banner_icon"
-        className="icon absolute left-5 top-5 w-[150px] md:w-[200px]"
-      />
-      <img
-        src="/public/main_doctor.png"
+        src={mainDoctor}
         alt="doctor"
         className="doctor absolute right-0 z-10 bottom-[-30px] opacity-90 w-[100px] md:w-[150px]"
       />
