@@ -3,8 +3,7 @@ import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 
 import useAuthStore from '../../core/stores/useAuthStore';
-import { loginWithGithub } from '../../core/api/socialAuth';
-import { loginWithKakao } from '../../core/api/socialAuth';
+import { loginWithGithub, loginWithKakao } from '../../core/api/socialAuth';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';
@@ -77,9 +76,8 @@ const SignIn = () => {
   };
 
   return (
-    <Article className="w-full xl:w-xl-1/2-important SignIn">
+    <Article className="flex justify-center min-h-[calc(100vh-10rem)] px-5 py-2 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignIn">
       <h1 className="mb-6 text-2xl font-bold">로그인</h1>
-
       <form onSubmit={onHandleSubmit} className="w-full space-y-4">
         <Input
           type="text"
@@ -102,8 +100,7 @@ const SignIn = () => {
           로그인
         </Button>
       </form>
-
-      <div className="flex mt-3">
+      <div className="w-full mt-3 space-y-4">
         <Button onClick={onHandleGithubLogin} disabled={isLoggedIn} className="w-full p-2 mr-2 !bg-custom-green">
           <span className="flex items-center justify-center">
             <FaGithub className="mr-1 -mt-[2px] text-lg" />

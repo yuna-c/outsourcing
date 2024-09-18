@@ -9,7 +9,7 @@ import mainBanner from '/src/assets/images/main_banner.png';
 const Banner = ({ handleSubmit, query, setQuery }) => {
   return (
     <div
-      className="main_banner relative overflow-hidden border rounded-lg h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center"
+      className="main_banner relative overflow-hidden h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center"
       style={{ backgroundImage: `url(${mainBanner})` }}
     >
       <img src={mainIcon} alt="banner_icon" className="icon absolute left-5 top-5 w-[150px] md:w-[200px]" />

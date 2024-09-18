@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .main {
-  @apply mx-auto border border-red-500;
+  /* @apply mx-auto border border-red-500; */
 }
 .current_parmacies {
   @apply min-h-[450px];
 }
 .pharmacy_selector_container {
-  @apply flex items-center justify-center flex-col h-28 gap-3;
+  @apply flex flex-col items-center justify-center gap-3 h-28;
 }
 .pharmacy_selector_title {
   @apply font-bold text-center;
@@ -18,7 +18,7 @@
   @apply pr-3 font-semibold;
 }
 .slider_container {
-  @apply text-center box-border;
+  @apply box-border text-center;
 }
 .slider_item {
   @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)]  h-[300px] relative rounded-[15px];

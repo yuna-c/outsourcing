@@ -64,7 +64,7 @@ export default function SignUp() {
   };
 
   return (
-    <Article className="w-full xl:w-xl-1/2-important SignUp">
+    <Article className="flex justify-center  md:min-h-[calc(100vh-14rem)] min-h-[calc(100vh-10rem)] px-5 py-2 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignUp">
       <h1 className="mb-6 text-2xl font-bold">회원가입</h1>
 
       <form onSubmit={onHandleSubmit} className="w-full space-y-4">
