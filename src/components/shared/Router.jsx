@@ -9,7 +9,6 @@ import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
-import ExamProfile from '../pages/ExamProfile';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
