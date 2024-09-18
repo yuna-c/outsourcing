@@ -70,7 +70,7 @@ const Nav = () => {
               <Link to="/sample" label="샘플" />
             </li>
             <li className="mx-3">
-              <Link to="/examProfile" label="프로필" />
+              <Link to="/mypage" label="MyPage" />
             </li>
             <li className="flex items-center pl-3">
               <div className="flex items-center pr-1">

@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "json-server": "json-server --watch db.json --port 5000"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
     "@tanstack/react-query": "^5.55.4",
+    "@tanstack/react-query": "^5.56.1",
     "@tanstack/react-query-devtools": "^5.55.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
@@ -23,6 +25,9 @@
     "react-intersection-observer": "^9.13.1",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-router-dom": "^6.26.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.14",
     "tailwindcss": "^3.4.11",
     "zustand": "^4.5.5"
   },
@@ -36,6 +41,6 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "vite": "^5.4.1"
+    "vite": "^5.4.5"
   }
 }

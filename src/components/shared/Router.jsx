@@ -6,6 +6,7 @@ import Main from './../pages/Main';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
+import MyPage from '../pages/MyPage';
 import NotFound from '../pages/NotFound';
 import ExamProfile from '../pages/ExamProfile';
 
@@ -41,6 +42,10 @@ const Router = () => {
           element: <SignUp />
         }
       ]
+    },
+    {
+      path: '/detail/:id',
+      element: <Detail />
     }
   ];
 
@@ -53,16 +58,20 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
+        },
+        {
+          path: 'mypage',
+          element: <MyPage />
         }
       ]
     },
     {
-      path: '/examProfile',
+      path: '/mypage',
       element: <ProtectedRoute />,
       children: [
         {
           path: '',
-          element: <ExamProfile />
+          element: <MyPage />
         }
       ]
     }
