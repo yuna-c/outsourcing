@@ -58,3 +58,39 @@
 .block-text {
   @apply max-w-[200px] overflow-hidden whitespace-nowrap text-ellipsis;
 }
+
+/* main_banner css start */
+.main_banner {
+  @apply relative overflow-hidden border rounded-lg h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center;
+}
+.main_banner img:nth-child(1) {
+  @apply absolute left-5 top-5 w-[150px] md:w-[200px];
+}
+.main_banner img:nth-child(2) {
+  @apply absolute right-0 z-10 bottom-[-30px] opacity-90 w-[100px] md:w-[150px];
+}
+.main_text_area {
+  @apply flex flex-col items-center z-20 w-full max-w-[400px] gap-2;
+}
+.main_text_area h3:nth-child(1) {
+  @apply text-white text-[27px] font-bold;
+}
+.main_text_area h3:nth-child(2) {
+  @apply text-lg text-white;
+}
+.main_text_area h3 span {
+  @apply text-[#9bdba6];
+}
+.main_text_area p {
+  @apply pb-2 text-sm text-center text-white;
+}
+.main_text_area form {
+  @apply flex justify-center w-full;
+}
+.main_text_area form input {
+  @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-green focus:outline-none;
+}
+.main_text_area form button {
+  @apply flex items-center justify-center w-10 h-10 border-none rounded-md bg-custom-green;
+}
+/* main_banner css end */

@@ -9,7 +9,7 @@ import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
-
+import Search from '../pages/Search';
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -42,6 +42,10 @@ const Router = () => {
           element: <SignUp />
         }
       ]
+    },
+    {
+      path: '/search',
+      element: <Search />
     },
     {
       path: '/detail/:id',
