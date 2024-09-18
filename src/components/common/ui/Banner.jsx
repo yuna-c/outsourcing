@@ -6,8 +6,14 @@ import mainIcon from '/src/assets/images/main_icon.png';
 import mainDoctor from '/src/assets/images/main_doctor.png';
 import mainBanner from '/src/assets/images/main_banner.png';
 import './../../../assets/styles/mainPage.css';
+import { useState } from 'react';
 
-const Banner = ({ handleSubmit, query, setQuery }) => {
+const Banner = () => {
+  const [query, setQuery] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // API를 호출하여 검색 결과 가져오는 로직 추가
+  };
   return (
     <div className="main_banner " style={{ backgroundImage: `url(${mainBanner})` }}>
       <img src={mainIcon} alt="banner_icon" />
