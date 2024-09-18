@@ -28,7 +28,7 @@ const Profile = () => {
 
     if (response && response.success) {
       setAuth(accessToken, response.nickname, response.userId, response.avatar);
-      navigate('/');
+      navigate('/mypage');
     }
   };
 
