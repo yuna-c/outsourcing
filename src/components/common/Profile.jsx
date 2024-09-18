@@ -1,77 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import useAuthStore from '../../core/stores/useAuthStore'; // useAuthStore import
-import { useProfile } from '../../core/hooks/useAuth'; // useProfile import
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { updateProfile } from '../../core/api/auth';
+import useAuthStore from '../../core/stores/useAuthStore';
+
+import Button from '../common/ui/Button';
+import Input from '../common/ui/Input';
 
 const Profile = () => {
-  const { nickname: currentNickname, avatar, setAvatar } = useAuthStore();
-  const [nickname, setNickname] = useState('');
-  const [file, setFile] = useState(null);
-  const { mutate } = useProfile(); // mutate 함수 사용
+  const { accessToken, setAuth, currentNickname, currentAvatar } = useAuthStore((state) => ({
+    accessToken: state.accessToken,
+    setAuth: state.setAuth,
+    currentNickname: state.nickname,
+    currentAvatar: state.avatar
+  }));
 
-  useEffect(() => {
-    if (currentNickname) {
-      setNickname(currentNickname); // 초기 닉네임 설정
-    }
-  }, [currentNickname]);
+  const [nickname, setNickname] = useState(currentNickname || '');
+  const [avatar, setAvatar] = useState(null);
+  const navigate = useNavigate();
 
-  // 닉네임 변경 핸들러
-  const handleNicknameChange = () => {
-    mutate(nickname); // useProfile의 mutate를 사용해 닉네임 업데이트
-  };
+  const onHandleUpdateProfile = async () => {
+    const formData = new FormData();
 
-  // 프로필 이미지 파일 변경 핸들러
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatar(reader.result); // 이미지 URL로 avatar 상태 설정
-        setFile(selectedFile);
-      };
-      reader.readAsDataURL(selectedFile);
+    formData.append('nickname', nickname || currentNickname);
+    formData.append('avatar', avatar || currentAvatar);
+
+    const response = await updateProfile(formData);
+
+    if (response && response.success) {
+      setAuth(accessToken, response.nickname, response.userId, response.avatar);
+      navigate('/');
     }
   };
 
   return (
-    <div className="relative max-w-[500px] mx-auto">
-      {/* 프로필 이미지 업데이트 */}
-      <div>
-        <label htmlFor="nickname" className="font-bold text-xl">
-          프로필
+    <form onSubmit={(e) => e.preventDefault()} className="box-border relative mx-auto space-y-6">
+      {/* 닉네임 업데이트 */}
+      <fieldset>
+        <label htmlFor="nickname" className="flex mb-2 font-bold">
+          닉네임 변경
         </label>
-        <input
+        <Input
+          type="text"
+          id="nickname"
+          value={nickname}
+          minLength={1}
+          maxLength={10}
+          onChange={(e) => setNickname(e.target.value)}
+          placeholder={currentNickname || '변경하실 닉네임을 입력해 주세요'}
+        />
+      </fieldset>
+
+      {/* 프로필 이미지 업데이트 */}
+      <fieldset>
+        <label htmlFor="avatar" className="flex mb-2 font-bold">
+          프로필 변경
+        </label>
+        <Input
           type="file"
           accept="image/*"
-          onChange={handleFileChange}
-          className=" mt-2 mb-4 border border-black py-3 px-4 rounded w-[100%]"
+          id="avatar"
+          onChange={(e) => setAvatar(e.target.files[0])}
+          placeholder="업로드 할 파일을 선택해 주세요"
         />
-      </div>
+      </fieldset>
 
-      {/* 닉네임 업데이트 */}
-      <form onSubmit={(e) => e.preventDefault()} className="space-y-4 ">
-        <div>
-          <label htmlFor="nickname" className="font-bold text-xl">
-            닉네임
-          </label>
-          <input
-            id="nickname"
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            className="mt-2 block w-full px-3 py-4 border border-black rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          />
-        </div>
-        <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={handleNicknameChange}
-            className="w-28 h-10 bg-custom-teal text-white py-2 px-4 rounded-md hover:bg-custom-green focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            변경하기
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className="flex justify-end">
+        <Button onClick={onHandleUpdateProfile} className="w-full p-2 text-white bg-custom-teal">
+          변경 하기
+        </Button>
+      </div>
+    </form>
   );
 };
 

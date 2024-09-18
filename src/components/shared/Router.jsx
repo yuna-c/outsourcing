@@ -1,15 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import Layout from '../common/Layout';
+
 import Main from './../pages/Main';
-import Login from '../pages/Login';
+import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
-import NotFound from '../pages/NotFound';
-import Layout from '../common/Layout';
-import ProtectedRoute from './ProtectedRoute';
-import Search from '../pages/Search';
 import Detail from '../pages/Detail';
+import NotFound from '../pages/NotFound';
+import ExamProfile from '../pages/ExamProfile';
+
+import GuestRoute from './GuestRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 const Router = () => {
   const publicRoutes = [
@@ -22,16 +25,24 @@ const Router = () => {
   // 비로그인
   const guestRoutes = [
     {
-      path: '/login',
-      element: <Login />
+      path: '/signIn',
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <SignIn />
+        }
+      ]
     },
     {
       path: '/signUp',
-      element: <SignUp />
-    },
-    {
-      path: '/search',
-      element: <Search />
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <SignUp />
+        }
+      ]
     },
     {
       path: '/detail/:id',
@@ -48,15 +59,11 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
-        },
-        {
-          path: 'mypage',
-          element: <MyPage />
         }
       ]
     },
     {
-      path: '/mypage',
+      path: '/myPage',
       element: <ProtectedRoute />,
       children: [
         {

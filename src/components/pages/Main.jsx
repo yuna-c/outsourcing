@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import Article from '../common/ui/Article';
-
 import Banner from '../common/ui/Banner';
-import axios from 'axios';
 import './../../assets/styles/mainPage.css';
 
 import CurrentPharmaciesSection from '../common/ui/CurrentPharmaciesSection';
 import WeekendPharmaciesSection from '../common/ui/WeekendPharmaciesSection';
+import { api } from '../../core/instance/axiosInstance';
 
-const API = 'http://localhost:5000/pharmacies';
 const REGIONS = [
   '서울',
   '부산',
@@ -36,8 +34,13 @@ const Main = () => {
   const [weekendPharmacies, setWeekendPharmacies] = useState([]);
 
   const addData = async () => {
-    const response = await axios.get(API);
-    setData(response.data);
+    try {
+      const response = await api.get(`/pharmacies`);
+      setData(response.data);
+      console.log('가져온 데이터:', response.data);
+    } catch (error) {
+      console.error('데이터를 가져오는 중 오류 발생:', error);
+    }
   };
 
   // 현재 영업중인 약국
@@ -65,11 +68,11 @@ const Main = () => {
     console.log('영업 중인 약국:', filteredPharmacies);
   };
 
-  //주말 운영 약국
+  // 주말 운영 약국
   const filterWeekendPharmacies = () => {
     const filteredWeekendPharmacies = data.filter((item) => item.time.includes('토') || item.time.includes('일'));
     setWeekendPharmacies(filteredWeekendPharmacies);
-    console.log('주말영업중약귝', filteredWeekendPharmacies);
+    console.log('주말영업중약국:', filteredWeekendPharmacies);
   };
 
   useEffect(() => {
@@ -78,7 +81,6 @@ const Main = () => {
 
   useEffect(() => {
     if (data) {
-      console.log('가져온 데이터:', data);
       filterOpenPharmacies();
       filterWeekendPharmacies();
     }
