@@ -10,7 +10,7 @@
       "address": "서울 강남구 강남대로 478, 1층 (논현동)",
       "latitude": 37.5051069,
       "longitude": 127.0246713,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "2",
@@ -33,7 +33,8 @@
       "phone": "02-487-8880",
       "address": "서울 강동구 천호대로157길 54(천호동)",
       "latitude": 37.5420009,
-      "longitude": 127.1377667
+      "longitude": 127.1377667,
+      "likes": null
     },
     {
       "id": "4",
