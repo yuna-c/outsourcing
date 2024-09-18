@@ -6,8 +6,8 @@ import { fetchPharmacies } from '../../core/instance/axiosInstance';
 
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
-import { SlArrowRight, SlMagnifier } from 'react-icons/sl';
-import { CiMedicalCross } from 'react-icons/ci';
+import { SlArrowRight } from 'react-icons/sl';
+import { FaSearch } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 
 const Search = () => {
@@ -31,12 +31,22 @@ const Search = () => {
 
   // 검색어 변경될 때마다 searchParams 업뎃
   useEffect(() => {
+    const params = {};
+
+    // 검색한 키워드를 파라미터에 추가
     if (keyword) {
-      setSearchParams({ keyword: keyword });
-    } else {
-      setSearchParams({});
+      params.keyword = keyword;
     }
-  }, [keyword, setSearchParams]);
+
+    // 검색한 타입을 파라미터에 추가
+    if (searchType === 'name') {
+      params.filter = 'name';
+    } else {
+      params.filter = 'region';
+    }
+
+    setSearchParams(params);
+  }, [keyword, searchType, setSearchParams]);
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
@@ -46,10 +56,10 @@ const Search = () => {
     const { name, address, region, subregion } = pharmacy;
     let searchContent;
 
-    if (searchType === 'name') {
-      searchContent = name;
-    } else if (searchType === 'region') {
+    if (searchType === 'region') {
       searchContent = `${subregion} ${region} ${address}`;
+    } else if (searchType === 'name') {
+      searchContent = name;
     } else {
       searchContent = address;
     }
@@ -73,8 +83,10 @@ const Search = () => {
   const handleMoveMap = (lat, lng, id, pharmacy) => {
     setMapCenter({ lat, lng });
     panTo(lat, lng, 2); // 지도를 클릭한 약국의 위치로 이동
-    searchParams.set('select', id);
+
+    searchParams.set('select', id); // url에 선택된 약국의 id를 저장
     setSearchParams(searchParams);
+
     setSelectedPharmacy(pharmacy); // 선택된 약국 설정
   };
 
@@ -101,81 +113,91 @@ const Search = () => {
   };
 
   return (
-    <section className=" flex flex-row justify-center bg-custom-yellow p-5">
-      <article className="flex flex-col items-start bg-white p-5 w-96 h-[750px] gap-5">
-        <div>
+    <section className=" flex flex-row justify-center border-8 w-full rounded-lg">
+      {/* 검색영역 */}
+      <article className="flex flex-col items-start p-5 w-1/4 h-[750px] gap-5 ">
+        <div className="flex flex-row gap-1 items-center">
           <button
-            className={`px-4 py-2 ${
-              searchType === 'region' ? 'bg-blue-500 text-white' : 'bg-gray-200'
-            } font-semibold text-1x1 font-custom`}
+            className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
+              searchType === 'region' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+            } font-semibold text-sm font-custom`}
             onClick={() => setSearchType('region')}
           >
             지역명
           </button>
           <button
-            className={`px-4 py-2 ${
-              searchType === 'name' ? 'bg-blue-500 text-white' : 'bg-gray-200'
-            } font-semibold text-1x1 font-custom`}
+            className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
+              searchType === 'name' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+            } font-semibold text-sm font-custom`}
             onClick={() => setSearchType('name')}
           >
             약국명
           </button>
           <span className="text-sm"> 으로 검색하기</span>
         </div>
-        <div className="border-8 w-full flex flex-row pr-3">
-          <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} className="w-full p-3" />
+        <div className="border-8 w-full flex flex-row pr-3 rounded-lg">
+          <input
+            type="text"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            className="w-full p-3 rounded-lg"
+          />
+          {/*돋보기아이콘 클릭시 검색된 핀들이 맵 중심으로 이동*/}
           <button onClick={handleCenterMap}>
-            <SlMagnifier />
+            <FaSearch size={25} />
           </button>
         </div>
-        <ul className="flex flex-col gap-3 h-[100%]	overflow-auto">
+        <ul className="flex flex-col gap-3 h-[100%]	overflow-auto w-full">
           {searchPharmacies.map((pharmacy, id) => (
             <li
               key={id}
-              className="flex flex-row items-center gap-3"
+              className="flex flex-row justify-between items-center gap-3 cursor-pointer shadow-lg p-3 rounded-lg transition-transform transform hover:-translate-y-1 duration-500 w-full"
               onClick={() => handleMoveMap(pharmacy.latitude, pharmacy.longitude, pharmacy.id, pharmacy)} // 리스트 클릭시 맵의 중심 이동
             >
-              <CiMedicalCross />
-              <div>
-                <h3>{pharmacy.name}</h3>
-                <p>{pharmacy.address}</p>
-                <span>{pharmacy.phone}</span>
+              <div className="w-10/12">
+                <h3 className="text-lg font-semibold text-gray-800">{pharmacy.name}</h3>
+                <p className="mb-1 text-sm break-words text-gray-600">{pharmacy.address}</p>
+                <span className="mb-1 text-sm break-words text-gray-600">{pharmacy.phone}</span>
               </div>
-              <SlArrowRight />
+              <div className="bg-custom-teal p-3 rounded-full text-white">
+                <SlArrowRight size={15} />
+              </div>
             </li>
           ))}
         </ul>
       </article>
+      {/* 지도영역 */}
       <article className="w-full md:w-9/12">
         <Map center={mapCenter} style={{ width: '100%', height: '750px' }} level={3} onCreate={setMap}>
           {searchPharmacies.map((pharmacy) => (
-            <MapMarker
+            <MapMarker // 마커
               key={pharmacy.id}
               position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
               onClick={() => setSelectedPharmacy(pharmacy)}
             >
               {selectedPharmacy && selectedPharmacy.id === pharmacy.id && (
-                <CustomOverlayMap
+                <CustomOverlayMap // 커스텀오버레이
                   position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
-                  yAnchor={1.7}
+                  yAnchor={1.3}
+                  xAnchor={0.5}
                 >
-                  <div className="customoverlay  z-9999 bg-white">
-                    <div className="overlay-content">
-                      <div className="flex flex-row items-center justify-between">
-                        <h3>{selectedPharmacy.name}</h3>
-                        <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
-                          <IoClose />
-                        </div>
+                  <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
+                      <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
+                        <IoClose size={20} />
                       </div>
-                      <p>{selectedPharmacy.address}</p>
-                      <span>{selectedPharmacy.phone}</span>
-                      <button onClick={() => handleGoToDetail(selectedPharmacy.id)} className="overlay-detail-button">
-                        자세히 보기
-                      </button>
-                      <button onClick={handleCloseOverlay} className="overlay-close-button">
-                        닫기
-                      </button>
                     </div>
+                    <div className="text-gray-600">
+                      <p className="mb-1 text-sm break-words">{selectedPharmacy.address}</p>
+                      <span className="text-sm">{selectedPharmacy.phone}</span>
+                    </div>
+                    <button
+                      onClick={() => handleGoToDetail(selectedPharmacy.id)}
+                      className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
+                    >
+                      자세히 보기
+                    </button>
                   </div>
                 </CustomOverlayMap>
               )}

@@ -8,7 +8,11 @@ import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
+<<<<<<< HEAD
 import Detail from '../pages/Detail';
+=======
+import ExamProfile from '../pages/ExamProfile';
+>>>>>>> 0acbc763253e5998501be350cdbb9baad2710692
 
 const Router = () => {
   const publicRoutes = [
@@ -29,10 +33,6 @@ const Router = () => {
       element: <SignUp />
     },
     {
-      path: '/sample',
-      element: <Sample />
-    },
-    {
       path: '/search',
       element: <Search />
     },
@@ -45,12 +45,22 @@ const Router = () => {
   // 로그인
   const protectedRoutes = [
     {
-      path: '/',
+      path: '/sample',
       element: <ProtectedRoute />,
       children: [
         {
           path: '',
           element: <Sample />
+        }
+      ]
+    },
+    {
+      path: '/examProfile',
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: '',
+          element: <ExamProfile />
         }
       ]
     }
