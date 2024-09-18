@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { loginWithKakao } from '../../core/api/socialAuth';
 import { useNavigate } from 'react-router-dom';
-import Button from '../common/ui/Button';
-import Article from '../common/ui/Article';
+import Button from '../../components/common/ui/Button';
+import Article from '../../components/common/ui/Article';
 
 const Kakao = () => {
   const navigate = useNavigate();

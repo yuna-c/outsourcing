@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../core/api/supabase';
-import useAuthStore from '../../core/stores/useAuthStore';
 
+import useAuthStore from '../../core/stores/useAuthStore';
 import { loginWithGithub } from '../../core/api/socialAuth';
 import { loginWithKakao } from '../../core/api/socialAuth';
 
@@ -46,16 +46,11 @@ const SignIn = () => {
 
   const onHandleGithubLogin = async () => {
     try {
-      await loginWithGithub();
+      const { success } = await loginWithGithub();
 
-      const { data: sessionData } = await supabase.auth.getSession();
-      const session = sessionData.session;
-
-      if (session) {
-        const user = session.user;
-        setAuth(session.access_token, user.user_metadata.full_name, user.id, user.user_metadata.avatar_url);
-        // alert('GitHub 로그인 성공');
-        // navigate('/');
+      if (success) {
+        alert('GitHub 로그인 성공');
+        navigate('/');
       } else {
         alert('GitHub 로그인 실패');
       }

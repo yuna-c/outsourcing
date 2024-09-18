@@ -11,7 +11,6 @@ import ExamProfile from '../pages/ExamProfile';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
-import Kakao from '../pages/Kakao';
 
 const Router = () => {
   const publicRoutes = [
@@ -40,16 +39,6 @@ const Router = () => {
         {
           path: '',
           element: <SignUp />
-        }
-      ]
-    },
-    {
-      path: '/kakao',
-      element: <GuestRoute />,
-      children: [
-        {
-          path: '',
-          element: <Kakao />
         }
       ]
     }

@@ -94,9 +94,6 @@ const Nav = () => {
               <Link to="/signIn" label="로그인" />
             </li>
             <li className="mx-3">
-              <Link to="/kakao" label="카카오" />
-            </li>
-            <li className="mx-3">
               <Link to="/signUp" label="회원가입" />
             </li>
           </>

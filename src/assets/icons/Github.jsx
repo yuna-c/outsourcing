@@ -1,9 +1,9 @@
-import Article from '../common/ui/Article';
+import Article from '../../components/common/ui/Article';
 import { loginWithGithub } from '../../core/api/socialAuth';
 import { supabase } from '../../core/api/supabase';
 import useAuthStore from '../../core/stores/useAuthStore';
 
-import Button from '../common/ui/Button';
+import Button from '../../components/common/ui/Button';
 import { useNavigate } from 'react-router-dom';
 
 const Github = () => {
