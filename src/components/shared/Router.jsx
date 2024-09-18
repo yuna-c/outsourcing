@@ -4,8 +4,9 @@ import Main from './../pages/Main';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
-import Layout from '../common/Layout';
+import MyPage from '../pages/MyPage';
 import NotFound from '../pages/NotFound';
+import Layout from '../common/Layout';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
@@ -48,16 +49,20 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
+        },
+        {
+          path: 'mypage',
+          element: <MyPage />
         }
       ]
     },
     {
-      path: '/examProfile',
+      path: '/mypage',
       element: <ProtectedRoute />,
       children: [
         {
           path: '',
-          element: <ExamProfile />
+          element: <MyPage />
         }
       ]
     }
