@@ -47,7 +47,7 @@ const MyPage = () => {
         <p className="text-2xl font-bold">{nickname || 'Guest'}</p>
       </div>
 
-      <div className="flex justify-center w-full m-0 mb-10">
+      <div className="flex justify-center w-full h-12 m-0 mb-10">
         <button
           onClick={() => handleTabChange('likes')}
           className={`w-1/2 px-16 py-2 rounded-s-full text-base font-semibold ${
@@ -55,6 +55,14 @@ const MyPage = () => {
           }`}
         >
           Likes
+        </button>
+        <button
+          onClick={() => handleTabChange('review')}
+          className={`w-1/2 px-16 py-2  text-base font-semibold ${
+            currentTab === 'review' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
+          }`}
+        >
+          Review
         </button>
         <button
           onClick={() => handleTabChange('profile')}
