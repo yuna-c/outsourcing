@@ -9,7 +9,11 @@ import NotFound from '../pages/NotFound';
 import Layout from '../common/Layout';
 import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
+<<<<<<< HEAD
+import Detail from '../pages/Detail';
+=======
 import ExamProfile from '../pages/ExamProfile';
+>>>>>>> 0acbc763253e5998501be350cdbb9baad2710692
 
 const Router = () => {
   const publicRoutes = [
@@ -32,6 +36,10 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
+    },
+    {
+      path: '/detail',
+      element: <Detail />
     }
   ];
 
