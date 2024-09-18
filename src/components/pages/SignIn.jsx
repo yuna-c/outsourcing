@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../core/api/supabase';
 
 import useAuthStore from '../../core/stores/useAuthStore';
 import { loginWithGithub } from '../../core/api/socialAuth';
