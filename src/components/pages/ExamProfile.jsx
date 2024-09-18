@@ -8,30 +8,25 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const ExamProfile = () => {
-  const {
-    accessToken,
-    nickname: currentNickname,
-    setAuth
-  } = useAuthStore((state) => ({
+  const { accessToken, setAuth, currentNickname } = useAuthStore((state) => ({
     accessToken: state.accessToken,
-    nickname: state.nickname,
-    setAuth: state.setAuth
+    setAuth: state.setAuth,
+    currentNickname: state.nickname
   }));
 
   const [nickname, setNickname] = useState('');
   const [avatar, setAvatar] = useState(null);
   const navigate = useNavigate();
 
-  const handleUpdateProfile = async () => {
+  const onHandleUpdateProfile = async () => {
     const formData = new FormData();
-
-    formData.append('nickname', nickname || currentNickname);
+    formData.append('nickname', nickname);
     formData.append('avatar', avatar);
 
     const response = await updateProfile(formData);
 
     if (response && response.success) {
-      setAuth(accessToken, response.nickname || currentNickname, response.userId, response.avatar);
+      setAuth(accessToken, response.nickname, response.userId, response.avatar);
       navigate('/');
     }
   };
@@ -48,7 +43,7 @@ const ExamProfile = () => {
           minLength={1}
           maxLength={10}
           onChange={(e) => setNickname(e.target.value)}
-          placeholder="변경하실 닉네임을 입력해 주세요"
+          placeholder={currentNickname || '변경하실 닉네임을 입력해 주세요'}
         />
 
         <Input
@@ -58,7 +53,7 @@ const ExamProfile = () => {
           onChange={(e) => setAvatar(e.target.files[0])}
           placeholder="업로드 할 파일을 선택해 주세요"
         />
-        <Button onClick={handleUpdateProfile} className="w-full p-2">
+        <Button onClick={onHandleUpdateProfile} className="w-full p-2">
           변경 하기
         </Button>
       </form>

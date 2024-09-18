@@ -1,14 +1,13 @@
 import Article from '../common/ui/Article';
-// import useAuthStore from '../../core/stores/useAuthStore'; // Zustand 스토어 import
-import { supabase } from '../../core/api/supabase';
+import { loginWithGithub } from '../../core/api/socialAuth';
+import useAuthStore from '../../core/stores/useAuthStore';
+
+import Button from '../common/ui/Button';
 
 const Github = () => {
-  console.log(supabase);
-  // Zustand 스토어에서 필요한 함수와 상태 가져오기
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
-  const loginWithGithub = useAuthStore((state) => state.loginWithGithub);
 
-  const handleGithubLogin = async () => {
+  const onHandleGithubLogin = async () => {
     try {
       await loginWithGithub();
     } catch (error) {
@@ -18,11 +17,9 @@ const Github = () => {
 
   return (
     <Article>
-      <div>
-        <button onClick={handleGithubLogin} disabled={isLoggedIn}>
-          GitHub 로그인
-        </button>
-      </div>
+      <Button onClick={onHandleGithubLogin} disabled={isLoggedIn} className="w-full p-2">
+        GitHub 로그인
+      </Button>
     </Article>
   );
 };

@@ -22,6 +22,7 @@ const Nav = () => {
   const onHandleLogout = () => {
     clearAuth();
     navigate('/');
+    setIsOpen(false);
   };
 
   const toggleMenu = () => {
@@ -47,7 +48,7 @@ const Nav = () => {
       className="fixed z-10 left-0 right-0 top-6 flex items-center justify-between px-5 py-2 w-[95%] md:w-[85%] lg:w-[50%] xl:w-[50%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out"
     >
       <div className="flex items-center">
-        <Link to="/">
+        <Link to="/" onClick={() => setIsOpen(false)}>
           <FaPills className="text-3xl text-black" />
         </Link>
       </div>
@@ -64,10 +65,10 @@ const Nav = () => {
         {isLoggedIn ? (
           <>
             <li className="mx-3">
-              <Link to="/sample" label="샘플" />
+              <Link to="/sample" label="샘플" onClick={() => setIsOpen(false)} />
             </li>
             <li className="mx-3">
-              <Link to="/examProfile" label="프로필" />
+              <Link to="/examProfile" label="프로필" onClick={() => setIsOpen(false)} />
             </li>
             <li className="flex items-center px-3">
               <div className="flex items-center pr-1">
@@ -88,13 +89,13 @@ const Nav = () => {
         ) : (
           <>
             <li className="mx-3">
-              <Link to="/signIn" label="로그인" />
+              <Link to="/signIn" label="로그인" onClick={() => setIsOpen(false)} />
             </li>
             <li className="mx-3">
-              <Link to="/github" label="깃헙" />
+              <Link to="/github" label="깃헙" onClick={() => setIsOpen(false)} />
             </li>
             <li className="mx-3">
-              <Link to="/signUp" label="회원가입" />
+              <Link to="/signUp" label="회원가입" onClick={() => setIsOpen(false)} />
             </li>
           </>
         )}
