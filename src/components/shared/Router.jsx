@@ -1,14 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Main from './../pages/Main';
-import Login from '../pages/Login';
+import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
 import Layout from '../common/Layout';
 import NotFound from '../pages/NotFound';
-import ProtectedRoute from './ProtectedRoute';
 import Search from '../pages/Search';
+import ProtectedRoute from './ProtectedRoute';
 import ExamProfile from '../pages/ExamProfile';
+
+import Github from '../pages/Github';
 
 const Router = () => {
   const publicRoutes = [
@@ -21,8 +23,8 @@ const Router = () => {
   // 비로그인
   const guestRoutes = [
     {
-      path: '/login',
-      element: <Login />
+      path: '/signIn',
+      element: <SignIn />
     },
     {
       path: '/signUp',
@@ -31,6 +33,10 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
+    },
+    {
+      path: '/Github',
+      element: <Github />
     }
   ];
 
