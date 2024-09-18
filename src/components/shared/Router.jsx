@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
+import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
 import ExamProfile from '../pages/ExamProfile';
 
@@ -58,15 +59,11 @@ const Router = () => {
         {
           path: '',
           element: <Sample />
-        },
-        {
-          path: 'mypage',
-          element: <MyPage />
         }
       ]
     },
     {
-      path: '/mypage',
+      path: '/myPage',
       element: <ProtectedRoute />,
       children: [
         {

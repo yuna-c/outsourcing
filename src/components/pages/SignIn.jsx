@@ -104,14 +104,14 @@ const SignIn = () => {
         </Button>
       </form>
 
-      <div className="flex mt-2">
+      <div className="flex mt-3">
         <Button onClick={onHandleGithubLogin} disabled={isLoggedIn} className="w-full p-2 mr-2 !bg-custom-green">
           <span className="flex items-center justify-center">
             <FaGithub className="mr-1 -mt-[2px] text-lg" />
             GitHub 로그인
           </span>
         </Button>
-        <Button onClick={onHandleKakaoLogin} disabled={isLoggedIn} className="w-full p-2 !bg-custom-mint">
+        <Button onClick={onHandleKakaoLogin} disabled={isLoggedIn} className="w-full p-2 !bg-kakao-yellow ">
           <span className="flex items-center justify-center">
             <RiKakaoTalkFill className="mr-1 -mt-[2px] text-lg" />
             Kakao 로그인

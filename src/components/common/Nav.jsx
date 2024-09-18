@@ -46,7 +46,7 @@ const Nav = () => {
   return (
     <nav
       ref={navRef}
-      className=" fixed z-10 left-0 right-0 top-6 flex items-center justify-between px-5 py-2 w-[95%] md:w-[85%] lg:w-[50%] xl:w-[50%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out Nav"
+      className=" fixed z-30 left-0 right-0 top-6 flex items-center justify-between px-5 py-2 w-[95%] md:w-[85%] lg:w-[50%] xl:w-[50%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out Nav"
     >
       <div className="flex items-center">
         <Link to="/" onClick={() => setIsOpen(false)}>
@@ -70,10 +70,10 @@ const Nav = () => {
               <Link to="/sample" label="샘플" />
             </li>
             <li className="mx-3">
-              <Link to="/mypage" label="MyPage" />
+              <Link to="/myPage" label="마이페이지" />
             </li>
-            <li className="flex items-center pl-3">
-              <div className="flex items-center pr-1">
+            <li className="flex items-center">
+              <div className="flex items-center pr-1 mr-2">
                 <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full">
                   <img
                     src={avatar || 'https://via.placeholder.com/30'}

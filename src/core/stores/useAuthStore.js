@@ -19,6 +19,7 @@ const useAuthStore = create(
       setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
 
       setAuth: (accessToken, nickname, userId, avatar) => {
+        console.log('setAuth 호출됨:', { accessToken, nickname, userId, avatar });
         set({
           accessToken,
           nickname,

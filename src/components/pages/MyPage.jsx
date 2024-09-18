@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import useAuthStore from '../../core/stores/useAuthStore';
+
 import Likes from '../common/Likes';
 import Review from '../common/Review';
 import Profile from '../common/Profile';
-import useAuthStore from '../../core/stores/useAuthStore';
+import Article from '../common/ui/Article';
 
 const MyPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentTab, setCurrentTab] = useState('likes');
 
-  // Zustand 스토어에서 사용자 정보를 가져오는 함수
   const { avatar, nickname } = useAuthStore((state) => ({
     avatar: state.avatar,
     nickname: state.nickname
@@ -32,50 +33,45 @@ const MyPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-evenly min-h-screen">
-      <div className="text-center mb-4">
+    <Article className="items-center w-full xl:w-xl-1/2-important">
+      {/* flex flex-col items-center min-h-screen justify-evenly */}
+      <div className="my-10 text-center">
         {/* 로그인한 사용자의 프로필 이미지 */}
         <img
-          src={
-            avatar ||
-            'https://vmswxqpplehaedyndokq.supabase.co/storage/v1/object/public/profile/PSM_Dprofile.png?t=2024-09-17T15%3A11%3A53.550Z'
-          } // 기본 프로필 이미지 사용
-          alt="default Profile image"
-          className="rounded-full w-48 h-48 mx-auto border-4 border-custom-teal"
+          src={avatar || 'https://via.placeholder.com/30'}
+          alt={nickname}
+          className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-teal"
         />
+
         {/* 로그인한 사용자의 닉네임 */}
-        <p className="mt-4 text-4xl">{nickname || 'Guest'}</p>
+        <p className="text-2xl font-bold">{nickname || 'Guest'}</p>
       </div>
-      <nav className="flex justify-center m-0 max-w-[500px] w-[100%]">
+
+      <div className="flex justify-center w-full m-0 mb-10">
         <button
           onClick={() => handleTabChange('likes')}
-          className={`w-[50%] px-16 py-3 rounded-s-full ${
-            currentTab === 'likes' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+          className={`w-1/2 px-16 py-2 rounded-s-full text-base font-semibold ${
+            currentTab === 'likes' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
           }`}
         >
           Likes
         </button>
-        {/* <button
-          onClick={() => handleTabChange('review')}
-          className={`px-16 py-3 rounded-none ${currentTab === 'review' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-        >
-          Review
-        </button> */}
         <button
           onClick={() => handleTabChange('profile')}
-          className={`w-[50%] px-16 py-3 rounded-r-full ${
-            currentTab === 'profile' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+          className={`w-1/2 px-16 py-2 rounded-r-full text-base font-semibold ${
+            currentTab === 'profile' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
           }`}
         >
           Profile
         </button>
-      </nav>
-      <div className="w-full h-80 overflow-y-auto mt-4">
+      </div>
+
+      <div className="w-full mt-4">
         {currentTab === 'likes' && <Likes />}
         {currentTab === 'review' && <Review />}
         {currentTab === 'profile' && <Profile />}
       </div>
-    </div>
+    </Article>
   );
 };
 
