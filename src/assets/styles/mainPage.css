@@ -17,6 +17,7 @@
 .select_region {
   @apply pr-3 font-semibold;
 }
+/* slider css start */
 .slider_container {
   @apply text-center box-border;
 }
@@ -58,7 +59,11 @@
 .block-text {
   @apply max-w-[100%] overflow-hidden whitespace-nowrap text-ellipsis;
 }
-
+.slick-prev:before,
+.slick-next:before {
+  @apply text-custom-deepgreen opacity-100 !important;
+}
+/* slider css end */
 /* main_banner css start */
 .main_banner {
   @apply relative overflow-hidden border rounded-lg h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center;
