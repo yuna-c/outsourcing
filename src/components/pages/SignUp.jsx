@@ -1,17 +1,24 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../core/stores/useAuthStore';
+import { useAuthActions } from '../../core/hooks/useAuthActions';
 import useFormValidation from '../../core/hooks/useFormValidation';
+import supabase from '../../core/instance/supabase';
 
 import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({ id: '', password: '', nickname: '' });
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    nickname: '',
+    id: ''
+  });
   const { validateForm } = useFormValidation();
+  const { signUp } = useAuthActions();
+
   const navigate = useNavigate();
 
   const onHandleSubmit = async (e) => {
@@ -22,14 +29,19 @@ const SignUp = () => {
 
     try {
       const response = await register(formData);
+
+      signUp.mutate({
+        id: formData.id,
+        email: formData.email,
+        password: formData.password,
+        nickname: formData.nickname
+      });
+      await supabase.auth.signOut();
+
       console.log('회원가입 API 응답값: ', response);
-
       if (response) {
-        const { accessToken, userId, nickname, avatar } = response;
-        setAuth(accessToken, nickname, userId, avatar);
-
-        alert('회원가입 및 자동 로그인 완료');
-        navigate('/');
+        alert('회원가입 완료. 로그인 페이지로 이동합니다.');
+        navigate('/signIn');
       }
     } catch (error) {
       console.error('회원가입 실패: ', error);
@@ -57,12 +69,22 @@ const SignUp = () => {
           placeholder="닉네임을 입력해 주세요"
           required
         />
+
         <Input
           type="text"
           name="id"
           value={formData.id}
           onChange={onHandleChange}
           placeholder="아이디를 입력해 주세요"
+          required
+        />
+
+        <Input
+          type="text"
+          name="email"
+          value={formData.email}
+          onChange={onHandleChange}
+          placeholder="이메일을 입력해 주세요"
           required
         />
         <Input

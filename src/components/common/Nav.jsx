@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
+import { useAuthActions } from '../../core/hooks/useAuthActions';
 
 import { HiMenu, HiX } from 'react-icons/hi';
 // import { FaPills } from 'react-icons/fa';
@@ -22,8 +23,10 @@ const Nav = () => {
     nickname: state.nickname,
     clearAuth: state.clearAuth
   }));
+  const { signOut } = useAuthActions();
 
   const onHandleLogout = useCallback(() => {
+    signOut.mutate();
     clearAuth();
     navigate('/');
     setIsOpen(false);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useAuthStore from '../../core/stores/useAuthStore';
+import useAuthStore from '../../core/stores/useAuthStore_';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';

@@ -3,6 +3,7 @@ import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 
 import useAuthStore from '../../core/stores/useAuthStore';
+import { useAuthActions } from '../../core/hooks/useAuthActions';
 import { loginWithGithub, loginWithKakao } from '../../core/api/social';
 
 import { FaGithub } from 'react-icons/fa6';
@@ -14,6 +15,7 @@ import Input from '../common/ui/Input';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { signIn } = useAuthActions();
   const [formData, setFormData] = useState({ id: '', password: '' });
 
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -27,18 +29,48 @@ const SignIn = () => {
     }));
   };
 
+  // const onHandleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const { accessToken, userId, nickname, avatar } = await login(formData);
+  //   console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
+
+  //   if (accessToken) {
+  //     setAuth(accessToken, nickname, userId, avatar);
+  //     alert('로그인 성공');
+  //     navigate('/');
+  //   } else {
+  //     alert('로그인 실패');
+  //   }
+  // };
+
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    const { accessToken, userId, nickname, avatar } = await login(formData);
-    console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
+    try {
+      // 1. JWT 서버에 로그인 요청
+      const { accessToken, userId, nickname, avatar } = await login(formData);
+      console.log('JWT 로그인 API 응답값: ', accessToken, userId, nickname, avatar);
 
-    if (accessToken) {
-      setAuth(accessToken, nickname, userId, avatar);
-      alert('로그인 성공');
-      navigate('/');
-    } else {
-      alert('로그인 실패');
+      if (accessToken) {
+        // JWT 서버 로그인 성공 시 상태 업데이트
+        setAuth(accessToken, nickname, userId, avatar);
+        alert('JWT 서버 로그인 성공');
+
+        console.log('Supabase 로그인 시도');
+        const result = await signIn.mutateAsync({
+          email: formData.id,
+          password: formData.password
+        });
+        console.log('Supabase 로그인 성공:', result);
+
+        navigate('/');
+      } else {
+        alert('JWT 서버 로그인 실패');
+      }
+    } catch (error) {
+      console.error('로그인 중 에러:', error.message);
+      alert('로그인 중 에러가 발생했습니다.');
     }
   };
 
@@ -87,6 +119,7 @@ const SignIn = () => {
           placeholder="아이디를 입력해 주세요"
           required
         />
+
         <Input
           type="password"
           name="password"
