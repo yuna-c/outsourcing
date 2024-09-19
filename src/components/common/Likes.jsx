@@ -4,6 +4,7 @@ import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { api } from '../../core/instance/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
   const { user, setUser } = useAuthStore((state) => ({
@@ -15,6 +16,8 @@ const Likes = () => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   // 약국 데이터 불러오기
   useEffect(() => {
@@ -140,7 +143,8 @@ const Likes = () => {
             .map((pharmacy) => (
               <li
                 key={pharmacy.name}
-                className="flex items-center justify-between p-4 mb-4 border border-gray-600 rounded w-full"
+                className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-gray-600 rounded w-full"
+                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 디테일 페이지로
               >
                 <div className="flex gap-4">
                   <button
