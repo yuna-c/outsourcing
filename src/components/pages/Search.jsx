@@ -180,6 +180,7 @@ const Search = () => {
                   position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
                   yAnchor={1.3}
                   xAnchor={0.5}
+                  zIndex={1}
                 >
                   <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
                     <div className="flex justify-between items-center mb-2">
@@ -194,7 +195,7 @@ const Search = () => {
                     </div>
                     <button
                       onClick={() => handleGoToDetail(selectedPharmacy.id)}
-                      className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
+                      className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center "
                     >
                       자세히 보기
                     </button>

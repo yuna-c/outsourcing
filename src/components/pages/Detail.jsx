@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../core/instance/axiosInstance';
 import { Map } from 'react-kakao-maps-sdk';
-import { updateLikes } from '../../core/instance/axiosInstance'; // 좋아요 업데이트 함수
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'; // 하트 아이콘 불러오기
+import { updateLikes } from '../../core/instance/axiosInstance';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 const fetchData = async (id) => {
   try {
@@ -87,11 +87,7 @@ const Detail = () => {
         <h2 className="flex justify-between items-center mb-4 text-4xl font-bold">
           {pharmacy.name}
           <button onClick={handleLike}>
-            {liked ? (
-              <AiFillHeart size={30} color="red" /> // 채워진 하트
-            ) : (
-              <AiOutlineHeart size={30} color="gray" /> // 비어 있는 하트
-            )}
+            {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
           </button>
         </h2>
         <div className="text-lg font-semibold leading-10">
