@@ -34,6 +34,9 @@ export default {
       },
       width: {
         'xl-1/2-important': '50% !important'
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(#9BDBA6 0%, #83CEA1 66.5%, #50B498 100%)'
       }
     }
   },

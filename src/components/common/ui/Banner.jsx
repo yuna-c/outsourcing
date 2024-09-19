@@ -4,12 +4,14 @@ import Button from './Button';
 
 import mainIcon from '/src/assets/images/main_icon.png';
 import mainDoctor from '/src/assets/images/main_doctor.png';
-import mainBanner from '/src/assets/images/main_banner.png';
+// import mainBanner from '/src/assets/images/main_banner.png';
 import './../../../assets/styles/mainPage.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Banner = ({ data }) => {
+  const mainBanner2 =
+    'https://img.freepik.com/premium-photo/medicine-darkened-room-black-background-night_39665-15585.jpg';
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
@@ -21,9 +23,9 @@ const Banner = ({ data }) => {
     }
   };
   return (
-    <div className="main_banner " style={{ backgroundImage: `url(${mainBanner})` }}>
+    <div className="main_banner " style={{ backgroundImage: `url(${mainBanner2})` }}>
       <img src={mainIcon} alt="banner_icon" />
-      <img src={mainDoctor} alt="doctor" className="" />
+      {/* <img src={mainDoctor} alt="doctor" className="" /> */}
 
       <div className="main_text_area ">
         <h3>약국찾기</h3>
