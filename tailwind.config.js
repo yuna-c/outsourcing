@@ -30,10 +30,15 @@ export default {
         'custom-yellow': '#DEF9C4',
         'kakao-yellow': '#ead61d', // #FAE100
         'custom-palemint': '#E9EFEC',
-        'custom-gray': '#ededed'
+        'custom-gray': '#ededed',
+        'custom-deepblue': '#074173',
+        'custom-skyblue': '#1679AB'
       },
       width: {
         'xl-1/2-important': '50% !important'
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(#9BDBA6 0%, #83CEA1 66.5%, #50B498 100%)'
       }
     }
   },

@@ -69,7 +69,7 @@ const Main = () => {
     <Article className="main">
       {/* 배너 부분 */}
       <Banner data={data} />
-      <div className="max-w-[80%] mx-auto">
+      <div>
         {/* 지금 영업중인 약국 */}
         <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
@@ -81,3 +81,5 @@ const Main = () => {
 };
 
 export default Main;
+
+/* Rectangle 32 */
