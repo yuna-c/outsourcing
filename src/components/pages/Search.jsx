@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
-import { fetchPharmacies } from '../../core/instance/axiosInstance';
+import { api, fetchPharmacies } from '../../core/instance/axiosInstance';
 
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
@@ -29,24 +29,18 @@ const Search = () => {
     queryFn: fetchPharmacies
   });
 
-  // // 검색어 변경될 때마다 searchParams 업뎃
-  // useEffect(() => {
-  //   const params = {};
+  // 검색한 약국의 id값을 searchParams로 가져옴
+  const searchId = searchParams.get('id');
 
-  //   // 검색한 키워드를 파라미터에 추가
-  //   if (keyword) {
-  //     params.keyword = keyword;
-  //   }
-
-  //   // 검색한 타입을 파라미터에 추가
-  //   if (searchType === 'region') {
-  //     params.filter = 'region';
-  //   } else {
-  //     params.filter = 'name';
-  //   }
-
-  //   setSearchParams(params);
-  // }, [keyword, searchType]);
+  useEffect(() => {
+    const fetchPharmacy = async () => {
+      const response = await api.get(`pharmacies/${searchId}`); // 쿼리스트링의 id값이 바뀔 때마다 동적으로 get요청
+      const data = response.data;
+      setMapCenter({ lat: data?.latitude, lng: data?.longitude }); // searchParams로 가져온 약국 데이터의 위경도값으로 바꿔줌
+      setSelectedPharmacy(data); // 커스텀오버레이도 유지시킴
+    };
+    fetchPharmacy();
+  }, []);
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
@@ -91,9 +85,6 @@ const Search = () => {
     setMapCenter({ lat, lng });
     panTo(lat, lng, 2); // 지도를 클릭한 약국의 위치로 이동
 
-    // 지도 중심 좌표를 URL에 저장
-    searchParams.set('lat', lat);
-    searchParams.set('lng', lng);
     searchParams.set('id', id); // url에 선택된 약국의 id를 저장
     setSearchParams(searchParams);
 
@@ -118,6 +109,11 @@ const Search = () => {
       searchPharmacies.forEach((pharmacy) => {
         bounds.extend(new kakao.maps.LatLng(pharmacy.latitude, pharmacy.longitude));
       });
+
+      // 중심 좌표를 계산해서 스토어에 저장
+      const center = bounds.getCenter();
+      useMapStore.getState().setCenter({ lat: center.getLat(), lng: center.getLng() });
+
       map.setBounds(bounds);
     }
   };
@@ -192,7 +188,6 @@ const Search = () => {
               position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
               yAnchor={1.3}
               xAnchor={0.5}
-              zIndex={1}
             >
               <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
                 <div className="flex justify-between items-center mb-2">

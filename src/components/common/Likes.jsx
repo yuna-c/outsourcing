@@ -4,6 +4,7 @@ import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { api } from '../../core/instance/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
   const { user, setUser } = useAuthStore((state) => ({
@@ -15,6 +16,8 @@ const Likes = () => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   // 약국 데이터 불러오기
   useEffect(() => {
@@ -32,45 +35,68 @@ const Likes = () => {
   }, []);
 
   // 사용자가 좋아요한 약국 데이터를 가져오기
+  // useEffect(() => {
+  //   if (user?.likedPharmacies) {
+  //     setLikedPharmacies(user.likedPharmacies);
+  //   }
+  // }, [user]);
+
   useEffect(() => {
-    if (user?.likedPharmacies) {
-      setLikedPharmacies(user.likedPharmacies);
+    const likedPharmaciesStorage = localStorage.getItem('likedPharmacies');
+
+    if (likedPharmaciesStorage) {
+      setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
+    } else {
+      setLikedPharmacies([]);
     }
-  }, [user]);
+  }, []);
 
   // 좋아요 버튼 클릭 핸들러
-  const handleLike = (pharmacy) => {
-    const pharmacyName = pharmacy.name;
-    if (likedPharmacies.includes(pharmacyName)) {
-      // 좋아요 취소
-      const updatedLikes = likedPharmacies.filter((name) => name !== pharmacyName);
-      setLikedPharmacies(updatedLikes);
-      updateLikes(updatedLikes); //  좋아요 취소 요청
-    } else {
-      // 좋아요 추가
-      const updatedLikes = [...likedPharmacies, pharmacyName];
-      setLikedPharmacies(updatedLikes);
-      updateLikes(updatedLikes); // 좋아요 추가 요청
-    }
-  };
+  // const handleLike = (pharmacy) => {
+  //   const pharmacyName = pharmacy.name;
+  //   if (likedPharmacies.includes(pharmacyName)) {
+  //     // 좋아요 취소
+  //     const updatedLikes = likedPharmacies.filter((name) => name !== pharmacyName);
+  //     setLikedPharmacies(updatedLikes);
+  //     updateLikes(updatedLikes); //  좋아요 취소 요청
+  //   } else {
+  //     // 좋아요 추가
+  //     const updatedLikes = [...likedPharmacies, pharmacyName];
+  //     setLikedPharmacies(updatedLikes);
+  //     updateLikes(updatedLikes); // 좋아요 추가 요청
+  //   }
+  // };
 
-  // 좋아요 업데이트 요청 함수
-  const updateLikes = async (updatedLikes) => {
-    try {
-      await api.patch(`/users/${user.userId}`, {
-        likedPharmacies: updatedLikes
-      });
-      // Zustand 상태 업데이트
-      setUser({ ...user, likedPharmacies: updatedLikes });
-    } catch (error) {
-      console.error('Failed to update likes', error);
-    }
+  // // 좋아요 업데이트 요청 함수
+  // const updateLikes = async (updatedLikes) => {
+  //   try {
+  //     await api.patch(`/users/${user.userId}`, {
+  //       likedPharmacies: updatedLikes
+  //     });
+  //     // Zustand 상태 업데이트
+  //     setUser({ ...user, likedPharmacies: updatedLikes });
+  //   } catch (error) {
+  //     console.error('Failed to update likes', error);
+  //   }
+  // };
+
+  const handleLike = (pharmacyId) => {
+    const updatedLikes = likedPharmacies.includes(pharmacyId)
+      ? likedPharmacies.filter((id) => id !== pharmacyId)
+      : [...likedPharmacies, pharmacyId];
+
+    setLikedPharmacies(updatedLikes);
+    localStorage.setItem('likedPharmacies', JSON.stringify(updatedLikes));
   };
 
   // 삭제
-  const handleDelete = (pharmacyName) => {
-    const updatedPharmacies = pharmacies.filter((pharmacy) => pharmacy.name !== pharmacyName);
+  const handleDelete = (pharmacyId) => {
+    const updatedPharmacies = pharmacies.filter((pharmacy) => pharmacy.id !== pharmacyId);
+    const updatedLikedPharmacies = likedPharmacies.filter((id) => id !== pharmacyId);
+
     setPharmacies(updatedPharmacies);
+    setLikedPharmacies(updatedLikedPharmacies);
+    localStorage.setItem('likedPharmacies', JSON.stringify(updatedLikedPharmacies));
     setShowDeleteOptions(null);
   };
 
@@ -80,11 +106,11 @@ const Likes = () => {
   };
 
   // 삭제 버튼 보이기, 숨기기
-  const toggleDeleteOptions = (pharmacyName) => {
-    if (showDeleteOptions === pharmacyName) {
+  const toggleDeleteOptions = (pharmacyId) => {
+    if (showDeleteOptions === pharmacyId) {
       setShowDeleteOptions(null);
     } else {
-      setShowDeleteOptions(pharmacyName);
+      setShowDeleteOptions(pharmacyId);
     }
   };
 
@@ -105,32 +131,35 @@ const Likes = () => {
 
   return (
     <div className="relative">
-      <ul className="flex items-center justify-between p-4 mb-4 border border-black rounded">
+      <ul className=" items-center justify-between mb-4 flex-wrap">
         {likedPharmacies.length === 0 ? (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 border p-3 border-black rounded w-full">
             <IoHeartDislikeCircleSharp size={45} />
             <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
         ) : (
           pharmacies
-            .filter((pharmacy) => likedPharmacies.includes(pharmacy.name))
+            .filter((pharmacy) => likedPharmacies.includes(pharmacy.id))
             .map((pharmacy) => (
               <li
                 key={pharmacy.name}
-                className="flex items-center justify-between p-4 mb-4 border border-gray-600 rounded"
+                className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-gray-600 rounded w-full"
+                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 디테일 페이지로
               >
-                <div className="flex items-center gap-4">
+                <div className="flex gap-4">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleLike(pharmacy);
+                      handleLike(pharmacy.id);
                     }}
+                    className="mb-auto"
                   >
                     <IoHeartCircleSharp
                       size={45}
-                      className={likedPharmacies.includes(pharmacy.name) ? 'text-red-500' : 'text-gray-500'}
+                      // className={likedPharmacies.includes(pharmacy.id) ? 'text-black' : 'text-gray-500'}
                     />
                   </button>
+
                   <div>
                     <span className="text-xl font-bold">{pharmacy.name}</span>
                     <p className="text-gray-600">{pharmacy.address}</p>
@@ -141,23 +170,23 @@ const Likes = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      toggleDeleteOptions(pharmacy.name);
+                      toggleDeleteOptions(pharmacy.id);
                     }}
                     className="text-black"
                   >
                     <HiOutlineDotsVertical size={24} />
                   </button>
-                  {showDeleteOptions === pharmacy.name && (
-                    <div className="absolute right-0 z-10 bg-white border border-gray-300 rounded shadow-lg top-8">
+                  {showDeleteOptions === pharmacy.id && (
+                    <div className="absolute w-24 right-3 z-10 bg-white border border-gray-300 rounded shadow-lg top-8">
                       <button
-                        onClick={() => handleDelete(pharmacy.name)}
-                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100"
+                        onClick={() => handleDelete(pharmacy.id)}
+                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 rounded"
                       >
                         삭제
                       </button>
                       <button
                         onClick={() => handleShare(pharmacy.name)}
-                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 rounded"
                       >
                         공유
                       </button>

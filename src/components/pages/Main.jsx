@@ -9,7 +9,6 @@ import { REGIONS } from '../../core/utils/regions';
 import { api } from '../../core/instance/axiosInstance';
 
 const Main = () => {
-  const [query, setQuery] = useState('');
   const [data, setData] = useState(null);
   const [openPharmacies, setOpenPharmacies] = useState([]);
   const [weekendPharmacies, setWeekendPharmacies] = useState([]);
@@ -18,7 +17,6 @@ const Main = () => {
     try {
       const response = await api.get(`/pharmacies`);
       setData(response.data);
-      console.log('가져온 데이터:', response.data);
     } catch (error) {
       console.error('데이터를 가져오는 중 오류 발생:', error);
     }
@@ -46,14 +44,14 @@ const Main = () => {
     });
 
     setOpenPharmacies(filteredPharmacies);
-    console.log('영업 중인 약국:', filteredPharmacies);
   };
 
   // 주말 운영 약국
   const filterWeekendPharmacies = () => {
-    const filteredWeekendPharmacies = data.filter((item) => item.time.includes('토') || item.time.includes('일'));
+    const filteredWeekendPharmacies = data.filter(
+      (item) => (item.time.includes('토') || item.time.includes('일')) && !item.time.includes('미운영')
+    );
     setWeekendPharmacies(filteredWeekendPharmacies);
-    console.log('주말영업중약국:', filteredWeekendPharmacies);
   };
 
   useEffect(() => {
@@ -67,23 +65,21 @@ const Main = () => {
     }
   }, [data]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // API를 호출하여 검색 결과 가져오는 로직 추가
-  };
-
   return (
     <Article className="main">
       {/* 배너 부분 */}
-      <Banner handleSubmit={handleSubmit} query={query} setQuery={setQuery} />
+      <Banner data={data} />
+      <div>
+        {/* 지금 영업중인 약국 */}
+        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
-      {/* 지금 영업중인 약국 */}
-      <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} />
-
-      {/* 주말 영업하는 약국 */}
-      <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} />
+        {/* 주말 영업하는 약국 */}
+        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
+      </div>
     </Article>
   );
 };
 
 export default Main;
+
+/* Rectangle 32 */
