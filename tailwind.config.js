@@ -31,6 +31,10 @@ export default {
         'kakao-yellow': '#ead61d', // #FAE100
         'custom-palemint': '#E9EFEC',
         'custom-gray': '#ededed'
+        // 'custom-200': '#8CB8D1',
+        // 'custom-200': '#7AA2B6',
+        // 'custom-200': '#A3C6E2',
+        // 'custom-200': '#003F5C'
       },
       width: {
         'xl-1/2-important': '50% !important'

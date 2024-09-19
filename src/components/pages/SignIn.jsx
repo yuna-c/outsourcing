@@ -3,7 +3,7 @@ import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 
 import useAuthStore from '../../core/stores/useAuthStore';
-import { loginWithGithub, loginWithKakao } from '../../core/api/socialAuth';
+import { loginWithGithub, loginWithKakao } from '../../core/api/social';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';

@@ -39,6 +39,7 @@ const useAuthStore = create(
           userId: null,
           isLoggedIn: false
         });
+        // localStorage.clear();
       }
     }),
     {

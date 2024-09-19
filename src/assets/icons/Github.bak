@@ -1,6 +1,6 @@
 import Article from '../../components/common/ui/Article';
-import { loginWithGithub } from '../../core/api/socialAuth';
-import { supabase } from '../../core/api/supabase';
+import { loginWithGithub } from '../../core/api/social';
+import { supabase } from '../../core/instance/supabase';
 import useAuthStore from '../../core/stores/useAuthStore';
 
 import Button from '../../components/common/ui/Button';

@@ -8,11 +8,11 @@ import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
-import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
+import NotFound from '../pages/NotFound';
+
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
-import Search from './../pages/Search';
 
 const Router = () => {
   const publicRoutes = [
@@ -45,26 +45,6 @@ const Router = () => {
         }
       ]
     },
-    // {
-    //   path: '/detail/:id',
-    //   element: <GuestRoute />,
-    //   children: [
-    //     {
-    //       path: '',
-    //       element: <Detail />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: '/search',
-    //   element: <GuestRoute />,
-    //   children: [
-    //     {
-    //       path: '',
-    //       element: <Search />
-    //     }
-    //   ]
-    // }
 
     {
       path: '/search',

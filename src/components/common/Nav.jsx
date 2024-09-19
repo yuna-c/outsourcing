@@ -22,14 +22,12 @@ const Nav = () => {
     clearAuth: state.clearAuth
   }));
 
-  // 로그아웃 핸들러 useCallback으로 메모이제이션
   const onHandleLogout = useCallback(() => {
     clearAuth();
     navigate('/');
     setIsOpen(false);
   }, [clearAuth, navigate, setIsOpen]);
 
-  // 외부 클릭 핸들러 useCallback으로 메모이제이션
   const handleClickOutside = useCallback(
     (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
@@ -39,7 +37,6 @@ const Nav = () => {
     [setIsOpen]
   );
 
-  // 스크롤 이벤트
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -51,7 +48,6 @@ const Nav = () => {
     };
   }, [setIsScrolled]);
 
-  // 외부 클릭 이벤트
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {

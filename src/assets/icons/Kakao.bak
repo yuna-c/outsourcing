@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { loginWithKakao } from '../../core/api/socialAuth';
+import { loginWithKakao } from '../../core/api/social';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/ui/Button';
 import Article from '../../components/common/ui/Article';

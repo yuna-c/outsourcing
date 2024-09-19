@@ -8,14 +8,15 @@ import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
-export default function SignUp() {
+const SignUp = () => {
   const [formData, setFormData] = useState({ id: '', password: '', nickname: '' });
-  const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
   const { validateForm } = useFormValidation();
+  const navigate = useNavigate();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
+    console.log('폼 데이터:', formData);
 
     if (!validateForm(formData)) return;
 
@@ -78,4 +79,6 @@ export default function SignUp() {
       </form>
     </Article>
   );
-}
+};
+
+export default SignUp;
