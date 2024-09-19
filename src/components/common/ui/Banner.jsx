@@ -1,43 +1,44 @@
 import React from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import Button from './Button';
-
 import mainIcon from '/src/assets/images/main_icon.png';
-import mainDoctor from '/src/assets/images/main_doctor.png';
-import mainBanner from '/src/assets/images/main_banner.png';
+import './../../../assets/styles/mainPage.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+const mainBanner =
+  'https://images.unsplash.com/photo-1612882515317-206847d253ff?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
-const Banner = ({ handleSubmit, query, setQuery }) => {
+const Banner = ({ data }) => {
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  // 검색어 입력 시 해당하는 링크로 이동
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query) {
+      navigate(`/search?keyword=${encodeURIComponent(query)}&filter=name`);
+    }
+  };
   return (
-    <div
-      className="main_banner relative overflow-hidden h-[500px] -mt-[100px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center"
-      style={{ backgroundImage: `url(${mainBanner})` }}
-    >
-      <img src={mainIcon} alt="banner_icon" className="icon absolute left-5 top-5 w-[150px] md:w-[200px]" />
-      <img
-        src={mainDoctor}
-        alt="doctor"
-        className="doctor absolute right-0 z-10 bottom-[-30px] opacity-90 w-[100px] md:w-[150px]"
-      />
+    <div className="main_banner " style={{ backgroundImage: `url(${mainBanner})` }}>
+      <img src={mainIcon} alt="banner_icon" />
+      {/* <img src={mainDoctor} alt="doctor" className="" /> */}
 
-      <div className="main_text_area flex flex-col items-center z-20 w-full max-w-[400px] gap-2">
-        <h3 className="text-white text-[27px] font-bold">약국찾기</h3>
-        <h3 className="text-lg text-white">
-          <span className="text-[#9bdba6]">24시 약국</span>을 찾아보세요
+      <div className="main_text_area ">
+        <h3>약국찾기</h3>
+        <h3>
+          <span>24시 약국</span>을 찾아보세요
         </h3>
-        <p className="pb-2 text-sm text-center text-white">약국명과 지역을 선택하여 검색할 수 있습니다.</p>
-        <form onSubmit={handleSubmit} className="flex justify-center w-full">
+        <p className="">약국명과 지역을 선택하여 검색할 수 있습니다.</p>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="약국을 검색해보세요"
             aria-label="검색"
-            className="rounded-md pl-4 w-[80%] h-10 border-2 border-custom-green focus:outline-none"
           />
-          <Button
-            type="submit"
-            className="flex items-center justify-center w-10 h-10 border-none rounded-md bg-custom-green"
-          >
+          <Button type="submit">
             <IoMdSearch className="w-7 h-7" />
           </Button>
         </form>

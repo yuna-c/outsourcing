@@ -40,7 +40,7 @@ const MyPage = () => {
         <img
           src={avatar || 'https://via.placeholder.com/300'}
           alt={nickname}
-          className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-teal"
+          className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-skyblue"
         />
 
         {/* 로그인한 사용자의 닉네임 */}
@@ -51,7 +51,7 @@ const MyPage = () => {
         <button
           onClick={() => handleTabChange('likes')}
           className={`w-1/2 px-16 py-2 rounded-s-full text-base font-semibold ${
-            currentTab === 'likes' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
+            currentTab === 'likes' ? 'bg-custom-skyblue text-white' : 'bg-custom-gray'
           }`}
         >
           Likes
@@ -59,7 +59,7 @@ const MyPage = () => {
         <button
           onClick={() => handleTabChange('review')}
           className={`w-1/2 px-16 py-2  text-base font-semibold ${
-            currentTab === 'review' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
+            currentTab === 'review' ? 'bg-custom-skyblue text-white' : 'bg-custom-gray'
           }`}
         >
           Review
@@ -67,7 +67,7 @@ const MyPage = () => {
         <button
           onClick={() => handleTabChange('profile')}
           className={`w-1/2 px-16 py-2 rounded-r-full text-base font-semibold ${
-            currentTab === 'profile' ? 'bg-custom-teal text-white' : 'bg-custom-gray'
+            currentTab === 'profile' ? 'bg-custom-skyblue text-white' : 'bg-custom-gray'
           }`}
         >
           Profile

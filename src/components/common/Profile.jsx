@@ -47,6 +47,7 @@ const Profile = () => {
           maxLength={10}
           onChange={(e) => setNickname(e.target.value)}
           placeholder={currentNickname || '변경하실 닉네임을 입력해 주세요'}
+          className={'border border-black rounded'}
         />
       </fieldset>
 
@@ -61,11 +62,15 @@ const Profile = () => {
           id="avatar"
           onChange={(e) => setAvatar(e.target.files[0])}
           placeholder="업로드 할 파일을 선택해 주세요"
+          className={'border border-black rounded'}
         />
       </fieldset>
 
       <div className="flex justify-end">
-        <Button onClick={onHandleUpdateProfile} className="w-full p-2 text-white bg-custom-teal">
+        <Button
+          onClick={onHandleUpdateProfile}
+          className="w-full p-2 text-white bg-custom-skyblue hover:bg-custom-deepblue"
+        >
           변경 하기
         </Button>
       </div>

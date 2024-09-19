@@ -3,6 +3,7 @@
 
 // 🔥 클라이언트 전역 상태 관리
 // yarn add zustand
+// yarn add immer
 
 // 🔥 스타일링 및 빌드 도구
 // yarn add tailwindcss postcss autoprefixer
@@ -18,6 +19,9 @@
 // 🔥 HTTP 클라이언트 및 API 관련
 // yarn add axios
 // yarn add json-server
+// 🔥 HTTP 클라이언트 및 API 관련
+// yarn add axios
+// yarn add json-server
 // yarn json-server db.json --port 5000
 
 // 🔥 지도
@@ -30,6 +34,9 @@
 
 // 🔥 데이터 베이스
 // yarn add @supabase/supabase-js
+
+// 🔥 작업 간소화 라이브러리
+// yarn add lodash
 
 // 🔥 작업 간소화 라이브러리
 // yarn add lodash
