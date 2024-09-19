@@ -33,6 +33,7 @@ const Router = () => {
         }
       ]
     },
+
     {
       path: '/signUp',
       element: <GuestRoute />,
