@@ -4,7 +4,8 @@ import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
 
 import { HiMenu, HiX } from 'react-icons/hi';
-import { FaPills } from 'react-icons/fa';
+// import { FaPills } from 'react-icons/fa';
+import psmLogo from '../../assets/images/psm_logo.png';
 
 import Button from './ui/Button';
 import Link from './ui/Link';

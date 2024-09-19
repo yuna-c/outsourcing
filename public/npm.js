@@ -19,9 +19,6 @@
 // 🔥 HTTP 클라이언트 및 API 관련
 // yarn add axios
 // yarn add json-server
-// 🔥 HTTP 클라이언트 및 API 관련
-// yarn add axios
-// yarn add json-server
 // yarn json-server db.json --port 5000
 
 // 🔥 지도
