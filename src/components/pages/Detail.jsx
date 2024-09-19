@@ -82,7 +82,7 @@ const Detail = () => {
   }
 
   return (
-    <div className="flex justify-center items-start p-8 bg-gray-100 min-h-screen">
+    <div className="flex justify-center items-start p-8 min-h-screen">
       <div className="bg-[#E9EFEC] shadow-lg rounded-lg p-6 w-1/3">
         <h2 className="flex justify-between items-center mb-4 text-4xl font-bold">
           {pharmacy.name}
@@ -109,10 +109,10 @@ const Detail = () => {
         </div>
       </div>
       <div className="w-2/3 pl-8">
-        <div className="w-full h-96 bg-gray-300 rounded-lg flex justify-center items-center">
+        <div className="w-full h-96 rounded-lg flex justify-center items-center">
           <Map
             center={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
-            style={{ width: '800px', height: '600px' }}
+            style={{ width: '800px', height: '400px' }}
             level={3}
           />
         </div>
