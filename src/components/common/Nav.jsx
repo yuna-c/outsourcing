@@ -52,11 +52,7 @@ const Nav = () => {
       <div className="flex items-center">
         <Link to="/" onClick={() => setIsOpen(false)}>
           {/* <FaPills className="text-3xl text-black" /> */}
-          <img
-            src={psmLogo}
-            alt="PSM_logo"
-            style={{ width: '60px', height: '60px', position: 'absolute', top: '-10px', left: '5px' }}
-          />
+          <img src={psmLogo} alt="PSM_logo" className="w-10 h-auto" />
         </Link>
       </div>
 
