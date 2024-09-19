@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-
 import { useQuery } from '@tanstack/react-query';
 import { api, fetchPharmacies } from '../../core/instance/axiosInstance';
-
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
-
 import { SlArrowRight } from 'react-icons/sl';
 import { FaSearch } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
@@ -16,7 +13,8 @@ const Search = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [map, setMap] = useState(null);
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
-  const [searchType, setSearchType] = useState('region'); // 검색 타입
+  const [searchType, setSearchType] = useState('name'); // 검색 타입
+  const [visiblePharmaciesCount, setVisiblePharmaciesCount] = useState(10); // 초기 약국 표시 개수
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -69,6 +67,9 @@ const Search = () => {
     return searchContent.includes(keyword);
   });
 
+  // 표시할 약국 리스트 제한 (최대 visiblePharmaciesCount만큼 보여줌)
+  const displayedPharmacies = searchPharmacies.slice(0, visiblePharmaciesCount);
+
   // 카카오 라이브러리가 제공하는 이동 애니메이션(panTo)으로 지도를 부드럽게 이동시키는 함수 선언
   const panTo = (lat, lng) => {
     let zoomLevel = 3;
@@ -118,8 +119,13 @@ const Search = () => {
     }
   };
 
+  // '더 보기' 버튼 클릭 시, 표시할 약국 개수 증가
+  const handleShowMore = () => {
+    setVisiblePharmaciesCount((prevCount) => prevCount + 10);
+  };
+
   return (
-    <section className=" flex flex-row justify-center border-8 w-full rounded-lg">
+    <section className="flex flex-row justify-center border-8 w-full rounded-lg">
       {/* 검색영역 */}
       <article className="flex flex-col items-start p-5 w-1/4 h-[750px] gap-5 ">
         <div className="flex flex-row gap-1 items-center">
@@ -154,7 +160,7 @@ const Search = () => {
           </button>
         </div>
         <ul className="flex flex-col gap-3 h-[100%]	overflow-auto w-full">
-          {searchPharmacies.map((pharmacy, id) => (
+          {displayedPharmacies.map((pharmacy, id) => (
             <li
               key={id}
               className="flex flex-row justify-between items-center gap-3 cursor-pointer shadow-lg p-3 rounded-lg transition-transform transform hover:-translate-y-1 duration-500 w-full"
@@ -171,6 +177,15 @@ const Search = () => {
             </li>
           ))}
         </ul>
+        {/* '더 보기' 버튼 */}
+        {visiblePharmaciesCount < searchPharmacies.length && (
+          <button
+            onClick={handleShowMore}
+            className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
+          >
+            더 보기
+          </button>
+        )}
       </article>
       {/* 지도영역 */}
       <article className="w-full md:w-9/12">
@@ -182,7 +197,6 @@ const Search = () => {
               onClick={() => setSelectedPharmacy(pharmacy)}
             />
           ))}
-          {/* {selectedPharmacy && selectedPharmacy.id ===pharmacy.id && ()} */}
           {selectedPharmacy && (
             <CustomOverlayMap // 커스텀오버레이
               position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
@@ -209,8 +223,6 @@ const Search = () => {
               </div>
             </CustomOverlayMap>
           )}
-          {/* </MapMarker> */}
-          {/* ))} */}
         </Map>
       </article>
     </section>
