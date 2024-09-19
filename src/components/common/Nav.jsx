@@ -55,7 +55,7 @@ const Nav = () => {
           <img
             src={psmLogo}
             alt="PSM_logo"
-            style={{ width: '60px', height: '60px', position: 'absolute', top: '-5px', left: '5px' }}
+            style={{ width: '60px', height: '60px', position: 'absolute', top: '-10px', left: '5px' }}
           />
         </Link>
       </div>
