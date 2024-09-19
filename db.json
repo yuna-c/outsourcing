@@ -212,7 +212,7 @@
       "address": "서울 서대문구 모래내로 359",
       "latitude": 37.5818765,
       "longitude": 126.9358671,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "20",
@@ -224,7 +224,7 @@
       "address": "서울 서초구 잠원로 24, 반포자이중심상가130호(반포동)",
       "latitude": 37.5071264,
       "longitude": 127.0098413,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "21",
