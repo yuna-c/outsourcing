@@ -4,7 +4,6 @@ import { api } from '../../core/instance/axiosInstance';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { updateLikes } from '../../core/instance/axiosInstance';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { IoClose } from 'react-icons/io5';
 import supabase from '../../core/api/supabase'; // Supabase 클라이언트 임포트
 
 const fetchData = async (id) => {
@@ -130,20 +129,20 @@ const Detail = () => {
           <p>전화번호: {pharmacy.phone}</p>
           <p>영업시간: {pharmacy.time}</p>
         </div>
-        <h3 className="text-xl font-semibold mb-4">댓글</h3>
+        <h3 className="text-lg font-semibold leading-8 mb-4">리뷰</h3>
         <div className="mb-4">
           <textarea
             className="w-full p-2 border border-gray-300 rounded-lg mb-2"
             rows="4"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="댓글을 입력하세요"
+            placeholder="리뷰를 입력하세요"
           />
           <button
             className="w-full bg-[#9BDBA6] text-gray-800 font-semibold py-2 px-4 rounded shadow-md hover:bg-[#478485] focus:outline-none focus:ring-2 focus:ring-gray-300"
             onClick={handleAddComment}
           >
-            댓글 추가
+            리뷰 추가
           </button>
         </div>
         <div className="flex-1 overflow-y-auto">
@@ -173,28 +172,27 @@ const Detail = () => {
             <MapMarker
               position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
               onClick={() => setSelectedPharmacy(pharmacy)}
-            >
-              {selectedPharmacy && selectedPharmacy.id === pharmacy.id && (
-                <CustomOverlayMap
-                  position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
-                  yAnchor={1.3}
-                  xAnchor={0.5}
-                >
-                  <div className="bg-white rounded-lg shadow-lg p-3 w-64 text-pretty">
-                    <div className="flex justify-between items-center mb-2">
-                      <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
-                      <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
-                        <IoClose size={20} />
-                      </div>
-                    </div>
-                    <div className="text-gray-600">
-                      <p className="mb-1 text-sm break-words">{selectedPharmacy.address}</p>
-                      <span className="text-sm">{selectedPharmacy.phone}</span>
-                    </div>
+            />
+            {selectedPharmacy && (
+              <CustomOverlayMap
+                position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
+                yAnchor={1.3}
+                xAnchor={0.5}
+              >
+                <div className="bg-white rounded-lg shadow-lg p-3 w-64 text-pretty">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
+                    <button className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
+                      X
+                    </button>
                   </div>
-                </CustomOverlayMap>
-              )}
-            </MapMarker>
+                  <div className="text-gray-600">
+                    <p className="mb-1 text-sm break-words">{selectedPharmacy.address}</p>
+                    <span className="text-sm">{selectedPharmacy.phone}</span>
+                  </div>
+                </div>
+              </CustomOverlayMap>
+            )}
           </Map>
         </div>
       </div>
