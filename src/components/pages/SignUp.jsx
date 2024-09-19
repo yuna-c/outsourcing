@@ -1,7 +1,8 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../core/stores/useAuthStore'; // import the useAuthStore
+import useAuthStore from '../../core/stores/useAuthStore';
+import useFormValidation from '../../core/hooks/useFormValidation';
 
 import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
@@ -10,40 +11,19 @@ import Input from '../common/ui/Input';
 export default function SignUp() {
   const [formData, setFormData] = useState({ id: '', password: '', nickname: '' });
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth); // use setAuth from the store
-
-  const validateForm = () => {
-    const { id, password, nickname } = formData;
-
-    if (id.length < 4 || id.length > 10) {
-      alert('아이디는 4글자에서 10글자 이내로만 가능합니다');
-      return false;
-    }
-
-    if (password.length < 4 || password.length > 15) {
-      alert('비밀번호는 4글자에서 15글자 이내로만 가능합니다');
-      return false;
-    }
-
-    if (nickname.length < 1 || nickname.length > 15) {
-      alert('닉네임은 1글자에서 15글자 이내로만 가능합니다');
-      return false;
-    }
-
-    return true;
-  };
+  const setAuth = useAuthStore((state) => state.setAuth);
+  const { validateForm } = useFormValidation();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateForm(formData)) return;
 
     try {
       const response = await register(formData);
       console.log('회원가입 API 응답값: ', response);
 
       if (response) {
-        // 자동 로그인
         const { accessToken, userId, nickname, avatar } = response;
         setAuth(accessToken, nickname, userId, avatar);
 
