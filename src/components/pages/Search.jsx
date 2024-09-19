@@ -16,7 +16,7 @@ const Search = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [map, setMap] = useState(null);
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
-  const [searchType, setSearchType] = useState('name'); // 검색 타입
+  const [searchType, setSearchType] = useState('region'); // 검색 타입
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -30,23 +30,23 @@ const Search = () => {
   });
 
   // 검색어 변경될 때마다 searchParams 업뎃
-  useEffect(() => {
-    const params = {};
+  // useEffect(() => {
+  //   const params = {};
 
-    // 검색한 키워드를 파라미터에 추가
-    if (keyword) {
-      params.keyword = keyword;
-    }
+  //   // 검색한 키워드를 파라미터에 추가
+  //   if (keyword) {
+  //     params.keyword = keyword;
+  //   }
 
-    // 검색한 타입을 파라미터에 추가
-    if (searchType === 'name') {
-      params.filter = 'name';
-    } else {
-      params.filter = 'region';
-    }
+  //   // 검색한 타입을 파라미터에 추가
+  //   if (searchType === 'region') {
+  //     params.filter = 'region';
+  //   } else {
+  //     params.filter = 'name';
+  //   }
 
-    setSearchParams(params);
-  }, [keyword, searchType, setSearchParams]);
+  //   setSearchParams(params);
+  // }, [keyword, searchType]);
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
@@ -84,7 +84,7 @@ const Search = () => {
     setMapCenter({ lat, lng });
     panTo(lat, lng, 2); // 지도를 클릭한 약국의 위치로 이동
 
-    searchParams.set('select', id); // url에 선택된 약국의 id를 저장
+    searchParams.set('id', id); // url에 선택된 약국의 id를 저장
     setSearchParams(searchParams);
 
     setSelectedPharmacy(pharmacy); // 선택된 약국 설정
@@ -92,7 +92,7 @@ const Search = () => {
 
   // 자세히보기 클릭시 해당 약국의 디테일페이지로 이동
   const handleGoToDetail = (id) => {
-    navigate(`/detail?id=${id}`);
+    navigate(`/detail/${id}`);
   };
 
   // 커스텀 오버레이 닫기
@@ -178,8 +178,9 @@ const Search = () => {
               {selectedPharmacy && selectedPharmacy.id === pharmacy.id && (
                 <CustomOverlayMap // 커스텀오버레이
                   position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
-                  yAnchor={1.3}
+                  yAnchor={1.25}
                   xAnchor={0.5}
+                  zIndex={1}
                 >
                   <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
                     <div className="flex justify-between items-center mb-2">
