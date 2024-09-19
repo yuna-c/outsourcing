@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useAuthStore from '../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';

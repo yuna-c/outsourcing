@@ -2,7 +2,7 @@ import Router from './components/shared/Router';
 
 function App() {
   return (
-    <div className="relative min-h-screen mx-auto overflow-x-hidden Wrap">
+    <div className="relative mx-auto Wrap">
       <Router />
     </div>
   );

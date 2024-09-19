@@ -1,4 +1,3 @@
-import React from 'react';
 import PharmaciesSection from './PharmaciesSection';
 
 const CurrentPharmaciesSection = ({ pharmacies, REGIONS }) => {

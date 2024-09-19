@@ -12,6 +12,7 @@ import NotFound from '../pages/NotFound';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
+import Search from './../pages/Search';
 
 const Router = () => {
   const publicRoutes = [
@@ -43,9 +44,34 @@ const Router = () => {
         }
       ]
     },
+    // {
+    //   path: '/detail/:id',
+    //   element: <GuestRoute />,
+    //   children: [
+    //     {
+    //       path: '',
+    //       element: <Detail />
+    //     }
+    //   ]
+    // },
+    // {
+    //   path: '/search',
+    //   element: <GuestRoute />,
+    //   children: [
+    //     {
+    //       path: '',
+    //       element: <Search />
+    //     }
+    //   ]
+    // }
+
     {
       path: '/detail/:id',
       element: <Detail />
+    },
+    {
+      path: '/search',
+      element: <Search />
     }
   ];
 

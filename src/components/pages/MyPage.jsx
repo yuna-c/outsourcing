@@ -38,7 +38,7 @@ const MyPage = () => {
       <div className="my-10 text-center">
         {/* 로그인한 사용자의 프로필 이미지 */}
         <img
-          src={avatar || 'https://via.placeholder.com/30'}
+          src={avatar || 'https://via.placeholder.com/300'}
           alt={nickname}
           className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-teal"
         />

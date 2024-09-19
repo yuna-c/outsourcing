@@ -12,6 +12,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const navRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 상태 추가
 
   const { isLoggedIn, avatar, nickname, clearAuth } = useAuthStore((state) => ({
     isLoggedIn: state.isLoggedIn,
@@ -39,9 +40,21 @@ const Nav = () => {
     }
   }, []);
 
+  // 스크롤 이벤트 핸들러 추가
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    document.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
+      document.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [handleClickOutside]);
@@ -49,7 +62,9 @@ const Nav = () => {
   return (
     <nav
       ref={navRef}
-      className="fixed z-30 left-0 right-0 top-6 flex items-center justify-between px-5 py-2 w-[95%] lg:w-[50%] xl:w-[50%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out Nav"
+      className={`fixed z-30 left-0 right-0 ${
+        isScrolled ? 'w-full my-0 rounded-none' : 'w-[95%] lg:w-[50%] xl:w-[50%] my-5 '
+      } flex items-center justify-between px-5 box-border py-2 mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out Nav`}
     >
       <div className="flex items-center">
         <Link to="/" onClick={() => setIsOpen(false)}>

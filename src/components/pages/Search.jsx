@@ -113,10 +113,10 @@ const Search = () => {
   };
 
   return (
-    <section className=" flex flex-row justify-center border-8 w-full rounded-lg">
+    <section className="flex flex-row justify-center w-full border-8 rounded-lg ">
       {/* 검색영역 */}
       <article className="flex flex-col items-start p-5 w-1/4 h-[750px] gap-5 ">
-        <div className="flex flex-row gap-1 items-center">
+        <div className="flex flex-row items-center gap-1">
           <button
             className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
               searchType === 'region' ? 'bg-custom-teal text-white' : 'bg-gray-200'
@@ -135,7 +135,7 @@ const Search = () => {
           </button>
           <span className="text-sm"> 으로 검색하기</span>
         </div>
-        <div className="border-8 w-full flex flex-row pr-3 rounded-lg">
+        <div className="flex flex-row w-full pr-3 border-8 rounded-lg">
           <input
             type="text"
             value={keyword}
@@ -151,15 +151,15 @@ const Search = () => {
           {searchPharmacies.map((pharmacy, id) => (
             <li
               key={id}
-              className="flex flex-row justify-between items-center gap-3 cursor-pointer shadow-lg p-3 rounded-lg transition-transform transform hover:-translate-y-1 duration-500 w-full"
+              className="flex flex-row items-center justify-between w-full gap-3 p-3 transition-transform duration-500 transform rounded-lg shadow-lg cursor-pointer hover:-translate-y-1"
               onClick={() => handleMoveMap(pharmacy.latitude, pharmacy.longitude, pharmacy.id, pharmacy)} // 리스트 클릭시 맵의 중심 이동
             >
               <div className="w-10/12">
                 <h3 className="text-lg font-semibold text-gray-800">{pharmacy.name}</h3>
-                <p className="mb-1 text-sm break-words text-gray-600">{pharmacy.address}</p>
-                <span className="mb-1 text-sm break-words text-gray-600">{pharmacy.phone}</span>
+                <p className="mb-1 text-sm text-gray-600 break-words">{pharmacy.address}</p>
+                <span className="mb-1 text-sm text-gray-600 break-words">{pharmacy.phone}</span>
               </div>
-              <div className="bg-custom-teal p-3 rounded-full text-white">
+              <div className="p-3 text-white rounded-full bg-custom-teal">
                 <SlArrowRight size={15} />
               </div>
             </li>
@@ -181,10 +181,10 @@ const Search = () => {
                   yAnchor={1.3}
                   xAnchor={0.5}
                 >
-                  <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
-                    <div className="flex justify-between items-center mb-2">
+                  <div className="w-64 p-3 bg-white rounded-lg shadow-lg  text-pretty">
+                    <div className="flex items-center justify-between mb-2">
                       <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
-                      <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
+                      <div className="cursor-pointer close" onClick={handleCloseOverlay} title="닫기">
                         <IoClose size={20} />
                       </div>
                     </div>
@@ -194,7 +194,7 @@ const Search = () => {
                     </div>
                     <button
                       onClick={() => handleGoToDetail(selectedPharmacy.id)}
-                      className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
+                      className="w-full px-4 py-2 mt-3 text-center text-white transition rounded-lg bg-custom-teal hover:bg-custom-green"
                     >
                       자세히 보기
                     </button>

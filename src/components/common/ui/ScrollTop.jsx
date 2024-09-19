@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
+import useScrollStore from '../../../core/stores/useScrollStore';
 
 const ScrollTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const { isVisible, setIsVisible } = useScrollStore();
 
   const toggleVisibility = useCallback(() => {
     if (window.scrollY > 200) {
@@ -9,7 +10,7 @@ const ScrollTop = () => {
     } else {
       setIsVisible(false);
     }
-  }, []);
+  }, [setIsVisible]);
 
   useEffect(() => {
     window.addEventListener('scroll', toggleVisibility);
@@ -29,7 +30,7 @@ const ScrollTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-5 right-5 w-10 h-10 rounded-full bg-black text-white shadow-lg transition-opacity duration-300 ${
+      className={`fixed bottom-10 right-10 w-10 h-10 rounded-full bg-black text-white shadow-lg transition-opacity duration-300 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label="Scroll to top"
