@@ -167,7 +167,8 @@
       "phone": "02-825-1122",
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
-      "longitude": 126.961344
+      "longitude": 126.961344,
+      "likes": null
     },
     {
       "id": "16",
@@ -299,7 +300,8 @@
       "phone": "02-714-0667",
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
-      "longitude": 126.9575191
+      "longitude": 126.9575191,
+      "likes": null
     },
     {
       "id": "28",
