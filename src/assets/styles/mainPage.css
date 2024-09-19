@@ -5,24 +5,28 @@
 .main {
   @apply mx-auto border;
 }
-.current_parmacies {
-  @apply min-h-[450px];
+.current_pharmacies {
+  @apply min-h-[450px] h-[85vh] flex flex-col items-center justify-center;
+}
+
+.current_pharmacies:nth-child(2) {
+  @apply bg-custom-gradient;
 }
 .pharmacy_selector_container {
-  @apply flex items-center justify-center flex-col h-28 gap-3;
+  @apply flex items-center justify-center flex-col h-[13rem] gap-[1.75rem];
 }
 .pharmacy_selector_title {
-  @apply font-bold text-center;
+  @apply font-bold text-center text-[30px];
 }
 .select_region {
   @apply pr-3 font-semibold;
 }
 /* slider css start */
 .slider_container {
-  @apply text-center box-border;
+  @apply text-center box-border max-w-[1100px] mx-auto;
 }
 .slider_item {
-  @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)]  h-[300px] relative rounded-[15px];
+  @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)] bg-white  h-[300px] relative rounded-[15px];
 }
 .slider_item_tag {
   @apply bg-custom-deepgreen text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute;
@@ -44,7 +48,6 @@
   @apply absolute bottom-[30px] translate-x-[-50%]
   py-[5px] px-[10px] bg-custom-teal min-w-[151px];
 }
-
 .current_parmacies select {
   @apply border border-gray-500 w-[100px];
 }
@@ -66,7 +69,7 @@
 /* slider css end */
 /* main_banner css start */
 .main_banner {
-  @apply relative overflow-hidden border rounded-lg h-[400px] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center;
+  @apply relative overflow-hidden border rounded-lg h-[80vh] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center;
 }
 .main_banner img:nth-child(1) {
   @apply absolute left-5 top-5 w-[150px] md:w-[200px];

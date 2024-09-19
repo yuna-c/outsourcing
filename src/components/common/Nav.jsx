@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
+import psmLogo from '/src/assets/images/psm_logo.png';
 
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaPills } from 'react-icons/fa';
@@ -50,7 +51,12 @@ const Nav = () => {
     >
       <div className="flex items-center">
         <Link to="/" onClick={() => setIsOpen(false)}>
-          <FaPills className="text-3xl text-black" />
+          {/* <FaPills className="text-3xl text-black" /> */}
+          <img
+            src={psmLogo}
+            alt="PSM_logo"
+            style={{ width: '60px', height: '60px', position: 'absolute', top: '-10px', left: '5px' }}
+          />
         </Link>
       </div>
 
