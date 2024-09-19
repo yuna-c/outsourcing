@@ -1,16 +1,17 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
+import { throttle } from 'lodash';
 import useScrollStore from '../../../core/stores/useScrollStore';
 
 const ScrollTop = () => {
   const { isVisible, setIsVisible } = useScrollStore();
 
-  const toggleVisibility = useCallback(() => {
+  const toggleVisibility = throttle(() => {
     if (window.scrollY > 200) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  }, [setIsVisible]);
+  }, 200);
 
   useEffect(() => {
     window.addEventListener('scroll', toggleVisibility);
@@ -20,18 +21,18 @@ const ScrollTop = () => {
     };
   }, [toggleVisibility]);
 
-  const scrollToTop = useCallback(() => {
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-  }, []);
+  };
 
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-10 right-10 w-10 h-10 rounded-full bg-black text-white shadow-lg transition-opacity duration-300 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
+      className={`fixed bottom-10 right-10 w-10 h-10 rounded-full bg-black text-white shadow-lg transition-opacity duration-300 transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
       aria-label="Scroll to top"
     >
