@@ -28,8 +28,12 @@ export default {
         'custom-teal': '#50B498',
         'custom-mint': '#9BDBA6',
         'custom-yellow': '#DEF9C4',
+        'kakao-yellow': '#ead61d', // #FAE100
         'custom-palemint': '#E9EFEC',
         'custom-gray': '#ededed'
+      },
+      width: {
+        'xl-1/2-important': '50% !important'
       }
     }
   },
