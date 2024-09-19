@@ -133,7 +133,7 @@ const Likes = () => {
     <div className="relative">
       <ul className=" items-center justify-between mb-4 flex-wrap">
         {likedPharmacies.length === 0 ? (
-          <div className="flex items-center gap-4 border p-3 border-black rounded w-full">
+          <div className="flex items-center gap-4 border p-3 border-custom-deepblue rounded w-full">
             <IoHeartDislikeCircleSharp size={45} />
             <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
@@ -143,9 +143,8 @@ const Likes = () => {
             .map((pharmacy) => (
               <li
                 key={pharmacy.name}
-                className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-gray-600 rounded w-full"
+                className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-black rounded w-full"
                 onClick={() => {
-                  console.log('눌리나? =>');
                   navigate(`/detail/${pharmacy.id}`);
                 }} // 클릭 시 디테일 페이지로
               >
