@@ -144,7 +144,10 @@ const Likes = () => {
               <li
                 key={pharmacy.name}
                 className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-gray-600 rounded w-full"
-                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 디테일 페이지로
+                onClick={() => {
+                  console.log('눌리나? =>');
+                  navigate(`/detail/${pharmacy.id}`);
+                }} // 클릭 시 디테일 페이지로
               >
                 <div className="flex gap-4">
                   <button
@@ -179,13 +182,19 @@ const Likes = () => {
                   {showDeleteOptions === pharmacy.id && (
                     <div className="absolute w-24 right-3 z-10 bg-white border border-gray-300 rounded shadow-lg top-8">
                       <button
-                        onClick={() => handleDelete(pharmacy.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleLike(pharmacy.id);
+                        }}
                         className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 rounded"
                       >
                         삭제
                       </button>
                       <button
-                        onClick={() => handleShare(pharmacy.name)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShare(pharmacy.name);
+                        }}
                         className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 rounded"
                       >
                         공유
