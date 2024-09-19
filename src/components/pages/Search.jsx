@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
-import { fetchPharmacies } from '../../core/instance/axiosInstance';
+import { api, fetchPharmacies } from '../../core/instance/axiosInstance';
 
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
@@ -16,7 +16,7 @@ const Search = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [map, setMap] = useState(null);
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
-  const [searchType, setSearchType] = useState('name'); // 검색 타입
+  const [searchType, setSearchType] = useState('region'); // 검색 타입
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -29,27 +29,28 @@ const Search = () => {
     queryFn: fetchPharmacies
   });
 
-  // 검색어 변경될 때마다 searchParams 업뎃
+  // 검색한 약국의 id값을 searchParams로 가져옴
+  const searchId = searchParams.get('id');
+
   useEffect(() => {
-    const params = {};
-
-    // 검색한 키워드를 파라미터에 추가
-    if (keyword) {
-      params.keyword = keyword;
-    }
-
-    // 검색한 타입을 파라미터에 추가
-    if (searchType === 'name') {
-      params.filter = 'name';
-    } else {
-      params.filter = 'region';
-    }
-
-    setSearchParams(params);
-  }, [keyword, searchType, setSearchParams]);
+    const fetchPharmacy = async () => {
+      const response = await api.get(`pharmacies/${searchId}`); // 쿼리스트링의 id값이 바뀔 때마다 동적으로 get요청
+      const data = response.data;
+      setMapCenter({ lat: data?.latitude, lng: data?.longitude }); // searchParams로 가져온 약국 데이터의 위경도값으로 바꿔줌
+      setSelectedPharmacy(data); // 커스텀오버레이도 유지시킴
+    };
+    fetchPharmacy();
+  }, []);
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
+
+  // 검색 타입 url에 저장
+  const handleSearchTypeChange = (type) => {
+    setSearchType(type); // 버튼 클릭 시 검색 타입 변경
+    searchParams.set('filter', type); // URL에 filter 파라미터를 추가/업데이트
+    setSearchParams(searchParams); // 업데이트된 파라미터를 URL에 반영
+  };
 
   // 검색어(keyword)로 리스트 필터링해서 보여줌
   const searchPharmacies = pharmacies.filter((pharmacy) => {
@@ -84,7 +85,7 @@ const Search = () => {
     setMapCenter({ lat, lng });
     panTo(lat, lng, 2); // 지도를 클릭한 약국의 위치로 이동
 
-    searchParams.set('select', id); // url에 선택된 약국의 id를 저장
+    searchParams.set('id', id); // url에 선택된 약국의 id를 저장
     setSearchParams(searchParams);
 
     setSelectedPharmacy(pharmacy); // 선택된 약국 설정
@@ -92,7 +93,7 @@ const Search = () => {
 
   // 자세히보기 클릭시 해당 약국의 디테일페이지로 이동
   const handleGoToDetail = (id) => {
-    navigate(`/detail?id=${id}`);
+    navigate(`/detail/${id}`);
   };
 
   // 커스텀 오버레이 닫기
@@ -108,6 +109,11 @@ const Search = () => {
       searchPharmacies.forEach((pharmacy) => {
         bounds.extend(new kakao.maps.LatLng(pharmacy.latitude, pharmacy.longitude));
       });
+
+      // 중심 좌표를 계산해서 스토어에 저장
+      const center = bounds.getCenter();
+      useMapStore.getState().setCenter({ lat: center.getLat(), lng: center.getLng() });
+
       map.setBounds(bounds);
     }
   };
@@ -121,7 +127,7 @@ const Search = () => {
             className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
               searchType === 'region' ? 'bg-custom-teal text-white' : 'bg-gray-200'
             } font-semibold text-sm font-custom`}
-            onClick={() => setSearchType('region')}
+            onClick={() => handleSearchTypeChange('region')}
           >
             지역명
           </button>
@@ -129,7 +135,7 @@ const Search = () => {
             className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
               searchType === 'name' ? 'bg-custom-teal text-white' : 'bg-gray-200'
             } font-semibold text-sm font-custom`}
-            onClick={() => setSearchType('name')}
+            onClick={() => handleSearchTypeChange('name')}
           >
             약국명
           </button>
@@ -174,35 +180,37 @@ const Search = () => {
               key={pharmacy.id}
               position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
               onClick={() => setSelectedPharmacy(pharmacy)}
-            >
-              {selectedPharmacy && selectedPharmacy.id === pharmacy.id && (
-                <CustomOverlayMap // 커스텀오버레이
-                  position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
-                  yAnchor={1.3}
-                  xAnchor={0.5}
-                >
-                  <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
-                    <div className="flex justify-between items-center mb-2">
-                      <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
-                      <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
-                        <IoClose size={20} />
-                      </div>
-                    </div>
-                    <div className="text-gray-600">
-                      <p className="mb-1 text-sm break-words">{selectedPharmacy.address}</p>
-                      <span className="text-sm">{selectedPharmacy.phone}</span>
-                    </div>
-                    <button
-                      onClick={() => handleGoToDetail(selectedPharmacy.id)}
-                      className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
-                    >
-                      자세히 보기
-                    </button>
-                  </div>
-                </CustomOverlayMap>
-              )}
-            </MapMarker>
+            />
           ))}
+          {/* {selectedPharmacy && selectedPharmacy.id ===pharmacy.id && ()} */}
+          {selectedPharmacy && (
+            <CustomOverlayMap // 커스텀오버레이
+              position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
+              yAnchor={1.3}
+              xAnchor={0.5}
+            >
+              <div className=" bg-white  rounded-lg shadow-lg p-3 w-64 text-pretty">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
+                  <div className="close cursor-pointer" onClick={handleCloseOverlay} title="닫기">
+                    <IoClose size={20} />
+                  </div>
+                </div>
+                <div className="text-gray-600">
+                  <p className="mb-1 text-sm break-words">{selectedPharmacy.address}</p>
+                  <span className="text-sm">{selectedPharmacy.phone}</span>
+                </div>
+                <button
+                  onClick={() => handleGoToDetail(selectedPharmacy.id)}
+                  className="mt-3 bg-custom-teal text-white px-4 py-2 rounded-lg hover:bg-custom-green transition w-full text-center"
+                >
+                  자세히 보기
+                </button>
+              </div>
+            </CustomOverlayMap>
+          )}
+          {/* </MapMarker> */}
+          {/* ))} */}
         </Map>
       </article>
     </section>
