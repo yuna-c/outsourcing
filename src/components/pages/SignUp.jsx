@@ -44,8 +44,10 @@ export default function SignUp() {
 
       if (response) {
         // 자동 로그인
-        const { accessToken, userId, nickname, avatar } = response;
-        setAuth(accessToken, nickname, userId, avatar);
+        // const { accessToken, userId, nickname, avatar } = response;
+        // setAuth(accessToken, nickname, userId, avatar);
+        const { id: userId, nickname } = formData;
+        setAuth(null, nickname, userId);
 
         alert('회원가입 및 자동 로그인 완료');
         navigate('/');
