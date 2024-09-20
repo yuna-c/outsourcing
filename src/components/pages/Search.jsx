@@ -13,7 +13,7 @@ const Search = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [map, setMap] = useState(null);
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
-  const [searchType, setSearchType] = useState('name'); // 검색 타입
+  const [searchType, setSearchType] = useState(searchParams.get('filter') || 'name'); // 검색 타입
   const [visiblePharmaciesCount, setVisiblePharmaciesCount] = useState(10); // 초기 약국 표시 개수
   const navigate = useNavigate();
 
@@ -105,17 +105,29 @@ const Search = () => {
   // 돋보기 클릭시 검색한 약국의 핀들이 중앙으로 가게 지도범위를 재설정
   const handleCenterMap = () => {
     if (searchPharmacies.length > 0) {
-      // 검색한 약국의 갯수가 0보다 클 경우
+      // 검색된 약국의 갯수가 0보다 크고, map이 null이 아닌 경우에만 실행
       const bounds = new kakao.maps.LatLngBounds();
+
+      // 검색된 약국들의 좌표를 bounds에 추가
       searchPharmacies.forEach((pharmacy) => {
         bounds.extend(new kakao.maps.LatLng(pharmacy.latitude, pharmacy.longitude));
       });
 
-      // 중심 좌표를 계산해서 스토어에 저장
-      const center = bounds.getCenter();
-      useMapStore.getState().setCenter({ lat: center.getLat(), lng: center.getLng() });
+      // bounds가 유효한지 확인 후 중심과 범위를 설정
+      if (!bounds.isEmpty()) {
+        map.setBounds(bounds); // 검색된 약국들을 포함하는 범위로 지도 설정
+      }
+    } else {
+      console.log('검색 결과가 없습니다.');
+    }
+  };
 
-      map.setBounds(bounds);
+  // 엔터키를 눌러도 돋보기를 마우스로 클릭한 것과 같이 동작하도록 하는 함수
+  // input에 onKeyUp속성(사용자가 키보드의 키를 눌렀다가 뗐을 때)으로 넣어주기
+  const pressEnterEvent = (e) => {
+    if (e.keyCode === 13) {
+      // keyCode가 13일때 => 13:엔터
+      handleCenterMap();
     }
   };
 
@@ -153,6 +165,7 @@ const Search = () => {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             className="w-full p-3 rounded-lg"
+            onKeyUp={pressEnterEvent}
           />
           {/*돋보기아이콘 클릭시 검색된 핀들이 맵 중심으로 이동*/}
           <button onClick={handleCenterMap}>
@@ -160,6 +173,14 @@ const Search = () => {
           </button>
         </div>
         <ul className="flex flex-col gap-3 h-[100%]	overflow-auto w-full">
+          {/* 검색 결과가 없을 때 보여줄 메시지 */}
+          {searchPharmacies.length === 0 && (
+            <li>
+              <p>
+                {searchType === 'region' ? '지역명' : '약국명'}으로 검색한 "{keyword}"에 대한 검색결과가 없습니다
+              </p>
+            </li>
+          )}
           {displayedPharmacies.map((pharmacy, id) => (
             <li
               key={id}
