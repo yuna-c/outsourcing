@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useAuthStore from './core/stores/useAuthStore';
+import useAuthStore from '../../assets/icons/useAuthStore_.bak';
 
 const UserProvider = ({ children }) => {
   const { getSession, subscribeToAuthChanges } = useAuthStore();

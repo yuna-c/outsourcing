@@ -5,7 +5,7 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { updateLikes } from '../../core/instance/axiosInstance';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
-import useAuthStore from '../../core/stores/useAuthStore';
+import useAuthStore from '../../assets/icons/useAuthStore_.bak';
 
 const fetchData = async (id) => {
   try {
@@ -98,17 +98,20 @@ const Detail = () => {
           <button onClick={handleGoBack}>
             <SlArrowLeft size={30} className="mr-4" />
           </button>
+
           <span className="mr-auto">{pharmacy.name}</span>
           <button onClick={handleLike}>
             {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
           </button>
         </h2>
+
         <div className="text-lg font-semibold leading-10">
           <p>주소 : {pharmacy.address}</p>
           <p>전화번호 : {pharmacy.phone}</p>
           <p>영업시간 : {pharmacy.time}</p>
         </div>
       </div>
+
       <div className="w-2/3 pl-8">
         <div className="flex items-center justify-center w-full rounded-lg h-96">
           <Map

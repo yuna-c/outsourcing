@@ -1,7 +1,6 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthActions } from '../../core/hooks/useAuthActions';
 import useFormValidation from '../../core/hooks/useFormValidation';
 
 import Article from '../common/ui/Article';
@@ -10,36 +9,24 @@ import Input from '../common/ui/Input';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    // email: '',
     password: '',
     nickname: '',
     id: ''
   });
 
   const { validateForm } = useFormValidation();
-  // const { signUp, signOut } = useAuthActions();
 
   const navigate = useNavigate();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-    console.log('폼 데이터:', formData);
 
     if (!validateForm(formData)) return;
 
     try {
       const response = await register(formData);
+      // console.log('회원가입 API 응답값: ', response);
 
-      // signUp.mutate({
-      //   id: formData.id,
-      //   email: formData.email,
-      //   password: formData.password,
-      //   nickname: formData.nickname
-      // });
-
-      // signOut.mutate();
-
-      console.log('회원가입 API 응답값: ', response);
       if (response) {
         alert('회원가입 완료. 로그인 페이지로 이동합니다.');
         navigate('/signIn');
@@ -58,10 +45,10 @@ const SignUp = () => {
   };
 
   return (
-    <Article className="flex justify-center  md:min-h-[calc(100vh-14rem)] min-h-[calc(100vh-10rem)] px-5 py-2 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignUp">
-      <h1 className="mb-6 text-2xl font-bold">회원가입</h1>
+    <Article className="flex justify-center min-h-[calc(100vh-16rem)] px-5 sm:py-2 py-6 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignIn">
+      <h1 className="mb-6 text-2xl font-extrabold sm:text-3xl">회원가입</h1>
 
-      <form onSubmit={onHandleSubmit} className="w-full space-y-4">
+      <form onSubmit={onHandleSubmit} className="w-full space-y-2 sm:space-y-4">
         <Input
           type="text"
           name="nickname"
@@ -80,14 +67,6 @@ const SignUp = () => {
           required
         />
 
-        {/* <Input
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={onHandleChange}
-          placeholder="이메일을 입력해 주세요"
-          required
-        /> */}
         <Input
           type="password"
           name="password"
@@ -96,7 +75,11 @@ const SignUp = () => {
           placeholder="비밀번호를 입력해 주세요"
           required
         />
-        <Button type="submit" className="w-full p-2">
+
+        <Button
+          type="submit"
+          className="sm:!mt-10 !mt-6 w-full py-2 font-bold !text-custom-deepblue  hover:!text-white bg-white border !border-custom-deepblue text-custom-deepblue hover:!border-custom-skyblue"
+        >
           회원가입
         </Button>
       </form>

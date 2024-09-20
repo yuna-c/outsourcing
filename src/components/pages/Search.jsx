@@ -137,9 +137,9 @@ const Search = () => {
   };
 
   return (
-    <section className="flex flex-row justify-center w-full border-8 rounded-lg">
+    <section className="flex flex-row justify-center w-full mt-24 border-8 rounded-lg">
       {/* 검색영역 */}
-      <article className="flex flex-col items-start p-5 w-1/4 h-[750px] gap-5 ">
+      <article className="flex flex-col items-start p-5 w-1/4 h-[800px] gap-5 ">
         <div className="flex flex-row items-center gap-1">
           <button
             className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
@@ -210,7 +210,7 @@ const Search = () => {
       </article>
       {/* 지도영역 */}
       <article className="w-full md:w-9/12">
-        <Map center={mapCenter} style={{ width: '100%', height: '750px' }} level={3} onCreate={setMap}>
+        <Map center={mapCenter} style={{ width: '100%', height: '800px' }} level={3} onCreate={setMap}>
           {searchPharmacies.map((pharmacy) => (
             <MapMarker // 마커
               key={pharmacy.id}
@@ -224,7 +224,7 @@ const Search = () => {
               yAnchor={1.3}
               xAnchor={0.5}
             >
-              <div className="w-64 p-3 bg-white rounded-lg shadow-lg  text-pretty">
+              <div className="w-64 p-3 bg-white rounded-lg shadow-lg text-pretty">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-semibold text-gray-800">{selectedPharmacy.name}</h3>
                   <div className="cursor-pointer close" onClick={handleCloseOverlay} title="닫기">

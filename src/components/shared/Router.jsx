@@ -22,23 +22,27 @@ const Router = () => {
       element: <Main />
     },
     {
-      path: '/signIn',
-      element: <SignIn />
+      path: '/search',
+      element: <Search />
+    },
+    {
+      path: '/detail/:id',
+      element: <Detail />
     }
   ];
 
   // 비로그인
   const guestRoutes = [
-    // {
-    //   path: '/signIn',
-    //   element: <GuestRoute />,
-    //   children: [
-    //     {
-    //       path: '',
-    //       element: <SignIn />
-    //     }
-    //   ]
-    // },
+    {
+      path: '/signIn',
+      element: <GuestRoute />,
+      children: [
+        {
+          path: '',
+          element: <SignIn />
+        }
+      ]
+    },
     {
       path: '/signUp',
       element: <GuestRoute />,
@@ -48,19 +52,6 @@ const Router = () => {
           element: <SignUp />
         }
       ]
-    },
-
-    {
-      path: '/search',
-      element: <Search />
-    },
-    {
-      path: '/detail/:id',
-      element: <Detail />
-    },
-    {
-      path: '/search',
-      element: <Search />
     },
     {
       path: '/upload',
