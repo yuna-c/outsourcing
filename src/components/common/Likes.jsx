@@ -33,6 +33,7 @@ const Likes = () => {
 
   useEffect(() => {
     const likedPharmaciesStorage = localStorage.getItem(`likedPharmacies_${userId}`);
+    console.log('나오냐? =>', userId);
 
     if (likedPharmaciesStorage) {
       setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
@@ -103,7 +104,7 @@ const Likes = () => {
             .filter((pharmacy) => likedPharmacies.includes(pharmacy.id))
             .map((pharmacy) => (
               <li
-                key={pharmacy.name}
+                key={pharmacy.id}
                 className="cursor-pointer flex items-center justify-between p-4 mb-4 border border-black rounded w-full"
                 onClick={() => {
                   navigate(`/detail/${pharmacy.id}`);
@@ -144,7 +145,7 @@ const Likes = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleLike(pharmacy.id);
+                          handleDelete(pharmacy.id);
                         }}
                         className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 rounded"
                       >

@@ -24,13 +24,20 @@ const Profile = () => {
     console.log('avatar=>', avatar);
 
     formData.append('nickname', nickname || currentNickname);
-    formData.append('avatar', avatar || currentAvatar);
+    if (avatar) {
+      formData.append('avatar', avatar);
+    }
 
     const response = await updateProfile(formData);
 
     if (response && response.success) {
       console.log('response =>', response);
-      setAuth(accessToken, response.nickname, response.userId, response.avatar);
+      setAuth(
+        accessToken,
+        response.nickname || currentNickname,
+        response.userId || useAuthStore.getState().userId,
+        response.avatar || currentAvatar
+      );
       navigate('/mypage');
     }
   };
