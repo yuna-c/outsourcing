@@ -2,11 +2,11 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
-import { useAuthActions } from '../../core/hooks/useAuthActions';
+// import { useAuthActions } from '../../core/hooks/useAuthActions';
 
+import psmLogo from '../../assets/images/psm_logo.png';
 import { HiMenu, HiX } from 'react-icons/hi';
 // import { FaPills } from 'react-icons/fa';
-import psmLogo from '../../assets/images/psm_logo.png';
 
 import Button from './ui/Button';
 import Link from './ui/Link';
@@ -14,20 +14,16 @@ import Link from './ui/Link';
 const Nav = () => {
   const navigate = useNavigate();
   const navRef = useRef(null);
-
+  // const { signOut } = useAuthActions();
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const avatar = useAuthStore((state) => state.avatar);
+  const nickname = useAuthStore((state) => state.nickname);
+  const clearAuth = useAuthStore((state) => state.clearAuth);
   const { isOpen, isScrolled, setIsOpen, toggleIsOpen, setIsScrolled } = useNavStore();
 
-  const { isLoggedIn, avatar, nickname, clearAuth } = useAuthStore((state) => ({
-    isLoggedIn: state.isLoggedIn,
-    avatar: state.avatar,
-    nickname: state.nickname,
-    clearAuth: state.clearAuth
-  }));
-  const { signOut } = useAuthActions();
-
   const onHandleLogout = useCallback(() => {
-    signOut.mutate();
     clearAuth();
+    // signOut.mutate();
     navigate('/');
     setIsOpen(false);
   }, [clearAuth, navigate, setIsOpen]);
@@ -100,7 +96,7 @@ const Nav = () => {
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <span className="font-bold">{nickname} 님</span>
+                <span className="w-20 overflow-hidden font-bold whitespace-nowrap text-ellipsis">{nickname} 님</span>
               </div>
               <Button onClick={onHandleLogout} className="px-3 py-1 text-base">
                 로그아웃

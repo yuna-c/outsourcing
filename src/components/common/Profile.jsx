@@ -7,12 +7,10 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const Profile = () => {
-  const { accessToken, setAuth, currentNickname, currentAvatar } = useAuthStore((state) => ({
-    accessToken: state.accessToken,
-    setAuth: state.setAuth,
-    currentNickname: state.nickname,
-    currentAvatar: state.avatar
-  }));
+  const accessToken = useAuthStore((state) => state.accessToken);
+  const setAuth = useAuthStore((state) => state.setAuth);
+  const currentNickname = useAuthStore((state) => state.nickname);
+  const currentAvatar = useAuthStore((state) => state.avatar);
 
   const [nickname, setNickname] = useState(currentNickname || '');
   const [avatar, setAvatar] = useState(null);

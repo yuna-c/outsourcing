@@ -1,9 +1,8 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthActions } from '../../core/hooks/useAuthActions';
+// import { useAuthActions } from '../../core/hooks/useAuthActions';
 import useFormValidation from '../../core/hooks/useFormValidation';
-import supabase from '../../core/instance/supabase';
 
 import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
@@ -11,13 +10,14 @@ import Input from '../common/ui/Input';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    // email: '',
     password: '',
     nickname: '',
     id: ''
   });
+
   const { validateForm } = useFormValidation();
-  const { signUp } = useAuthActions();
+  // const { signUp, signOut } = useAuthActions();
 
   const navigate = useNavigate();
 
@@ -30,13 +30,14 @@ const SignUp = () => {
     try {
       const response = await register(formData);
 
-      signUp.mutate({
-        id: formData.id,
-        email: formData.email,
-        password: formData.password,
-        nickname: formData.nickname
-      });
-      await supabase.auth.signOut();
+      // signUp.mutate({
+      //   id: formData.id,
+      //   email: formData.email,
+      //   password: formData.password,
+      //   nickname: formData.nickname
+      // });
+
+      // signOut.mutate();
 
       console.log('회원가입 API 응답값: ', response);
       if (response) {
@@ -79,14 +80,14 @@ const SignUp = () => {
           required
         />
 
-        <Input
+        {/* <Input
           type="text"
           name="email"
           value={formData.email}
           onChange={onHandleChange}
           placeholder="이메일을 입력해 주세요"
           required
-        />
+        /> */}
         <Input
           type="password"
           name="password"

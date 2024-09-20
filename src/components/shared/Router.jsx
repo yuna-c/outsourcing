@@ -13,28 +13,32 @@ import NotFound from '../pages/NotFound';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
+import ProfileImageUpload from '../common/ProfileImageUpload';
 
 const Router = () => {
   const publicRoutes = [
     {
       path: '/',
       element: <Main />
+    },
+    {
+      path: '/signIn',
+      element: <SignIn />
     }
   ];
 
   // 비로그인
   const guestRoutes = [
-    {
-      path: '/signIn',
-      element: <GuestRoute />,
-      children: [
-        {
-          path: '',
-          element: <SignIn />
-        }
-      ]
-    },
-
+    // {
+    //   path: '/signIn',
+    //   element: <GuestRoute />,
+    //   children: [
+    //     {
+    //       path: '',
+    //       element: <SignIn />
+    //     }
+    //   ]
+    // },
     {
       path: '/signUp',
       element: <GuestRoute />,
@@ -57,6 +61,10 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
+    },
+    {
+      path: '/upload',
+      element: <ProfileImageUpload />
     }
   ];
 

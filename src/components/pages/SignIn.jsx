@@ -3,7 +3,7 @@ import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 
 import useAuthStore from '../../core/stores/useAuthStore';
-import { useAuthActions } from '../../core/hooks/useAuthActions';
+// import { useAuthActions } from '../../core/hooks/useAuthActions';
 import { loginWithGithub, loginWithKakao } from '../../core/api/social';
 
 import { FaGithub } from 'react-icons/fa6';
@@ -15,11 +15,8 @@ import Input from '../common/ui/Input';
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { signIn } = useAuthActions();
   const [formData, setFormData] = useState({ id: '', password: '' });
-
   const setAuth = useAuthStore((state) => state.setAuth);
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -29,64 +26,68 @@ const SignIn = () => {
     }));
   };
 
-  // const onHandleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const { accessToken, userId, nickname, avatar } = await login(formData);
-  //   console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
-
-  //   if (accessToken) {
-  //     setAuth(accessToken, nickname, userId, avatar);
-  //     alert('로그인 성공');
-  //     navigate('/');
-  //   } else {
-  //     alert('로그인 실패');
-  //   }
-  // };
-
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // 1. JWT 서버에 로그인 요청
-      const { accessToken, userId, nickname, avatar } = await login(formData);
-      console.log('JWT 로그인 API 응답값: ', accessToken, userId, nickname, avatar);
+    const { accessToken, userId, nickname, avatar } = await login(formData);
+    console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
 
-      if (accessToken) {
-        // JWT 서버 로그인 성공 시 상태 업데이트
-        setAuth(accessToken, nickname, userId, avatar);
-        alert('JWT 서버 로그인 성공');
-
-        console.log('Supabase 로그인 시도');
-        const result = await signIn.mutateAsync({
-          email: formData.id,
-          password: formData.password
-        });
-        console.log('Supabase 로그인 성공:', result);
-
-        navigate('/');
-      } else {
-        alert('JWT 서버 로그인 실패');
-      }
-    } catch (error) {
-      console.error('로그인 중 에러:', error.message);
-      alert('로그인 중 에러가 발생했습니다.');
+    if (accessToken) {
+      setAuth(accessToken, nickname, userId, avatar);
+      alert('로그인 성공');
+      // navigate('/');
+    } else {
+      alert('로그인 실패');
     }
   };
+
+  // const onHandleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     // 1. JWT 서버에 로그인 요청
+  //     const { accessToken, userId, nickname, avatar } = await login(formData);
+  //     console.log('JWT 로그인 API 응답값: ', accessToken, userId, nickname, avatar);
+
+  //     if (accessToken) {
+  //       // JWT 서버 로그인 성공 시 상태 업데이트
+  //       setAuth(accessToken, nickname, userId, avatar);
+  //       alert('JWT 서버 로그인 성공');
+
+  //       console.log('Supabase 로그인 시도');
+  //       const result = await signIn.mutateAsync({
+  //         email: formData.id,
+  //         password: formData.password
+  //       });
+  //       console.log('Supabase 로그인 성공:', result);
+
+  //       navigate('/');
+  //     } else {
+  //       alert('JWT 서버 로그인 실패');
+  //     }
+  //   } catch (error) {
+  //     console.error('로그인 중 에러:', error.message);
+  //     alert('로그인 중 에러가 발생했습니다.');
+  //   }
+  // };
 
   const onHandleGithubLogin = async () => {
     try {
       const { success } = await loginWithGithub();
+      console.log('GitHub 로그인 결과:', success);
 
       if (success) {
         alert('GitHub 로그인 성공');
-        navigate('/');
+        return;
       } else {
         alert('GitHub 로그인 실패');
+        console.log('로그인 실패 시 세부 로그를 확인하세요.');
+        return;
       }
     } catch (error) {
-      console.error('GitHub 로그인 에러:', error.message);
-      alert('GitHub 로그인 중 에러가 발생했습니다.');
+      console.error('GitHub 로그인 중 에러 발생:', error.message);
+      console.log('전체 에러 정보:', error);
+      alert(`GitHub 로그인 중 에러가 발생했습니다: ${error.message}`);
     }
   };
 
@@ -97,13 +98,18 @@ const SignIn = () => {
   }, []);
 
   const onHandleKakaoLogin = async () => {
-    const { success } = await loginWithKakao();
+    try {
+      const { success } = await loginWithKakao();
 
-    if (success) {
-      alert('Kakao 로그인 성공');
-      navigate('/');
-    } else {
-      alert('Kakao 로그인에 실패했습니다.');
+      if (success) {
+        alert('Kakao 로그인 성공');
+        navigate('/');
+      } else {
+        alert('Kakao 로그인에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('Kakao 로그인 에러:', error.message);
+      alert('Kakao 로그인 중 에러가 발생했습니다.');
     }
   };
 
@@ -134,13 +140,13 @@ const SignIn = () => {
         </Button>
       </form>
       <div className="w-full mt-3 space-y-4">
-        <Button onClick={onHandleGithubLogin} disabled={isLoggedIn} className="w-full p-2 mr-2 !bg-custom-green">
+        <Button onClick={onHandleGithubLogin} className="w-full p-2 mr-2">
           <span className="flex items-center justify-center">
             <FaGithub className="mr-1 -mt-[2px] text-lg" />
             GitHub 로그인
           </span>
         </Button>
-        <Button onClick={onHandleKakaoLogin} disabled={isLoggedIn} className="w-full p-2 !bg-kakao-yellow ">
+        <Button onClick={onHandleKakaoLogin} className="w-full p-2">
           <span className="flex items-center justify-center">
             <RiKakaoTalkFill className="mr-1 -mt-[2px] text-lg" />
             Kakao 로그인

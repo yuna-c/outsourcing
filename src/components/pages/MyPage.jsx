@@ -12,10 +12,8 @@ const MyPage = () => {
   const location = useLocation();
   const [currentTab, setCurrentTab] = useState('likes');
 
-  const { avatar, nickname } = useAuthStore((state) => ({
-    avatar: state.avatar,
-    nickname: state.nickname
-  }));
+  const avatar = useAuthStore((state) => state.avatar);
+  const nickname = useAuthStore((state) => state.nickname);
 
   // 현재 탭을 가져오는 로직
   useEffect(() => {
