@@ -77,7 +77,10 @@ const Profile = () => {
       </fieldset>
 
       <div className="flex justify-end">
-        <Button onClick={onHandleUpdateProfile} className="w-full p-2 text-white bg-custom-deepblue hover:bg-sky-950">
+        <Button
+          onClick={onHandleUpdateProfile}
+          className="w-full p-2 text-white bg-custom-deepblue hover:bg-custom-skyblue"
+        >
           변경 하기
         </Button>
       </div>
