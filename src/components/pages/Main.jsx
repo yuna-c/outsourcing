@@ -66,7 +66,7 @@ const Main = () => {
   }, [data]);
 
   return (
-    <Article className="main">
+    <Article className="-mt-10 overflow-hidden main">
       {/* 배너 부분 */}
       <Banner data={data} />
       <div>

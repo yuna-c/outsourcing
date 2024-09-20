@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase } from '../instance/supabase';
 import useAuthStore from '../stores/useAuthStore';
 
 export const loginWithGithub = async () => {

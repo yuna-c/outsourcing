@@ -1,10 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
-import psmLogo from '/src/assets/images/psm_logo.png';
+import useNavStore from '../../core/stores/useNavStore';
+import { useAuthActions } from '../../core/hooks/useAuthActions';
 
 import { HiMenu, HiX } from 'react-icons/hi';
-import { FaPills } from 'react-icons/fa';
+// import { FaPills } from 'react-icons/fa';
+import psmLogo from '../../assets/images/psm_logo.png';
 
 import Button from './ui/Button';
 import Link from './ui/Link';
@@ -12,7 +14,8 @@ import Link from './ui/Link';
 const Nav = () => {
   const navigate = useNavigate();
   const navRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
+
+  const { isOpen, isScrolled, setIsOpen, toggleIsOpen, setIsScrolled } = useNavStore();
 
   const { isLoggedIn, avatar, nickname, clearAuth } = useAuthStore((state) => ({
     isLoggedIn: state.isLoggedIn,
@@ -20,34 +23,48 @@ const Nav = () => {
     nickname: state.nickname,
     clearAuth: state.clearAuth
   }));
+  const { signOut } = useAuthActions();
 
-  const onHandleLogout = () => {
+  const onHandleLogout = useCallback(() => {
+    signOut.mutate();
     clearAuth();
     navigate('/');
     setIsOpen(false);
-  };
+  }, [clearAuth, navigate, setIsOpen]);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    },
+    [setIsOpen]
+  );
 
-  const handleClickOutside = (event) => {
-    if (navRef.current && !navRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [setIsScrolled]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <nav
       ref={navRef}
-      className=" fixed z-30 left-0 right-0 top-6 flex items-center justify-between px-5 py-2 w-[95%] md:w-[85%] lg:w-[50%] xl:w-[50%] mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out Nav"
+      className={`fixed z-30 left-0 right-0 ${
+        isScrolled ? 'w-full my-0 rounded-none' : 'w-[95%] lg:w-[50%] my-5'
+      } flex items-center justify-between px-5 py-2 mx-auto border border-custom-gray rounded-full bg-custom-gray transition-all duration-300 ease-in-out`}
     >
       <div className="flex items-center">
         <Link to="/" onClick={() => setIsOpen(false)}>
@@ -56,12 +73,12 @@ const Nav = () => {
         </Link>
       </div>
 
-      <button onClick={toggleMenu} className="text-3xl md:hidden focus:outline-none" aria-label="Toggle menu">
+      <button onClick={toggleIsOpen} className="text-3xl md:hidden focus:outline-none" aria-label="Toggle menu">
         {isOpen ? <HiX /> : <HiMenu />}
       </button>
 
       <ul
-        className={`md:flex items-center absolute md:relative top-16 md:top-0 left-0 right-0 z-10 md:p-0 py-3 px-2 w-full md:w-auto md:space-y-0 space-y-2 rounded-xl border md:border-0 bg-custom-gray md:bg-transparent transition-all duration-300 ease-in-out ${
+        className={`md:flex items-center absolute md:relative top-16 md:top-0 left-0 right-0 z-10 md:p-0 py-3 px-2 w-full md:w-auto space-y-2 md:space-y-0 rounded-xl border md:border-0 bg-custom-gray md:bg-transparent transition-all duration-300 ease-in-out ${
           isOpen ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'
         } md:opacity-100 md:max-h-full overflow-hidden`}
         onClick={() => setIsOpen(false)}
@@ -75,7 +92,7 @@ const Nav = () => {
               <Link to="/myPage" label="마이페이지" />
             </li>
             <li className="flex items-center">
-              <div className="flex items-center pr-1 mr-2">
+              <div className="flex items-center pr-1 mx-2">
                 <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full">
                   <img
                     src={avatar || 'https://via.placeholder.com/30'}
@@ -83,7 +100,7 @@ const Nav = () => {
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <span className="text-bold"> {nickname} 님</span>
+                <span className="font-bold">{nickname} 님</span>
               </div>
               <Button onClick={onHandleLogout} className="px-3 py-1 text-base">
                 로그아웃
@@ -105,4 +122,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default React.memo(Nav);

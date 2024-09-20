@@ -1,18 +1,19 @@
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
+import ScrollTop from './ui/ScrollTop';
 
 const Layout = () => {
   return (
     <>
       <Header />
-      <main className="relative p-3 px-0 py-0 mt-20 bg-white md:bg-white md:px-6 md:py-4 Layout">
-        <section className="min-h-[calc(100vh-7rem)] md:min-h-[calc(100vh-10rem)]">
-          {/*  flex justify-center items-center 가로세로 중간 배치 */}
+      <main className="relative bg-white md:bg-white Layout">
+        <section className="mt-24 min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-3rem)]">
           <Outlet />
         </section>
       </main>
       <Footer />
+      <ScrollTop />
     </>
   );
 };

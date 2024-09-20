@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuthStore from '../../core/stores/useAuthStore';
+import useAuthStore from '../../core/stores/useAuthStore_';
 
 const GuestRoute = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);

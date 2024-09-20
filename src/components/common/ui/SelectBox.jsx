@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SelectBox = ({ REGIONS, selectedRegion, setSelectedRegion }) => {
   return (
     <div>

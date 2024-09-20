@@ -1,9 +1,12 @@
 import Router from './components/shared/Router';
+import UserProvider from './UserProvider';
 
 function App() {
   return (
-    <div className="relative min-h-screen mx-auto overflow-x-hidden Wrap">
-      <Router />
+    <div className="relative mx-auto Wrap">
+      <UserProvider>
+        <Router />
+      </UserProvider>
     </div>
   );
 }
