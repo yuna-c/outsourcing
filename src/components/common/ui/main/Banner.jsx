@@ -1,8 +1,8 @@
 import React from 'react';
 import { IoMdSearch } from 'react-icons/io';
-import Button from './Button';
+import Button from '../Button';
 import mainIcon from '/src/assets/images/main_icon.png';
-import './../../../assets/styles/mainPage.css';
+import './../../../../assets/styles/mainPage.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import mainBanner from '/src/assets/images/pills.jpg';
