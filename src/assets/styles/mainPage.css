@@ -6,26 +6,24 @@
   @apply mx-auto border;
 }
 .current_pharmacies {
-  @apply min-h-[450px] p-[40px] flex flex-col items-center justify-center bg-white;
+  @apply min-h-[450px] p-[40px] bg-white;
 }
 .current_pharmacies:nth-child(2) {
   @apply bg-custom-gradient;
 }
 .current_pharmacies select {
-  @apply border rounded-sm bg-transparent;
-}
-.pharmacy_selector_container {
-  @apply flex items-center justify-center flex-col h-[13rem] gap-[1.75rem];
+  @apply border bg-transparent border-custom-deepblue focus:ring-white p-2 rounded-lg;
 }
 .pharmacy_selector_title {
   @apply font-bold text-center text-[30px] p-[40px];
 }
-.select_region {
-  @apply pr-3 font-semibold;
+
+.select_container {
+  @apply text-right max-w-[1080px] mx-auto;
 }
 /* slider css start */
 .slider_container {
-  @apply text-center box-border max-w-[1100px] mx-auto p-[40px];
+  @apply text-center box-border max-w-[1100px] mx-auto;
 }
 .slider_item {
   @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)] bg-white  h-[300px] relative rounded-[15px];
@@ -34,7 +32,7 @@
   @apply bg-custom-skyblue text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute;
 }
 .slider_item .slider_text_area {
-  @apply top-[90px] mx-auto left-[50%] translate-x-[-50%] w-[80%] leading-[40px] absolute overflow-hidden
+  @apply top-[80px] mx-auto left-[50%] translate-x-[-50%] w-[80%] leading-[40px] absolute overflow-hidden
   whitespace-nowrap text-ellipsis;
 }
 .slider_item h3 {
@@ -47,7 +45,7 @@
   @apply text-[14px] leading-[20px] pt-[10px];
 }
 .slider_item button {
-  @apply absolute bottom-[30px] translate-x-[-50%]
+  @apply absolute bottom-[47px] translate-x-[-50%]
   py-[5px] px-[10px] min-w-[151px];
 }
 .current_parmacies select {
@@ -56,17 +54,13 @@
 .slick-slide {
   @apply px-[10px] pt-[5px];
 }
-.slick-prev:before,
-.slick-next:before {
-  @apply text-custom-deepgreen;
-}
 
 .block-text {
   @apply max-w-[100%] overflow-hidden whitespace-nowrap text-ellipsis;
 }
 .slick-prev:before,
 .slick-next:before {
-  @apply text-custom-deepgreen opacity-100 !important;
+  @apply text-custom-deepblue opacity-100 !important;
 }
 /* slider css end */
 /* main_banner css start */
@@ -100,7 +94,7 @@
   @apply flex justify-center w-full;
 }
 .main_text_area form input {
-  @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-deepblue focus:outline-none;
+  @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-deepblue focus:outline-none outline-none;
 }
 .main_text_area form button {
   @apply flex items-center justify-center w-10 h-10 border-none rounded-md bg-custom-deepblue;
@@ -119,3 +113,4 @@
 .youtube_item iframe {
   @apply rounded-md;
 }
+/* youtube css end */

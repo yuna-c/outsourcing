@@ -15,15 +15,15 @@ function SliderResponse({ pharmacies = [], tag }) {
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
-    slidesToShow: Math.min(pharmacies.length, 3), // 최대 4개, 아이템 수에 따라 조정
-    slidesToScroll: Math.min(pharmacies.length, 3), // 최대 4개, 아이템 수에 따라 조정
+    slidesToShow: Math.min(pharmacies.length, 3), // 최대 3개, 아이템 수에 따라 조정
+    slidesToScroll: Math.min(pharmacies.length, 3), // 최대 3개, 아이템 수에 따라 조정
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: Math.min(pharmacies.length, 3),
-          slidesToScroll: Math.min(pharmacies.length, 3),
+          slidesToShow: Math.min(pharmacies.length, 2),
+          slidesToScroll: Math.min(pharmacies.length, 2),
           infinite: pharmacies.length > 1, // 약국 수가 2개 이상일 때 무한 스크롤 활성화
           dots: false
         }
@@ -31,8 +31,8 @@ function SliderResponse({ pharmacies = [], tag }) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: Math.min(pharmacies.length, 2),
-          slidesToScroll: Math.min(pharmacies.length, 2),
+          slidesToShow: Math.min(pharmacies.length, 1),
+          slidesToScroll: Math.min(pharmacies.length, 1),
           infinite: pharmacies.length > 1, // 약국 수가 2개 이상일 때 무한 스크롤 활성화
           initialSlide: 1 // 필요에 따라 초기 슬라이드 설정
         }

@@ -26,7 +26,7 @@ const Youtube = () => {
 
   return (
     <div className="current_pharmacies">
-      <h1 className="pharmacy_selector_title text-2xl">YouTube Videos</h1>
+      <h1 className="pharmacy_selector_title text-2xl">약국 꿀팁 영상</h1>
       <div className="youtube_container">
         {videos.map((video) => (
           <div key={video.id.videoId} className="youtube_item">

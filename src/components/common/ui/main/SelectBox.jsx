@@ -1,11 +1,10 @@
 import React from 'react';
-
+import './../../../../assets/styles/mainPage.css';
 const SelectBox = ({ REGIONS, selectedRegion, setSelectedRegion }) => {
   return (
-    <div>
-      <span className="select_region text-1x1">지역 선택:</span>
-      <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}>
-        <option value="">전국</option>
+    <div className="select_container">
+      <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)} className="border ">
+        <option value="지역선택">지역선택</option>
         {REGIONS.map((region) => (
           <option key={region} value={region}>
             {region}
