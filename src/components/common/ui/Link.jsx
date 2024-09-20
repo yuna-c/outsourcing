@@ -4,7 +4,7 @@ const Link = ({ label, children, className = '', ...props }) => {
   return (
     <RouterNavLink
       className={({ isActive }) =>
-        `inline-flex ${className} ${isActive ? 'active text-custom-teal font-bold' : 'text-black'}`
+        `inline-flex ${className} ${isActive ? 'active text-custom-deepblue font-bold' : 'text-black'}`
       }
       {...props}
     >
