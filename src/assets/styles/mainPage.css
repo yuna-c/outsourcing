@@ -6,30 +6,32 @@
   @apply mx-auto border;
 }
 .current_pharmacies {
-  @apply min-h-[450px] h-[85vh] flex flex-col items-center justify-center;
+  @apply min-h-[450px] p-[40px] flex flex-col items-center justify-center bg-white;
 }
-
 .current_pharmacies:nth-child(2) {
   @apply bg-custom-gradient;
+}
+.current_pharmacies select {
+  @apply border rounded-sm bg-transparent;
 }
 .pharmacy_selector_container {
   @apply flex items-center justify-center flex-col h-[13rem] gap-[1.75rem];
 }
 .pharmacy_selector_title {
-  @apply font-bold text-center text-[30px];
+  @apply font-bold text-center text-[30px] p-[40px];
 }
 .select_region {
   @apply pr-3 font-semibold;
 }
 /* slider css start */
 .slider_container {
-  @apply text-center box-border max-w-[1100px] mx-auto;
+  @apply text-center box-border max-w-[1100px] mx-auto p-[40px];
 }
 .slider_item {
   @apply shadow-[0px_2px_12px_rgba(0,0,0,0.2)] bg-white  h-[300px] relative rounded-[15px];
 }
 .slider_item_tag {
-  @apply bg-custom-deepgreen text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute;
+  @apply bg-custom-skyblue text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute;
 }
 .slider_item .slider_text_area {
   @apply top-[90px] mx-auto left-[50%] translate-x-[-50%] w-[80%] leading-[40px] absolute overflow-hidden
@@ -39,14 +41,14 @@
   @apply text-[23px] font-extrabold;
 }
 .highlight {
-  @apply inline bg-custom-mint px-[2px] rounded-[8px];
+  @apply inline bg-[#C3EBFF] px-[2px] rounded-[8px];
 }
 .address {
   @apply text-[14px] leading-[20px] pt-[10px];
 }
 .slider_item button {
   @apply absolute bottom-[30px] translate-x-[-50%]
-  py-[5px] px-[10px] bg-custom-teal min-w-[151px];
+  py-[5px] px-[10px] min-w-[151px];
 }
 .current_parmacies select {
   @apply border border-gray-500 w-[100px];
@@ -83,9 +85,11 @@
 .main_text_area h3 {
   @apply xl:text-[2.5rem] text-[1.5rem] text-white font-semibold;
 }
+
 .main_text_area h3:nth-child(1) {
   @appl text-[27px] font-bold;
 }
+
 .main_text_area h3 span {
   @apply text-custom-deepblue font-extrabold;
 }
@@ -99,7 +103,19 @@
   @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-deepblue focus:outline-none;
 }
 .main_text_area form button {
-  @apply flex items-center justify-center w-10 h-10 border-none rounded-md;
+  @apply flex items-center justify-center w-10 h-10 border-none rounded-md bg-custom-deepblue;
 }
 /* main_banner css end */
-/*  */
+/* youtube css start */
+.youtube_container {
+  @apply flex flex-wrap gap-12 justify-center items-center;
+}
+.youtube_container .youtube_item {
+  @apply inline-block max-w-[350px] text-center border border-b-2 p-[30px] box-border shadow-[0px_2px_12px_rgba(0,0,0,0.2)];
+}
+.youtube_item h2 {
+  @apply py-6;
+}
+.youtube_item iframe {
+  @apply rounded-md;
+}
