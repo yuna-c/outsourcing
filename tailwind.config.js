@@ -38,7 +38,8 @@ export default {
         'xl-1/2-important': '50% !important'
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(#9BDBA6 0%, #83CEA1 66.5%, #50B498 100%)'
+        'custom-gradient':
+          'linear-gradient(to right bottom, #2587e8, #5396eb, #72a5ed, #8db5f0, #a6c4f2, #accaf1, #b4cfef, #bcd4ee, #b3d1e9, #abcde3, #a3cadd, #9cc6d7)'
       }
     }
   },
