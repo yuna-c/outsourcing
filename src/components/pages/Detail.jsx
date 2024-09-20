@@ -5,6 +5,7 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { updateLikes } from '../../core/instance/axiosInstance';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
+import useAuthStore from '../../core/stores/useAuthStore';
 
 const fetchData = async (id) => {
   try {
@@ -21,13 +22,17 @@ const Detail = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState(false);
-  const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 상태 추가
+  const [selectedPharmacy, setSelectedPharmacy] = useState(null);
   const navigate = useNavigate();
 
+  const userId = useAuthStore((state) => state.userId);
+
   useEffect(() => {
-    const likedPharmacies = JSON.parse(localStorage.getItem('likedPharmacies')) || [];
-    setLiked(likedPharmacies.includes(id));
-  }, [id]);
+    if (userId) {
+      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
+      setLiked(likedPharmacies.includes(id));
+    }
+  }, [id, userId]);
 
   const handleGoBack = () => {
     navigate(-1);
@@ -44,13 +49,13 @@ const Detail = () => {
 
     try {
       await updateLikes(id, newLikeCount);
-      const likedPharmacies = JSON.parse(localStorage.getItem('likedPharmacies')) || [];
+      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
       if (liked) {
         const updatedLikes = likedPharmacies.filter((pharmacyId) => pharmacyId !== id);
-        localStorage.setItem('likedPharmacies', JSON.stringify(updatedLikes));
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes));
       } else {
         likedPharmacies.push(id);
-        localStorage.setItem('likedPharmacies', JSON.stringify(likedPharmacies));
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(likedPharmacies));
       }
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
@@ -88,18 +93,14 @@ const Detail = () => {
 
   return (
     <div className="flex justify-center items-start p-8 min-h-screen">
-      <div className=" shadow-lg rounded-lg p-6 w-1/3">
+      <div className="shadow-lg rounded-lg p-6 w-1/3">
         <h2 className="flex justify-start items-center mb-4 text-4xl font-bold">
           <button onClick={handleGoBack}>
             <SlArrowLeft size={30} className="mr-4" />
           </button>
           <span className="mr-auto">{pharmacy.name}</span>
           <button onClick={handleLike}>
-            {liked ? (
-              <AiFillHeart size={30} color="red" /> // 채워진 하트
-            ) : (
-              <AiOutlineHeart size={30} color="gray" /> // 비어 있는 하트
-            )}
+            {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
           </button>
         </h2>
         <div className="text-lg font-semibold leading-10">
