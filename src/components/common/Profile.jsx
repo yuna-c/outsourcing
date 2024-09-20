@@ -20,6 +20,8 @@ const Profile = () => {
 
   const onHandleUpdateProfile = async () => {
     const formData = new FormData();
+    console.log('currentAvatar=>', currentAvatar);
+    console.log('avatar=>', avatar);
 
     formData.append('nickname', nickname || currentNickname);
     formData.append('avatar', avatar || currentAvatar);
@@ -27,6 +29,7 @@ const Profile = () => {
     const response = await updateProfile(formData);
 
     if (response && response.success) {
+      console.log('response =>', response);
       setAuth(accessToken, response.nickname, response.userId, response.avatar);
       navigate('/mypage');
     }

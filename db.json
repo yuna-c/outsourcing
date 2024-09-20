@@ -168,7 +168,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 2
+      "likes": 4
     },
     {
       "id": "16",
@@ -305,7 +305,7 @@
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
       "longitude": 126.9575191,
-      "likes": 1
+      "likes": 4
     },
     {
       "id": "28",
@@ -350,7 +350,7 @@
       "address": "서울 중구 동호로11길 43(신당동)",
       "latitude": 37.5533356,
       "longitude": 127.0090626,
-      "likes": 1
+      "likes": 2
     },
     {
       "id": "32",
@@ -362,7 +362,7 @@
       "address": "서울 중랑구 면목로 421",
       "latitude": 37.5896475,
       "longitude": 127.0870515,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "33",
@@ -729,7 +729,7 @@
       "address": "인천광역시 중구 인항로 42 (신흥동3가)",
       "latitude": 37.4569827,
       "longitude": 126.6347845,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "66",
