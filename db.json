@@ -168,7 +168,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": null
+      "likes": 2
     },
     {
       "id": "16",
@@ -179,7 +179,8 @@
       "phone": "02-332-3250",
       "address": "서울 마포구 월드컵로 111",
       "latitude": 37.558185,
-      "longitude": 126.9077964
+      "longitude": 126.9077964,
+      "likes": null
     },
     {
       "id": "17",
@@ -190,7 +191,8 @@
       "phone": "02-337-7959",
       "address": "서울 마포구 양화로 72, 118호(서교동)",
       "latitude": 37.5507977,
-      "longitude": 126.9167221
+      "longitude": 126.9167221,
+      "likes": null
     },
     {
       "id": "18",
@@ -303,7 +305,7 @@
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
       "longitude": 126.9575191,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "28",
@@ -348,7 +350,7 @@
       "address": "서울 중구 동호로11길 43(신당동)",
       "latitude": 37.5533356,
       "longitude": 127.0090626,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "32",
@@ -359,7 +361,8 @@
       "phone": "02-435-3900",
       "address": "서울 중랑구 면목로 421",
       "latitude": 37.5896475,
-      "longitude": 127.0870515
+      "longitude": 127.0870515,
+      "likes": null
     },
     {
       "id": "33",
@@ -403,7 +406,8 @@
       "phone": "051-413-0300",
       "address": "부산광역시 기장군 정관읍 정관4로 24",
       "latitude": 35.3241099,
-      "longitude": 129.1695991
+      "longitude": 129.1695991,
+      "likes": null
     },
     {
       "id": "37",
@@ -723,7 +727,8 @@
       "phone": "032-888-7548",
       "address": "인천광역시 중구 인항로 42 (신흥동3가)",
       "latitude": 37.4569827,
-      "longitude": 126.6347845
+      "longitude": 126.6347845,
+      "likes": null
     },
     {
       "id": "66",
@@ -822,7 +827,8 @@
       "phone": "032-764-5747",
       "address": "인천광역시 동구 화수로 18, 103호 (송현동,동부프라자)",
       "latitude": 37.4810947,
-      "longitude": 126.6355054
+      "longitude": 126.6355054,
+      "likes": null
     },
     {
       "id": "75",

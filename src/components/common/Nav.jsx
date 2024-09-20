@@ -78,7 +78,7 @@ const Nav = () => {
               <div className="flex items-center pr-1 mr-2">
                 <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full">
                   <img
-                    src={avatar || 'https://via.placeholder.com/30'}
+                    src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
                     alt={nickname}
                     className="object-cover w-full h-full"
                   />

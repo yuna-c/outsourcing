@@ -133,7 +133,7 @@ const Likes = () => {
     <div className="relative">
       <ul className=" items-center justify-between mb-4 flex-wrap">
         {likedPharmacies.length === 0 ? (
-          <div className="flex items-center gap-4 border p-3 border-custom-deepblue rounded w-full">
+          <div className="flex items-center gap-4 border p-3 border-black rounded w-full">
             <IoHeartDislikeCircleSharp size={45} />
             <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
