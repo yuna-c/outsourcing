@@ -168,7 +168,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "16",
@@ -590,7 +590,8 @@
       "phone": "053-323-8736",
       "address": "대구광역시 북구 칠곡중앙대로 450",
       "latitude": 35.9358908,
-      "longitude": 128.5494369
+      "longitude": 128.5494369,
+      "likes": null
     },
     {
       "id": "54",
@@ -1867,7 +1868,8 @@
       "phone": "063-261-8275",
       "address": "전라북도 완주군 고산면 고산로 91",
       "latitude": 35.9750618,
-      "longitude": 127.2069574
+      "longitude": 127.2069574,
+      "likes": null
     },
     {
       "id": "170",
