@@ -31,10 +31,10 @@ const ScrollTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-10 right-10 w-10 h-10 rounded-full bg-black text-white shadow-lg transition-opacity duration-300 transform ${
+      className={`fixed bottom-10 right-10 w-10 h-10 rounded-full bg-white border border-white text-custom-deepblue shadow-lg transition-opacity duration-300 transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
-      aria-label="Scroll to top"
+      aria-label="위로가기"
     >
       ↑
     </button>

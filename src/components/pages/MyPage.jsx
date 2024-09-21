@@ -12,10 +12,8 @@ const MyPage = () => {
   const location = useLocation();
   const [currentTab, setCurrentTab] = useState('likes');
 
-  const { avatar, nickname } = useAuthStore((state) => ({
-    avatar: state.avatar,
-    nickname: state.nickname
-  }));
+  const avatar = useAuthStore((state) => state.avatar);
+  const nickname = useAuthStore((state) => state.nickname);
 
   // 현재 탭을 가져오는 로직
   useEffect(() => {
@@ -34,15 +32,18 @@ const MyPage = () => {
 
   return (
     <Article className="px-5 py-2 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important MyPage">
-      {/* flex flex-col items-center min-h-screen justify-evenly */}
       <div className="my-10 text-center">
         {/* 로그인한 사용자의 프로필 이미지 */}
         <img
+<<<<<<< HEAD
 <<<<<<< HEAD
           src={avatar || 'https://via.placeholder.com/300'}
 =======
           src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
 >>>>>>> 32de0e33973d3ae5bc17672c20f9ade30560baf9
+=======
+          src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
+>>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
           alt={nickname}
           className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-deepblue"
         />

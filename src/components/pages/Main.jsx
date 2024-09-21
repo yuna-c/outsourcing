@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import Article from '../common/ui/Article';
-import Banner from '../common/ui/main/Banner';
-import './../../assets/styles/mainPage.css';
+import Banner from '../common/main/Banner';
+import Youtube from '../common/main/Youtube';
+import CurrentPharmaciesSection from '../common/main/CurrentPharmaciesSection';
+import WeekendPharmaciesSection from '../common/main/WeekendPharmaciesSection';
 
-import CurrentPharmaciesSection from '../common/ui/main/CurrentPharmaciesSection';
-import WeekendPharmaciesSection from '../common/ui/main/WeekendPharmaciesSection';
+import './../../assets/styles/mainPage.css';
 import { REGIONS } from '../../core/utils/regions';
 import { api } from '../../core/instance/axiosInstance';
-import Youtube from '../common/ui/main/Youtube';
 
 const Main = () => {
   const [data, setData] = useState(null);
@@ -67,7 +67,7 @@ const Main = () => {
   }, [data]);
 
   return (
-    <Article className="-mt-10 overflow-hidden main">
+    <Article className="!-mt-2 overflow-hidden main">
       {/* 배너 부분 */}
       <Banner data={data} />
       <div>

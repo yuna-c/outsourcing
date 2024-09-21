@@ -19,6 +19,14 @@ const Router = () => {
     {
       path: '/',
       element: <Main />
+    },
+    {
+      path: '/search',
+      element: <Search />
+    },
+    {
+      path: '/detail/:id',
+      element: <Detail />
     }
   ];
 
@@ -34,7 +42,6 @@ const Router = () => {
         }
       ]
     },
-
     {
       path: '/signUp',
       element: <GuestRoute />,
@@ -44,19 +51,6 @@ const Router = () => {
           element: <SignUp />
         }
       ]
-    },
-
-    {
-      path: '/search',
-      element: <Search />
-    },
-    {
-      path: '/detail/:id',
-      element: <Detail />
-    },
-    {
-      path: '/search',
-      element: <Search />
     }
   ];
 
