@@ -1,13 +1,11 @@
-import { supabase } from './supabase';
+import { supabase } from '../instance/supabase';
 import useAuthStore from '../stores/useAuthStore';
 
 export const loginWithGithub = async () => {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: 'http://localhost:5173'
-      }
+      provider: 'github'
+      // options: { redirectTo: 'http://localhost:5173', scopes: 'read:user user:email' }
     });
 
     if (error) {
@@ -16,7 +14,7 @@ export const loginWithGithub = async () => {
     }
 
     const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-
+    console.log('세션 데이터:', sessionData);
     if (sessionError) {
       console.error('세션 가져오기 에러:', sessionError.message);
       return { success: false };
@@ -27,7 +25,16 @@ export const loginWithGithub = async () => {
     if (session) {
       const user = session.user;
       const setAuth = useAuthStore.getState().setAuth;
-      setAuth(session.access_token, user.user_metadata.full_name, user.id, user.user_metadata.avatar_url);
+      console.log('GitHub 로그인 성공:', user);
+
+      setAuth(
+        session.access_token,
+        user.user_metadata.user_name || user.user_metadata.full_name || 'user',
+        user.id,
+        user.user_metadata.avatar_url
+      );
+
+      console.log('setAuth 이후 상태:', useAuthStore.getState());
       return { success: true, accessToken: session.access_token };
     }
 

@@ -5,8 +5,9 @@ export default {
     extend: {
       fontFamily: {
         custom: [
+          'Pretendard', // 로컬 및 웹폰트 모두 사용
+          'Arial',
           'Pretendard Variable',
-          'Pretendard',
           '-apple-system',
           'BlinkMacSystemFont',
           'system-ui',

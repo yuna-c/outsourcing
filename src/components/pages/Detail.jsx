@@ -146,10 +146,10 @@ const Detail = () => {
   };
 
   return (
-    <div className="flex justify-center items-start p-8 min-h-screen">
+    <div className="flex items-start justify-center min-h-screen p-8">
       <div>
-        <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-          <h2 className="flex justify-start items-center mb-4 text-4xl font-bold">
+        <div className="p-4 mb-6 bg-white rounded-lg shadow-md">
+          <h2 className="flex items-center justify-start mb-4 text-4xl font-bold">
             <button onClick={handleGoBack}>
               <SlArrowLeft size={30} className="mr-4" />
             </button>
@@ -164,18 +164,18 @@ const Detail = () => {
             <p>영업시간 : {pharmacy.time}</p>
           </div>
         </div>
-        <div className="bg-white p-4 mt-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold leading-8 mb-4">리뷰</h3>
+        <div className="p-4 mt-6 bg-white rounded-lg shadow-md">
+          <h3 className="mb-4 text-lg font-semibold leading-8">리뷰</h3>
           <div className="mb-4">
             <textarea
-              className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+              className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
               rows="4"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="리뷰를 입력하세요"
             />
             <button
-              className="flex justify-end text-white border border-transparent rounded-full overflow-hidden bg-custom-deepblue hover:bg-custom-skyblue transition-none py-2 px-4 ml-auto"
+              className="flex justify-end px-4 py-2 ml-auto overflow-hidden text-white transition-none border border-transparent rounded-full bg-custom-deepblue hover:bg-custom-skyblue"
               onClick={handleAddComment}
             >
               리뷰 추가
@@ -184,11 +184,11 @@ const Detail = () => {
 
           {pharmacy.comments?.length > 0 ? (
             pharmacy.comments.map((comment) => (
-              <div key={comment.id} className="mb-4 p-4 bg-gray-100 rounded-lg">
+              <div key={comment.id} className="p-4 mb-4 bg-gray-100 rounded-lg">
                 {editingCommentId === comment.id ? (
                   <div>
                     <textarea
-                      className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+                      className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
                       rows="2"
                       value={editingCommentContent}
                       onChange={(e) => setEditingCommentContent(e.target.value)}
@@ -203,7 +203,7 @@ const Detail = () => {
                     <p>{comment.content}</p>
                     {comment.userId === userId && (
                       <div className="flex justify-end space-x-2">
-                        <p className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</p>
+                        <p className="text-sm text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
                         <button className="text-sm text-blue-500 " onClick={() => handleEditComment(comment)}>
                           <AiFillEdit />
                         </button>
@@ -223,7 +223,7 @@ const Detail = () => {
       </div>
 
       <div className="w-2/3 pl-8">
-        <div className="w-full h-96 rounded-lg flex justify-center items-center">
+        <div className="flex items-center justify-center w-full rounded-lg h-96">
           <Map
             center={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
             style={{ width: '100%', height: '100%' }}
@@ -235,9 +235,9 @@ const Detail = () => {
             />
             {selectedPharmacy && (
               <CustomOverlayMap position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}>
-                <div className="p-2 bg-white border border-gray-300 shadow-lg rounded-lg relative">
+                <div className="relative p-2 bg-white border border-gray-300 rounded-lg shadow-lg">
                   <button
-                    className="absolute top-1 right-1 text-gray-500 hover:text-black"
+                    className="absolute text-gray-500 top-1 right-1 hover:text-black"
                     onClick={handleCloseOverlay}
                   >
                     &times;
