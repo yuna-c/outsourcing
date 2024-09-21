@@ -13,7 +13,7 @@ function SliderResponse({ pharmacies = [], tag }) {
   const settings = {
     dots: false,
     infinite: pharmacies.length > 1, // 약국 수가 2개 이상일 때 무한 스크롤 활성화
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
     slidesToShow: Math.min(pharmacies.length, 3), // 최대 3개, 아이템 수에 따라 조정
@@ -60,7 +60,7 @@ function SliderResponse({ pharmacies = [], tag }) {
           {pharmacies.map((item) => (
             <div
               key={item.name}
-              className="border border-custom-gray shadow-md bg-white h-[300px] relative rounded-[15px] slider_item"
+              className="border border-custom-gray shadow-md bg-white h-[300px] relative rounded-[15px] slider_item w-full"
             >
               <span className="slider_item_tag bg-custom-skyblue text-white py-[5px] px-[10px] rounded-[10px] right-[20px] top-[20px] absolute text-sm font-bold">
                 {tag}
@@ -76,7 +76,7 @@ function SliderResponse({ pharmacies = [], tag }) {
               </div>
 
               <Button
-                className="inline-flex items-center justify-center absolute bottom-[47px] translate-x-[-50%] py-[5px] px-[14px] min-w-[151px] md:w-auto w-[85%]"
+                className="inline-flex items-center justify-center absolute bottom-[47px] translate-x-[-50%] py-[5px] px-[14px] min-w-[151px] w-[85%] xl:w-auto"
                 onClick={() => handleDetailClick(item.id)}
               >
                 약국 자세히 보기 <MdArrowForwardIos />

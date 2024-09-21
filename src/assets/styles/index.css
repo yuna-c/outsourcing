@@ -5,6 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-custom;
+/* 전역 */
+@layer base {
+  body {
+    @apply antialiased font-custom;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

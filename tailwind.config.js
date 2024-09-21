@@ -24,13 +24,6 @@ export default {
         ]
       },
       colors: {
-        // 'custom-deepgreen': '#16423C',
-        // 'custom-green': '#478485',
-        // 'custom-teal': '#50B498',
-        // 'custom-mint': '#9BDBA6',
-        // 'custom-yellow': '#DEF9C4',
-        // 'kakao-yellow': '#ead61d', // #FAE100
-        // 'custom-palemint': '#E9EFEC',
         'custom-gray': '#ededed',
         'custom-deepblue': '#074173',
         'custom-skyblue': '#1679AB'
@@ -47,5 +40,8 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [],
+  corePlugins: {
+    fontSmoothing: true
+  }
 };

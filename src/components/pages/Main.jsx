@@ -5,7 +5,7 @@ import Youtube from '../common/main/Youtube';
 import CurrentPharmaciesSection from '../common/main/CurrentPharmaciesSection';
 import WeekendPharmaciesSection from '../common/main/WeekendPharmaciesSection';
 
-import './../../assets/styles/mainPage.css';
+import './../../assets/styles/main.css';
 import { REGIONS } from '../../core/utils/regions';
 import { api } from '../../core/instance/axiosInstance';
 
