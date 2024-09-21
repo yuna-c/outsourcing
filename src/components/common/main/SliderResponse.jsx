@@ -71,7 +71,9 @@ function SliderResponse({ pharmacies = [], tag }) {
   whitespace-nowrap text-ellipsis"
               >
                 <h3 className="text-[23px] font-extrabold">{item.name}</h3>
-                <p className="highlight inline bg-[#C3EBFF] py-1 px-2 rounded-[8px] font-bold text-sm">{item.time}</p>
+                <p className="highlight bg-[#C3EBFF] py-1 px-2 rounded-[8px] font-bold text-sm inline-block overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
+                  {item.time}
+                </p>
                 <p className="address block-text text-[14px] leading-[15px]">{item.address}</p>
               </div>
 

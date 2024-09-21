@@ -136,7 +136,7 @@ const Search = () => {
   };
 
   return (
-    <article className="relative flex flex-row justify-center h-full m-auto overflow-hidden rounded-lg">
+    <article className="relative flex flex-row justify-center h-full m-auto overflow-hidden">
       {/* 모바일에서 검색영역 토글 버튼 */}
       <button
         className="absolute z-40 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
