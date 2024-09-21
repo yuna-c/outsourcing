@@ -29,7 +29,17 @@ export default {
         'custom-skyblue': '#1679AB'
       },
       width: {
-        'xl-1/2-important': '50% !important'
+        'xl-1/2-important': '50% !important',
+        fit: 'fit-content'
+      },
+      maxWidth: {
+        fit: 'fit-content'
+      },
+      height: {
+        fit: 'fit-content'
+      },
+      minHeight: {
+        fit: 'fit-content'
       },
       backgroundImage: {
         'custom-gradient':

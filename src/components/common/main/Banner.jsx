@@ -19,7 +19,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="!h-screen pt-10 !mt-2 bg-left-top bg-cover md:!h-[750px] main_banner saturate-50 bg-custom-deepblue bg-custom-main-gradient opacity-95 custom-main-gradient relative overflow-hidden  bg-no-repeat flex flex-col justify-center items-center">
+    <div className="!h-screen pt-10 !mt-2 bg-left-top bg-cover md:!h-[750px] main_banner saturate-50 bg-custom-deepblue bg-custom-main-gradient opacity-95 custom-main-gradient relative overflow-hidden bg-no-repeat flex flex-col justify-center items-center">
       <img src={mainIcon} alt="banner_icon" className="grayscale absolute right-5 top-5 w-[150px] md:w-[200px]" />
 
       <div className="flex flex-col w-full xl:w-[55%] lg:w-[85%] gap-2 mt-0 md:px-16 md:py-16 px-5 py:0 md:mt-0  border-transparent xl:border-[1.5px] xl:border-[rgba(255,255,255,0.1)] rounded-lg">
