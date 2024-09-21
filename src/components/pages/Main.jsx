@@ -67,7 +67,7 @@ const Main = () => {
   }, [data]);
 
   return (
-    <Article className="!-mt-2 overflow-hidden main">
+    <Article className="!-mt-2 overflow-hidden mx-auto main">
       {/* 배너 부분 */}
       <Banner data={data} />
       <div>
