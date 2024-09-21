@@ -23,6 +23,34 @@ const useAuthStore = create(
       setUserId: (userId) => set({ userId }),
       setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
 
+      // 세션을 가져오고 사용자 상태를 설정
+      getSession: async () => {
+        const {
+          data: { session }
+        } = await supabase.auth.getSession();
+        set({
+          user: session?.user ?? null,
+          accessToken: session?.access_token ?? null,
+          isLoggedIn: !!session?.user
+        });
+      },
+
+      // 인증 상태 변경을 구독
+      subscribeToAuthChanges: () => {
+        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+          set({
+            user: session?.user ?? null,
+            accessToken: session?.access_token ?? null,
+            isLoggedIn: !!session?.user
+          });
+        });
+
+        return () => {
+          authListener.subscription.unsubscribe();
+        };
+      },
+
+      // 사용자 인증 정보 설정
       // 객체 형태로 받아와야 함! 지금은 순서대로 받고 있어서 무조건 요 순서를 지켜서 넣어줘야함 예..
       // setAuth: ({accessToken, nickname, userId, avatar})
       setAuth: (accessToken, nickname, userId, avatar) => {
