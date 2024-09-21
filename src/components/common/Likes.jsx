@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import useAuthStore from '../../core/stores/useAuthStore';
+import useAuthStore from '../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
@@ -7,7 +7,7 @@ import { api } from '../../core/instance/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
-  const { userId } = useAuthStore((state) => state);
+  const userId = useAuthStore((state) => state);
   const [pharmacies, setPharmacies] = useState([]);
   const [likedPharmacies, setLikedPharmacies] = useState([]);
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
