@@ -82,7 +82,6 @@ const Main = () => {
         {/* 유트브 */}
         <Youtube />
       </Article>
-      <Footer />
     </>
   );
 };
