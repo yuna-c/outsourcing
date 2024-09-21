@@ -22,7 +22,7 @@ const PharmacyDetail = ({ pharmacy, liked, onLike, onGoBack }) => {
           )}
         </button>
       </div>
-      <div className="text-[15px] font-bold leading-5 block px-3">
+      <div className="text-[15px] leading-5 block px-3">
         <p>주소 : {pharmacy.address}</p>
         <p>전화번호 : {pharmacy.phone}</p>
         <p>영업시간 : {pharmacy.time}</p>
