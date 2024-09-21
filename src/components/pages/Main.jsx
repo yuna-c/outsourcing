@@ -11,7 +11,6 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPharmacies } from './../../core/instance/axiosInstance';
 
 const Main = () => {
-  const [data, setData] = useState(null);
   const [openPharmacies, setOpenPharmacies] = useState([]);
   const [weekendPharmacies, setWeekendPharmacies] = useState([]);
 
@@ -75,9 +74,6 @@ const Main = () => {
     <Article className="!-mt-2 overflow-x-hidden mx-auto main">
       {/* 배너 부분 */}
       <Banner pharmacies={pharmacies} />
-      {/* 지금 영업중인 약국 */}
-      <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
-      <Banner data={data} />
       <div>
         {/* 지금 영업중인 약국 */}
         <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
