@@ -7,9 +7,7 @@ import { api } from '../../core/instance/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
-  // const user = useAuthStore((state) => state.user);
-  // const setUser = useAuthStore((state) => state.setUser);
-
+  const { userId } = useAuthStore((state) => state);
   const [pharmacies, setPharmacies] = useState([]);
   const [likedPharmacies, setLikedPharmacies] = useState([]);
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
@@ -33,51 +31,16 @@ const Likes = () => {
     fetchPharmacies();
   }, []);
 
-  // 사용자가 좋아요한 약국 데이터를 가져오기
-  // useEffect(() => {
-  //   if (user?.likedPharmacies) {
-  //     setLikedPharmacies(user.likedPharmacies);
-  //   }
-  // }, [user]);
-
   useEffect(() => {
-    const likedPharmaciesStorage = localStorage.getItem('likedPharmacies');
+    const likedPharmaciesStorage = localStorage.getItem(`likedPharmacies_${userId}`);
+    console.log('나오냐? =>', userId);
 
     if (likedPharmaciesStorage) {
       setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
     } else {
       setLikedPharmacies([]);
     }
-  }, []);
-
-  // 좋아요 버튼 클릭 핸들러
-  // const handleLike = (pharmacy) => {
-  //   const pharmacyName = pharmacy.name;
-  //   if (likedPharmacies.includes(pharmacyName)) {
-  //     // 좋아요 취소
-  //     const updatedLikes = likedPharmacies.filter((name) => name !== pharmacyName);
-  //     setLikedPharmacies(updatedLikes);
-  //     updateLikes(updatedLikes); //  좋아요 취소 요청
-  //   } else {
-  //     // 좋아요 추가
-  //     const updatedLikes = [...likedPharmacies, pharmacyName];
-  //     setLikedPharmacies(updatedLikes);
-  //     updateLikes(updatedLikes); // 좋아요 추가 요청
-  //   }
-  // };
-
-  // // 좋아요 업데이트 요청 함수
-  // const updateLikes = async (updatedLikes) => {
-  //   try {
-  //     await api.patch(`/users/${user.userId}`, {
-  //       likedPharmacies: updatedLikes
-  //     });
-  //     // Zustand 상태 업데이트
-  //     setUser({ ...user, likedPharmacies: updatedLikes });
-  //   } catch (error) {
-  //     console.error('Failed to update likes', error);
-  //   }
-  // };
+  }, [userId]);
 
   const handleLike = (pharmacyId) => {
     const updatedLikes = likedPharmacies.includes(pharmacyId)
@@ -85,7 +48,7 @@ const Likes = () => {
       : [...likedPharmacies, pharmacyId];
 
     setLikedPharmacies(updatedLikes);
-    localStorage.setItem('likedPharmacies', JSON.stringify(updatedLikes));
+    localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes));
   };
 
   // 삭제
@@ -95,7 +58,7 @@ const Likes = () => {
 
     setPharmacies(updatedPharmacies);
     setLikedPharmacies(updatedLikedPharmacies);
-    localStorage.setItem('likedPharmacies', JSON.stringify(updatedLikedPharmacies));
+    localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikedPharmacies));
     setShowDeleteOptions(null);
   };
 
@@ -132,7 +95,7 @@ const Likes = () => {
     <div className="relative">
       <ul className="flex-wrap items-center justify-between mb-4 ">
         {likedPharmacies.length === 0 ? (
-          <div className="flex items-center w-full gap-4 p-3 border rounded border-custom-deepblue">
+          <div className="flex items-center w-full gap-4 p-3 border border-black rounded">
             <IoHeartDislikeCircleSharp size={45} />
             <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
@@ -141,7 +104,7 @@ const Likes = () => {
             .filter((pharmacy) => likedPharmacies.includes(pharmacy.id))
             .map((pharmacy) => (
               <li
-                key={pharmacy.name}
+                key={pharmacy.id}
                 className="flex items-center justify-between w-full p-4 mb-4 border border-black rounded cursor-pointer"
                 onClick={() => {
                   navigate(`/detail/${pharmacy.id}`);
@@ -182,7 +145,7 @@ const Likes = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleLike(pharmacy.id);
+                          handleDelete(pharmacy.id);
                         }}
                         className="block w-full px-4 py-2 text-left text-black rounded hover:bg-gray-100"
                       >
