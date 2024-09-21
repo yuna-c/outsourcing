@@ -92,15 +92,9 @@
 } */
 /* .main_text_area form {
   @apply flex justify-center w-full;
-<<<<<<< HEAD
 }
 .main_text_area form input {
   @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-deepblue focus:outline-none outline-none;
-=======
-} */
-/* .main_text_area form input {
-  @apply rounded-md pl-4 w-[80%] h-10 border-2 border-custom-deepblue focus:outline-none;
->>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
 }
 .main_text_area form button {
   @apply flex items-center justify-center w-10 h-10 border-none rounded-md bg-custom-deepblue;
