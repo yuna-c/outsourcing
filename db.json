@@ -43,7 +43,7 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 8,
+      "likes": 11,
       "comments": []
     },
     {
@@ -202,7 +202,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 6
+      "likes": 8
     },
     {
       "id": "16",
@@ -339,7 +339,7 @@
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
       "longitude": 126.9575191,
-      "likes": 6
+      "likes": 8
     },
     {
       "id": "28",
@@ -384,7 +384,16 @@
       "address": "서울 중구 동호로11길 43(신당동)",
       "latitude": 37.5533356,
       "longitude": 127.0090626,
-      "likes": 5
+      "likes": 6,
+      "comments": [
+        {
+          "id": 1726930281983,
+          "userId": "wldndnwl",
+          "nickname": "지영",
+          "content": "아ㅏㅏㅏㅏ",
+          "createdAt": "2024-09-21T14:51:21.983Z"
+        }
+      ]
     },
     {
       "id": "32",
@@ -552,7 +561,7 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "47",
@@ -880,7 +889,8 @@
       "address": "인천광역시 서구 신신로 68, 1층(석남동)",
       "latitude": 37.5080034,
       "longitude": 126.6779519,
-      "likes": null
+      "likes": null,
+      "comments": []
     },
     {
       "id": "76",
