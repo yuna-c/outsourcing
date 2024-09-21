@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../core/instance/axiosInstance';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { updateLikes } from '../../core/instance/axiosInstance';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiFillEdit } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
 import useAuthStore from '../../core/stores/useAuthStore';
+import { MdDelete } from 'react-icons/md';
 
 const fetchData = async (id) => {
   try {
@@ -23,8 +24,11 @@ const Detail = () => {
   const [liked, setLiked] = useState(false);
   const [selectedPharmacy, setSelectedPharmacy] = useState(null);
   const [newComment, setNewComment] = useState('');
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingCommentContent, setEditingCommentContent] = useState('');
   const navigate = useNavigate();
   const userId = useAuthStore((state) => state.userId);
+  const nickname = useAuthStore((state) => state.nickname);
   const [pharmacy, setPharmacy] = useState({ comments: [] });
 
   useEffect(() => {
@@ -95,14 +99,13 @@ const Detail = () => {
     const comment = {
       id: Date.now(),
       userId,
+      nickname,
       content: newComment,
       createdAt: new Date().toISOString()
     };
 
     try {
-      // 댓글이 없을 경우, 기존 댓글 배열 생성
       const updatedComments = pharmacy.comments ? [...pharmacy.comments, comment] : [comment];
-
       await api.patch(`/pharmacies/${id}`, { comments: updatedComments });
       setPharmacy((prev) => ({ ...prev, comments: updatedComments }));
       setNewComment('');
@@ -122,14 +125,21 @@ const Detail = () => {
     }
   };
 
-  const handleUpdateComment = async (commentId, updatedContent) => {
+  const handleEditComment = (comment) => {
+    setEditingCommentId(comment.id);
+    setEditingCommentContent(comment.content);
+  };
+
+  const handleUpdateComment = async (commentId) => {
     const updatedComments = pharmacy.comments.map((comment) =>
-      comment.id === commentId ? { ...comment, content: updatedContent } : comment
+      comment.id === commentId ? { ...comment, content: editingCommentContent } : comment
     );
 
     try {
       await api.patch(`/pharmacies/${id}`, { comments: updatedComments });
       setPharmacy((prev) => ({ ...prev, comments: updatedComments }));
+      setEditingCommentId(null);
+      setEditingCommentContent('');
     } catch (error) {
       console.error('댓글 수정 실패:', error);
     }
@@ -137,23 +147,24 @@ const Detail = () => {
 
   return (
     <div className="flex justify-center items-start p-8 min-h-screen">
-      <div className="shadow-lg rounded-lg p-6 w-1/3">
-        <h2 className="flex justify-start items-center mb-4 text-4xl font-bold">
-          <button onClick={handleGoBack}>
-            <SlArrowLeft size={30} className="mr-4" />
-          </button>
-          <span className="mr-auto">{pharmacy.name}</span>
-          <button onClick={handleLike}>
-            {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
-          </button>
-        </h2>
-        <div className="text-lg font-semibold leading-10">
-          <p>주소 : {pharmacy.address}</p>
-          <p>전화번호 : {pharmacy.phone}</p>
-          <p>영업시간 : {pharmacy.time}</p>
+      <div>
+        <div className="bg-white p-4 rounded-lg shadow-md mb-6">
+          <h2 className="flex justify-start items-center mb-4 text-4xl font-bold">
+            <button onClick={handleGoBack}>
+              <SlArrowLeft size={30} className="mr-4" />
+            </button>
+            <span className="mr-auto">{pharmacy.name}</span>
+            <button onClick={handleLike}>
+              {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
+            </button>
+          </h2>
+          <div className="text-lg font-semibold leading-10">
+            <p>주소 : {pharmacy.address}</p>
+            <p>전화번호 : {pharmacy.phone}</p>
+            <p>영업시간 : {pharmacy.time}</p>
+          </div>
         </div>
-
-        <div>
+        <div className="bg-white p-4 mt-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold leading-8 mb-4">리뷰</h3>
           <div className="mb-4">
             <textarea
@@ -164,7 +175,7 @@ const Detail = () => {
               placeholder="리뷰를 입력하세요"
             />
             <button
-              className="w-full bg-[#9BDBA6] text-gray-800 font-semibold py-2 px-4 rounded shadow-md hover:bg-[#478485] focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex justify-end text-white border border-transparent rounded-full overflow-hidden bg-custom-deepblue hover:bg-custom-skyblue transition-none py-2 px-4 ml-auto"
               onClick={handleAddComment}
             >
               리뷰 추가
@@ -174,24 +185,39 @@ const Detail = () => {
           {pharmacy.comments?.length > 0 ? (
             pharmacy.comments.map((comment) => (
               <div key={comment.id} className="mb-4 p-4 bg-gray-100 rounded-lg">
-                <p>{comment.content}</p>
-                {comment.userId === userId && (
-                  <div className="flex justify-end space-x-2">
-                    <button
-                      className="text-sm text-blue-500"
-                      onClick={() => handleUpdateComment(comment.id, '업데이트된 내용')}
-                    >
-                      수정
+                {editingCommentId === comment.id ? (
+                  <div>
+                    <textarea
+                      className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+                      rows="2"
+                      value={editingCommentContent}
+                      onChange={(e) => setEditingCommentContent(e.target.value)}
+                    />
+                    <button className="text-sm text-blue-500" onClick={() => handleUpdateComment(comment.id)}>
+                      <AiFillEdit />
                     </button>
-                    <button className="text-sm text-red-500" onClick={() => handleDeleteComment(comment.id)}>
-                      삭제
-                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="font-bold">{comment.nickname}</p>
+                    <p>{comment.content}</p>
+                    {comment.userId === userId && (
+                      <div className="flex justify-end space-x-2">
+                        <p className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</p>
+                        <button className="text-sm text-blue-500 " onClick={() => handleEditComment(comment)}>
+                          <AiFillEdit />
+                        </button>
+                        <button className="text-sm text-red-500" onClick={() => handleDeleteComment(comment.id)}>
+                          <MdDelete />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
             ))
           ) : (
-            <p>댓글이 없습니다.</p>
+            <p>리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요.</p>
           )}
         </div>
       </div>
@@ -208,19 +234,17 @@ const Detail = () => {
               onClick={() => setSelectedPharmacy(pharmacy)}
             />
             {selectedPharmacy && (
-              <CustomOverlayMap
-                position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
-                yAnchor={1.3}
-                xAnchor={0.5}
-              >
-                <div className="bg-white rounded-lg shadow-lg p-3 w-64 text-pretty">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-lg font-semibold">{selectedPharmacy.name}</h3>
-                    <button onClick={handleCloseOverlay}>
-                      <SlArrowLeft size={24} className="cursor-pointer" />
-                    </button>
-                  </div>
-                  <p>{selectedPharmacy.address}</p>
+              <CustomOverlayMap position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}>
+                <div className="p-2 bg-white border border-gray-300 shadow-lg rounded-lg relative">
+                  <button
+                    className="absolute top-1 right-1 text-gray-500 hover:text-black"
+                    onClick={handleCloseOverlay}
+                  >
+                    &times;
+                  </button>
+                  <div className="font-bold">{selectedPharmacy.name}</div>
+                  <div>{selectedPharmacy.address}</div>
+                  <div>{selectedPharmacy.phone}</div>
                 </div>
               </CustomOverlayMap>
             )}

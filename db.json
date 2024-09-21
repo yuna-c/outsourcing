@@ -17,6 +17,19 @@
           "userId": "test6789",
           "content": "헐랭... 진짜되나?\n",
           "createdAt": "2024-09-20T13:03:59.148Z"
+        },
+        {
+          "id": 1726846420397,
+          "userId": null,
+          "content": "수정 한번 해볼래? 1차수정",
+          "createdAt": "2024-09-20T15:33:40.397Z"
+        },
+        {
+          "id": 1726888180452,
+          "userId": "hyein3",
+          "nickname": "테스트테스트",
+          "content": "닉네임나오는지 확인",
+          "createdAt": "2024-09-21T03:09:40.452Z"
         }
       ]
     },
@@ -30,7 +43,8 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 8
+      "likes": 8,
+      "comments": []
     },
     {
       "id": "3",
@@ -54,7 +68,16 @@
       "address": "서울 강동구 올림픽로 781 (암사동)",
       "latitude": 37.5510138,
       "longitude": 127.1275517,
-      "likes": null
+      "likes": null,
+      "comments": [
+        {
+          "id": 1726890313478,
+          "userId": "hyein3",
+          "nickname": "테스트테스트",
+          "content": "처음 입력",
+          "createdAt": "2024-09-21T03:45:13.478Z"
+        }
+      ]
     },
     {
       "id": "5",
@@ -528,7 +551,8 @@
       "phone": "051-403-2122",
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
-      "longitude": 129.0676483
+      "longitude": 129.0676483,
+      "likes": null
     },
     {
       "id": "47",
@@ -1098,7 +1122,8 @@
       "phone": "052-257-7584",
       "address": "울산광역시 남구 삼산로 159-1",
       "latitude": 35.5370149,
-      "longitude": 129.3246498
+      "longitude": 129.3246498,
+      "likes": null
     },
     {
       "id": "98",
@@ -1615,7 +1640,8 @@
       "phone": "031-358-7541",
       "address": "경기도 화성시 우정읍 기아자동차 555",
       "latitude": 37.0807123,
-      "longitude": 126.7888689
+      "longitude": 126.7888689,
+      "likes": null
     },
     {
       "id": "145",
