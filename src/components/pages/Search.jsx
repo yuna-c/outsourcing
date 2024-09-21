@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api, fetchPharmacies } from '../../core/instance/axiosInstance';
@@ -16,7 +16,7 @@ const Search = () => {
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
   const [searchType, setSearchType] = useState(searchParams.get('filter') || 'name'); // 검색 타입
   const [visiblePharmaciesCount, setVisiblePharmaciesCount] = useState(10); // 초기 약국 표시 개수
-  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역의 가시성 제어
+  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역 토글
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -136,7 +136,7 @@ const Search = () => {
   };
 
   return (
-    <article className="relative flex flex-row justify-center pt-[4.5rem] rounded-lg overflow-hidden m-auto h-full">
+    <article className="relative flex flex-row justify-center h-full m-auto overflow-hidden rounded-lg">
       {/* 모바일에서 검색영역 토글 버튼 */}
       <button
         className="absolute z-50 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
@@ -188,7 +188,7 @@ const Search = () => {
           </button>
         </div>
 
-        <ul className="flex flex-col gap-3 xl:h-[650px] md:h-[80%] h-[70%] overflow-auto">
+        <ul className="flex flex-col gap-3 xl:h-[680px] md:h-[80%] h-[70%] overflow-auto">
           {searchPharmacies.length === 0 && (
             <li>
               <p>

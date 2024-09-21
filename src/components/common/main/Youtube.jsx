@@ -86,7 +86,7 @@ const Youtube = () => {
         {videoed.map((video, index) => (
           <div
             key={index}
-            className="relative flex flex-col items-start justify-center overflow-hidden border rounded-lg shadow-md youtube_item border-custom-gray"
+            className="relative flex flex-col items-start justify-start overflow-hidden border rounded-lg shadow-md youtube_item border-custom-gray"
           >
             <strong className="py-4 text-[23px] font-extrabold text-center max-w-[350px] truncate px-6">
               {video.title}
@@ -102,9 +102,9 @@ const Youtube = () => {
               ></iframe>
             </div>
 
-            <div className="px-2 content-section">
+            <div className="inline-block px-2 py-2 content-section">
               {video.content.split(',').map((word, idx) => (
-                <span key={idx} className="inline-flex mx-1 bg-[#C3EBFF] py-1 px-2 rounded-full font-bold text-sm my-4">
+                <span key={idx} className=" mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
                   {word.trim()}
                 </span>
               ))}
