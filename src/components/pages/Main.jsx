@@ -7,7 +7,6 @@ import WeekendPharmaciesSection from '../common/main/WeekendPharmaciesSection';
 
 import './../../assets/styles/mainPage.css';
 import { REGIONS } from '../../core/utils/regions';
-import { api } from '../../core/instance/axiosInstance';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPharmacies } from './../../core/instance/axiosInstance';
 
