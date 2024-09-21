@@ -6,6 +6,7 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { SlArrowRight } from 'react-icons/sl';
 import { FaSearch } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
+import { IoMdSearch } from 'react-icons/io';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,7 @@ const Search = () => {
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
   const [searchType, setSearchType] = useState(searchParams.get('filter') || 'name'); // 검색 타입
   const [visiblePharmaciesCount, setVisiblePharmaciesCount] = useState(10); // 초기 약국 표시 개수
+  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역의 가시성 제어
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -88,7 +90,6 @@ const Search = () => {
   };
 
   // 약국 리스트 클릭시 해당 약국의 핀이 중심으로 가게 지도 이동
-  // lat : 위도 / lng : 경도
   const handleMoveMap = (lat, lng, id, pharmacy) => {
     setMapCenter({ lat, lng });
     panTo(lat, lng, 2); // 지도를 클릭한 약국의 위치로 이동
@@ -112,15 +113,10 @@ const Search = () => {
   // 돋보기 클릭시 검색한 약국의 핀들이 중앙으로 가게 지도범위를 재설정
   const handleCenterMap = () => {
     if (searchPharmacies.length > 0) {
-      // 검색된 약국의 갯수가 0보다 크고, map이 null이 아닌 경우에만 실행
       const bounds = new kakao.maps.LatLngBounds();
-
-      // 검색된 약국들의 좌표를 bounds에 추가
       searchPharmacies.forEach((pharmacy) => {
         bounds.extend(new kakao.maps.LatLng(pharmacy.latitude, pharmacy.longitude));
       });
-
-      // bounds가 유효한지 확인 후 중심과 범위를 설정
       if (!bounds.isEmpty()) {
         map.setBounds(bounds); // 검색된 약국들을 포함하는 범위로 지도 설정
       }
@@ -129,29 +125,41 @@ const Search = () => {
     }
   };
 
-  // 엔터키를 눌러도 돋보기를 마우스로 클릭한 것과 같이 동작하도록 하는 함수
-  // input에 onKeyUp속성(사용자가 키보드의 키를 눌렀다가 뗐을 때)으로 넣어주기
   const pressEnterEvent = (e) => {
     if (e.keyCode === 13) {
-      // keyCode가 13일때 => 13:엔터
       handleCenterMap();
     }
   };
 
-  // '더 보기' 버튼 클릭 시, 표시할 약국 개수 증가
   const handleShowMore = () => {
     setVisiblePharmaciesCount((prevCount) => prevCount + 10);
   };
-  //1679ab
+
   return (
-    <article className="flex flex-row justify-center pt-[4.5rem] rounded-lg overflow-hidden m-auto h-full">
+    <article className="relative flex flex-row justify-center pt-[4.5rem] rounded-lg overflow-hidden m-auto h-full">
+      {/* 모바일에서 검색영역 토글 버튼 */}
+      <button
+        className="absolute z-50 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
+        onClick={() => setIsSearchVisible(!isSearchVisible)}
+      >
+        {isSearchVisible ? (
+          <IoMdSearch className="w-6 h-6 text-custom-deepblue" />
+        ) : (
+          <IoMdSearch className="w-6 h-6 text-custom-skyblue" />
+        )}
+      </button>
+
       {/* 검색영역 */}
-      <div className="flex flex-col items-start p-5 xl:w-1/4 w-1/3 h-full lg:h-[840px] gap-5">
-        <div className="flex flex-row items-center gap-1">
+      <div
+        className={`absolute top-0 left-0 right-0 bottom-0 z-30 bg-white p-5 h-full ${
+          isSearchVisible ? 'block' : 'hidden'
+        } lg:relative lg:block lg:w-1/3 xl:w-1/4 lg:h-[calc(100vh-10rem)] space-y-4`}
+      >
+        <div className="flex flex-row items-center gap-1 mb-0 lg:mb-4">
           <button
             className={`px-3 py-1 rounded-lg transition hover:bg-[#074173] hover:text-white ${
               searchType === 'region' ? 'bg-[#074173] text-white' : 'bg-gray-200'
-            } font-semibold text-sm font-custom`}
+            } font-semibold text-sm`}
             onClick={() => handleSearchTypeChange('region')}
           >
             지역명
@@ -159,13 +167,14 @@ const Search = () => {
           <button
             className={`px-3 py-1 rounded-lg transition hover:bg-[#074173] hover:text-white ${
               searchType === 'name' ? 'bg-[#074173] text-white' : 'bg-gray-200'
-            } font-semibold text-sm font-custom`}
+            } font-semibold text-sm`}
             onClick={() => handleSearchTypeChange('name')}
           >
             약국명
           </button>
-          <span className="text-sm"> 으로 검색하기</span>
+          <span className="text-sm">으로 검색하기</span>
         </div>
+
         <div className="flex flex-row w-full pr-3 border-2 rounded-lg border-[#074173]">
           <input
             type="text"
@@ -174,13 +183,12 @@ const Search = () => {
             className="w-full p-3 rounded-lg focus:outline-none"
             onKeyUp={pressEnterEvent}
           />
-          {/*돋보기아이콘 클릭시 검색된 핀들이 맵 중심으로 이동*/}
           <button onClick={handleCenterMap}>
             <FaSearch size={25} color="#074173" />
           </button>
         </div>
-        <ul className="flex flex-col gap-3 h-[100%]	overflow-auto w-full">
-          {/* 검색 결과가 없을 때 보여줄 메시지 */}
+
+        <ul className="flex flex-col gap-3 xl:h-[650px] md:h-[80%] h-[70%] overflow-auto">
           {searchPharmacies.length === 0 && (
             <li>
               <p>
@@ -192,20 +200,25 @@ const Search = () => {
             <li
               key={id}
               className="flex flex-row items-center justify-between w-full gap-3 p-3 transition-transform duration-500 transform border rounded-lg shadow-md cursor-pointer border-custom-gray hover:-translate-y-1 "
-              onClick={() => handleMoveMap(pharmacy.latitude, pharmacy.longitude, pharmacy.id, pharmacy)} // 리스트 클릭시 맵의 중심 이동
+              onClick={() => handleMoveMap(pharmacy.latitude, pharmacy.longitude, pharmacy.id, pharmacy)}
             >
-              <div className="w-10/12">
+              <div className="">
                 <h3 className="mb-2 text-lg font-bold text-gray-800">{pharmacy.name}</h3>
                 <p className="text-sm text-gray-600 break-words">{pharmacy.address}</p>
                 <span className="mb-1 text-sm text-gray-600 break-words">{pharmacy.phone}</span>
               </div>
               <div className="p-2 text-white rounded-full bg-[#074173]">
-                <SlArrowRight size={15} />
+                <SlArrowRight
+                  size={15}
+                  onClick={() => {
+                    setIsSearchVisible(false);
+                  }}
+                />
               </div>
             </li>
           ))}
         </ul>
-        {/* '더 보기' 버튼 */}
+
         {visiblePharmaciesCount < searchPharmacies.length && (
           <button
             onClick={handleShowMore}
@@ -217,7 +230,7 @@ const Search = () => {
       </div>
 
       {/* 지도영역 */}
-      <div className="w-full h-full md:w-9/12">
+      <div className="w-full h-full lg:w-9/12">
         <Map
           center={mapCenter}
           style={{ width: '100%', height: '100%' }}
@@ -226,14 +239,14 @@ const Search = () => {
           onCreate={setMap}
         >
           {searchPharmacies.map((pharmacy) => (
-            <MapMarker // 마커
+            <MapMarker
               key={pharmacy.id}
               position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
               onClick={() => setSelectedPharmacy(pharmacy)}
             />
           ))}
           {selectedPharmacy && (
-            <CustomOverlayMap // 커스텀오버레이
+            <CustomOverlayMap
               position={{ lat: selectedPharmacy.latitude, lng: selectedPharmacy.longitude }}
               yAnchor={1.3}
               xAnchor={0.5}

@@ -1,10 +1,10 @@
-import React from 'react';
-import { IoMdSearch } from 'react-icons/io';
-import Button from '../ui/Button';
-import mainIcon from '/src/assets/images/main_icon.png';
-import '../../../assets/styles/main.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { IoMdSearch } from 'react-icons/io';
+
+import Button from '../ui/Button';
+import mainIcon from '/src/assets/images/main_icon.png';
 
 const Banner = () => {
   const [query, setQuery] = useState('');

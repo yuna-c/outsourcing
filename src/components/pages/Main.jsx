@@ -68,21 +68,19 @@ const Main = () => {
   }, [data]);
 
   return (
-    <>
-      <Article className="!-mt-2 overflow-x-hidden mx-auto main">
-        {/* 배너 부분 */}
-        <Banner data={data} />
+    <Article className="!-mt-2 overflow-x-hidden mx-auto main">
+      {/* 배너 부분 */}
+      <Banner data={data} />
 
-        {/* 지금 영업중인 약국 */}
-        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
+      {/* 지금 영업중인 약국 */}
+      <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
-        {/* 주말 영업하는 약국 */}
-        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
+      {/* 주말 영업하는 약국 */}
+      <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
 
-        {/* 유트브 */}
-        <Youtube />
-      </Article>
-    </>
+      {/* 유트브 */}
+      <Youtube />
+    </Article>
   );
 };
 

@@ -13,7 +13,6 @@ import NotFound from '../pages/NotFound';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
-import Search2 from '../pages/search2';
 
 const Router = () => {
   const publicRoutes = [
@@ -24,10 +23,6 @@ const Router = () => {
     {
       path: '/search',
       element: <Search />
-    },
-    {
-      path: '/search2',
-      element: <Search2 />
     },
     {
       path: '/detail/:id',
