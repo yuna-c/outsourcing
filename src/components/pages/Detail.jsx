@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+iimport React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { api } from '../../core/instance/axiosInstance';
-import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
-import { updateLikes } from '../../core/instance/axiosInstance';
-import { AiFillHeart, AiOutlineHeart, AiFillEdit } from 'react-icons/ai';
-import { SlArrowLeft } from 'react-icons/sl';
-import useAuthStore from '../../core/stores/useAuthStore';
-import { MdDelete } from 'react-icons/md';
-import handleTimeCalculate from '../../core/stores/changeTime';
+import { api, updateLikes } from '../../core/instance/axiosInstance';
+import PharmacyDetail from '../common/detail/PharmacyDetail'; //약국정보 section
+import CommentSection from '../common/detail/CommentSection'; //댓글 section
+import MapSection from '../common/detail/MapSection'; //지도 section
+import useAuthStore from '../../core/stores/useAuthStore'; //zustand 회원정보
 
 const fetchData = async (id) => {
   try {
@@ -22,16 +19,17 @@ const Detail = () => {
   const { id } = useParams();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [liked, setLiked] = useState(false);
-  const [selectedPharmacy, setSelectedPharmacy] = useState(null);
-  const [newComment, setNewComment] = useState('');
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editingCommentContent, setEditingCommentContent] = useState('');
+  const [liked, setLiked] = useState(false); //좋아요
+  const [selectedPharmacy, setSelectedPharmacy] = useState(null); //약국정보저장
+  const [newComment, setNewComment] = useState(''); //새로운 리뷰
+  const [editingCommentId, setEditingCommentId] = useState(null); //수정중인 리뷰 id
+  const [editingCommentContent, setEditingCommentContent] = useState(''); //수정중인 리뷰 내용
   const navigate = useNavigate();
-  const userId = useAuthStore((state) => state.userId);
-  const nickname = useAuthStore((state) => state.nickname);
-  const [pharmacy, setPharmacy] = useState({ comments: [] });
+  const userId = useAuthStore((state) => state.userId); //zustand에서 가져온 사용자정보
+  const nickname = useAuthStore((state) => state.nickname); //zustand에서 가져온 닉네임
+  const [pharmacy, setPharmacy] = useState({ comments: [] }); //약국의 상세정보, 리뷰목록
 
+  //사용자의 좋아요 상태 업데이트
   useEffect(() => {
     if (userId) {
       const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
@@ -39,35 +37,7 @@ const Detail = () => {
     }
   }, [id, userId]);
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
-  const handleLike = async () => {
-    const newLikeCount = pharmacy.likes + (liked ? -1 : 1);
-    setPharmacy((prev) => ({ ...prev, likes: newLikeCount }));
-
-    try {
-      await updateLikes(id, newLikeCount);
-      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
-      if (liked) {
-        const updatedLikes = likedPharmacies.filter((pharmacyId) => pharmacyId !== id);
-        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes));
-      } else {
-        likedPharmacies.push(id);
-        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(likedPharmacies));
-      }
-    } catch (error) {
-      console.error('좋아요 업데이트 실패:', error);
-    } finally {
-      setLiked(!liked);
-    }
-  };
-
-  const handleCloseOverlay = () => {
-    setSelectedPharmacy(null);
-  };
-
+  //약국 데이터 가져오기
   useEffect(() => {
     const getPharmacyData = async () => {
       try {
@@ -91,6 +61,39 @@ const Detail = () => {
     return <div>오류 발생: {error}</div>;
   }
 
+  //이전 페이지로 돌아가기
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  //좋아요
+  const handleLike = async () => {
+    const newLikeCount = pharmacy.likes + (liked ? -1 : 1);
+    setPharmacy((prev) => ({ ...prev, likes: newLikeCount })); //setPharmacy를 사용해 즉시 업데이트(optimistic update)
+
+    try {
+      await updateLikes(id, newLikeCount); //서버에 좋아요 업데이트
+      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
+      if (liked) {
+        const updatedLikes = likedPharmacies.filter((pharmacyId) => pharmacyId !== id);
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes)); //좋아요를 이미 한 경우
+      } else {
+        likedPharmacies.push(id);
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(likedPharmacies)); //좋아요를 하지 않은 경우
+      }
+    } catch (error) {
+      console.error('좋아요 업데이트 실패:', error);
+    } finally {
+      setLiked(!liked);
+    } //좋아요 상태 반전
+  };
+
+  //지도에서 약국 정보 닫기
+  const handleCloseOverlay = () => {
+    setSelectedPharmacy(null);
+  };
+
+  // 리뷰 추가(db.json에 리뷰가 없는 경우, 새로 생성도함)
   const handleAddComment = async () => {
     if (!newComment.trim()) {
       alert('댓글 내용을 입력하세요.');
@@ -115,6 +118,7 @@ const Detail = () => {
     }
   };
 
+  //리뷰 삭제
   const handleDeleteComment = async (commentId) => {
     const updatedComments = pharmacy.comments.filter((comment) => comment.id !== commentId);
 
@@ -126,11 +130,13 @@ const Detail = () => {
     }
   };
 
+  //수정할 리뷰 id, 내용 저장
   const handleEditComment = (comment) => {
     setEditingCommentId(comment.id);
     setEditingCommentContent(comment.content);
   };
 
+  //리뷰 수정
   const handleUpdateComment = async (commentId) => {
     const updatedComments = pharmacy.comments.map((comment) =>
       comment.id === commentId ? { ...comment, content: editingCommentContent } : comment
@@ -142,115 +148,36 @@ const Detail = () => {
       setEditingCommentId(null);
       setEditingCommentContent('');
     } catch (error) {
-      console.error('댓글 수정 실패:', error);
+      console.error('리뷰 수정 실패:', error);
     }
   };
 
   return (
     <div className="flex items-start justify-center min-h-screen p-8">
       <div>
-        <div className="p-4 mb-6 bg-white rounded-lg shadow-md">
-          <h2 className="flex items-center justify-start mb-4 text-4xl font-bold">
-            <button onClick={handleGoBack}>
-              <SlArrowLeft size={30} className="mr-4" />
-            </button>
-            <span className="mr-auto">{pharmacy.name}</span>
-            <button onClick={handleLike}>
-              {liked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="gray" />}
-            </button>
-          </h2>
-          <div className="text-lg font-semibold leading-10">
-            <p>주소 : {pharmacy.address}</p>
-            <p>전화번호 : {pharmacy.phone}</p>
-            <p>영업시간 : {pharmacy.time}</p>
-          </div>
-        </div>
-        <div className="p-4 mt-6 bg-white rounded-lg shadow-md">
-          <h3 className="mb-4 text-lg font-semibold leading-8">리뷰</h3>
-          <div className="mb-4">
-            <textarea
-              className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
-              rows="4"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="리뷰를 입력하세요"
-            />
-            <button
-              className="flex justify-end px-4 py-2 ml-auto overflow-hidden text-white transition-none border border-transparent rounded-full bg-custom-deepblue hover:bg-custom-skyblue"
-              onClick={handleAddComment}
-            >
-              리뷰 추가
-            </button>
-          </div>
-
-          {pharmacy.comments?.length > 0 ? (
-            pharmacy.comments.map((comment) => (
-              <div key={comment.id} className="p-4 mb-4 bg-gray-100 rounded-lg">
-                {editingCommentId === comment.id ? (
-                  <div>
-                    <textarea
-                      className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
-                      rows="2"
-                      value={editingCommentContent}
-                      onChange={(e) => setEditingCommentContent(e.target.value)}
-                    />
-                    <button className="text-sm text-blue-500" onClick={() => handleUpdateComment(comment.id)}>
-                      <AiFillEdit />
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="font-bold">{comment.nickname}</p>
-                    <p>{comment.content}</p>
-                    {comment.userId === userId && (
-                      <div className="flex justify-end space-x-2">
-                        <p className="text-sm text-gray-500">{handleTimeCalculate(comment.createdAt)}</p>
-                        <button className="text-sm text-blue-500 " onClick={() => handleEditComment(comment)}>
-                          <AiFillEdit />
-                        </button>
-                        <button className="text-sm text-red-500" onClick={() => handleDeleteComment(comment.id)}>
-                          <MdDelete />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <p>리뷰가 없습니다. 첫 번째 리뷰를 작성해주세요.</p>
-          )}
-        </div>
+        <PharmacyDetail pharmacy={pharmacy} liked={liked} onLike={handleLike} onGoBack={handleGoBack} />
+        <CommentSection
+          comments={pharmacy.comments || []}
+          newComment={newComment}
+          onNewCommentChange={(e) => setNewComment(e.target.value)} // 리뷰입력
+          onAddComment={handleAddComment}
+          userId={userId}
+          onEditComment={handleEditComment}
+          editingCommentId={editingCommentId}
+          editingCommentContent={editingCommentContent}
+          onEditCommentChange={(e) => setEditingCommentContent(e.target.value)} // 수정 리뷰 입력
+          onUpdateComment={handleUpdateComment}
+          onDeleteComment={handleDeleteComment}
+        />
       </div>
 
       <div className="w-2/3 pl-8">
-        <div className="flex items-center justify-center w-full rounded-lg h-96">
-          <Map
-            center={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
-            style={{ width: '100%', height: '100%' }}
-            level={3}
-          >
-            <MapMarker
-              position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
-              onClick={() => setSelectedPharmacy(pharmacy)}
-            />
-            {selectedPharmacy && (
-              <CustomOverlayMap position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}>
-                <div className="relative p-2 bg-white border border-gray-300 rounded-lg shadow-lg">
-                  <button
-                    className="absolute text-gray-500 top-1 right-1 hover:text-black"
-                    onClick={handleCloseOverlay}
-                  >
-                    &times;
-                  </button>
-                  <div className="font-bold">{selectedPharmacy.name}</div>
-                  <div>{selectedPharmacy.address}</div>
-                  <div>{selectedPharmacy.phone}</div>
-                </div>
-              </CustomOverlayMap>
-            )}
-          </Map>
-        </div>
+        <MapSection
+          pharmacy={pharmacy}
+          selectedPharmacy={selectedPharmacy}
+          onSelectPharmacy={setSelectedPharmacy}
+          onCloseOverlay={handleCloseOverlay}
+        />
       </div>
     </div>
   );
