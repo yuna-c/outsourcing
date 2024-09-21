@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { api, updateLikes } from '../../core/instance/axiosInstance';
 import PharmacyDetail from '../common/detail/PharmacyDetail'; //약국정보 section
