@@ -32,10 +32,17 @@ const Search = () => {
 
   useEffect(() => {
     const fetchPharmacy = async () => {
-      const response = await api.get(`pharmacies/${searchId}`); // 쿼리스트링의 id값이 바뀔 때마다 동적으로 get요청
-      const data = response.data;
-      setMapCenter({ lat: data?.latitude, lng: data?.longitude }); // searchParams로 가져온 약국 데이터의 위경도값으로 바꿔줌
-      setSelectedPharmacy(data); // 커스텀오버레이도 유지시킴
+      try {
+        if (searchId) {
+          // searchId가 존재할 때만 API 요청 실행
+          const response = await api.get(`pharmacies/${searchId}`);
+          const data = response.data;
+          setMapCenter({ lat: data?.latitude, lng: data?.longitude }); // searchParams로 가져온 약국 데이터의 위경도값으로 바꿔줌
+          setSelectedPharmacy(data); // 커스텀 오버레이도 유지시킴
+        }
+      } catch (error) {
+        console.error('Error fetching pharmacy:', error); // 에러 로그 출력
+      }
     };
     fetchPharmacy();
   }, []);
