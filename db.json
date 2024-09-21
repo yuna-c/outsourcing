@@ -43,7 +43,7 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 8,
+      "likes": 11,
       "comments": []
     },
     {
@@ -76,13 +76,6 @@
           "nickname": "테스트테스트",
           "content": "처음 입력",
           "createdAt": "2024-09-21T03:45:13.478Z"
-        },
-        {
-          "id": 1726891618468,
-          "userId": "wldndnwl",
-          "nickname": "지영",
-          "content": "우와와",
-          "createdAt": "2024-09-21T04:06:58.468Z"
         }
       ]
     },
@@ -391,14 +384,14 @@
       "address": "서울 중구 동호로11길 43(신당동)",
       "latitude": 37.5533356,
       "longitude": 127.0090626,
-      "likes": 5,
+      "likes": 6,
       "comments": [
         {
-          "id": 1726910899724,
+          "id": 1726930281983,
           "userId": "wldndnwl",
           "nickname": "지영",
-          "content": "대풍ㅇ",
-          "createdAt": "2024-09-21T09:28:19.724Z"
+          "content": "아ㅏㅏㅏㅏ",
+          "createdAt": "2024-09-21T14:51:21.983Z"
         }
       ]
     },
@@ -896,7 +889,8 @@
       "address": "인천광역시 서구 신신로 68, 1층(석남동)",
       "latitude": 37.5080034,
       "longitude": 126.6779519,
-      "likes": null
+      "likes": null,
+      "comments": []
     },
     {
       "id": "76",

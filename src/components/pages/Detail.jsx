@@ -7,6 +7,7 @@ import { AiFillHeart, AiOutlineHeart, AiFillEdit } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
 import useAuthStore from '../../core/stores/useAuthStore';
 import { MdDelete } from 'react-icons/md';
+import handleTimeCalculate from '../../core/stores/chageTime';
 
 const fetchData = async (id) => {
   try {
@@ -203,7 +204,7 @@ const Detail = () => {
                     <p>{comment.content}</p>
                     {comment.userId === userId && (
                       <div className="flex justify-end space-x-2">
-                        <p className="text-sm text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
+                        <p className="text-sm text-gray-500">{handleTimeCalculate(comment.createdAt)}</p>
                         <button className="text-sm text-blue-500 " onClick={() => handleEditComment(comment)}>
                           <AiFillEdit />
                         </button>
