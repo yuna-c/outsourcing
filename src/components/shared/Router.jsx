@@ -13,7 +13,6 @@ import NotFound from '../pages/NotFound';
 
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
-import ProfileImageUpload from '../common/ProfileImageUpload';
 
 const Router = () => {
   const publicRoutes = [
@@ -52,10 +51,6 @@ const Router = () => {
           element: <SignUp />
         }
       ]
-    },
-    {
-      path: '/upload',
-      element: <ProfileImageUpload />
     }
   ];
 

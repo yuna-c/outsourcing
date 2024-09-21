@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../assets/icons/useAuthStore_.bak';
+import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
 
 import psmLogo from '../../assets/images/psm_logo.png';
@@ -98,12 +98,10 @@ const Nav = () => {
                   />
                 </div>
                 <p className="flex mr-2 font-bold">
-                  <span className="w-12 overflow-hidden whitespace-nowrap text-ellipsis">{nickname}</span>님
+                  <span className="overflow-hidden whitespace-nowrap text-ellipsis">{nickname}</span>님
                 </p>
               </div>
-              <Button onClick={onHandleLogout} className="">
-                로그아웃
-              </Button>
+              <Button onClick={onHandleLogout}>로그아웃</Button>
             </li>
           </>
         ) : (

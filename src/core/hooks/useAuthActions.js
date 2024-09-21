@@ -48,7 +48,7 @@ export const useAuthActions = () => {
       }
 
       const userId = authData.user.id;
-      const { error: profileError } = await supabase.from('profiles').upsert({ id: userId, username: nickname, email });
+      const { error: profileError } = await supabase.from('profiles').upsert({ id: userId, username: nickname });
 
       if (profileError) {
         console.error('프로필 저장 중 오류:', profileError);

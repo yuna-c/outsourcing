@@ -85,6 +85,7 @@ const SignIn = () => {
   return (
     <Article className="flex justify-center min-h-[calc(100vh-16rem)] px-5 sm:py-2 py-6 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignIn">
       <h1 className="mb-6 text-2xl font-extrabold sm:text-3xl">로그인</h1>
+
       <form onSubmit={onHandleSubmit} className="w-full space-y-2 sm:space-y-4">
         <Input
           type="text"

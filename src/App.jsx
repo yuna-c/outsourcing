@@ -1,5 +1,5 @@
 import Router from './components/shared/Router';
-// import UserProvider from './UserProvider';
+// import UserProvider from '../src/core/instance/UserProvider';
 
 function App() {
   return (

@@ -21,17 +21,17 @@ const Banner = () => {
 
   return (
     <div
-      className="pt-10 bg-left-top bg-cover main_banner saturate-50 bg-custom-deepblue opacity-95"
+      className="!h-screen pt-10 bg-left-top bg-cover md:!h-[750px] main_banner saturate-50 bg-custom-deepblue opacity-95"
       style={{ backgroundImage: `linear-gradient(rgba(7, 65, 115, 0.922) , rgba(0, 0, 0, 0.5)), url(${mainBanner})` }}
     >
       <img src={mainIcon} alt="banner_icon" className="grayscale" />
 
-      <div className="flex flex-col w-[55%] gap-2 px-16 py-16 border-[1.5px] border-[rgba(255,255,255,0.1)] rounded-lg">
-        <h3 className="xl:text-[3.8rem] leading-tight text-white text-[27px] font-bold mb-16">
+      <div className="flex flex-col w-full xl:w-[55%] lg:w-[85%] gap-2 mt-0 md:px-16 md:py-16 px-5 py:0 md:mt-0 mt-16 border-transparent xl:border-[1.5px] xl:border-[rgba(255,255,255,0.1)] rounded-lg">
+        <h3 className="text-[2.8rem] md:text-[3.8rem] leading-tight text-white font-bold md:mb-16 mb-8">
           <span className="bg-cyan-700">언제든,</span>
           <br />
           어디서든 <br />
-          <span className="text-cyan-300 xl:text-[4.2rem]">“24시 약국”</span> 찾기
+          <span className="text-cyan-300 text-[3rem] md:text-[4.2rem]">“24시 약국”</span> 찾기
         </h3>
 
         <p className="pb-2 text-[16px] text-white">

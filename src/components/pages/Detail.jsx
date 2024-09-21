@@ -5,7 +5,7 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { updateLikes } from '../../core/instance/axiosInstance';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
-import useAuthStore from '../../assets/icons/useAuthStore_.bak';
+import useAuthStore from '../../core/stores/useAuthStore';
 
 const fetchData = async (id) => {
   try {
