@@ -23,6 +23,10 @@
   }
 
   .main {
-    min-height: calc(100vh - 7.5rem) !important; /* Header와 Footer의 높이를 제외한 부분 */
+    min-height: calc(100vh - 7.5rem) !important;
+  }
+
+  .map {
+    pointer-events: auto;
   }
 }

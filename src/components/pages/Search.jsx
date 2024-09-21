@@ -16,7 +16,7 @@ const Search = () => {
   const [selectedPharmacy, setSelectedPharmacy] = useState(null); // 선택된 약국
   const [searchType, setSearchType] = useState(searchParams.get('filter') || 'name'); // 검색 타입
   const [visiblePharmaciesCount, setVisiblePharmaciesCount] = useState(10); // 초기 약국 표시 개수
-  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역의 가시성 제어
+  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역 토글
   const navigate = useNavigate();
 
   // 약국 데이터를 가져옴
@@ -136,10 +136,10 @@ const Search = () => {
   };
 
   return (
-    <article className="relative flex flex-row justify-center pt-[4.5rem] rounded-lg overflow-hidden m-auto h-full">
+    <article className="relative flex flex-row justify-center lg:pt-[4.5rem] rounded-lg overflow-hidden m-auto h-full">
       {/* 모바일에서 검색영역 토글 버튼 */}
       <button
-        className="absolute z-50 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
+        className="absolute z-40 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
         onClick={() => setIsSearchVisible(!isSearchVisible)}
       >
         {isSearchVisible ? (
@@ -234,9 +234,11 @@ const Search = () => {
         <Map
           center={mapCenter}
           style={{ width: '100%', height: '100%' }}
-          className="h-full"
+          className="h-full map"
           level={3}
           onCreate={setMap}
+          draggable={true} // 지도 이동 가능 여부
+          zoomable={true} // 지도 확대/축소 가능 여부
         >
           {searchPharmacies.map((pharmacy) => (
             <MapMarker
