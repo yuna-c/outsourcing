@@ -5,9 +5,10 @@ import Youtube from '../common/main/Youtube';
 import CurrentPharmaciesSection from '../common/main/CurrentPharmaciesSection';
 import WeekendPharmaciesSection from '../common/main/WeekendPharmaciesSection';
 
-import './../../assets/styles/mainPage.css';
+import './../../assets/styles/main.css';
 import { REGIONS } from '../../core/utils/regions';
 import { api } from '../../core/instance/axiosInstance';
+import Footer from '../common/Footer';
 
 const Main = () => {
   const [data, setData] = useState(null);
@@ -67,19 +68,18 @@ const Main = () => {
   }, [data]);
 
   return (
-    <Article className="!-mt-2 overflow-hidden main">
+    <Article className="!-mt-2 overflow-x-hidden mx-auto main">
       {/* 배너 부분 */}
       <Banner data={data} />
-      <div>
-        {/* 지금 영업중인 약국 */}
-        <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
-        {/* 주말 영업하는 약국 */}
-        <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
+      {/* 지금 영업중인 약국 */}
+      <CurrentPharmaciesSection pharmacies={openPharmacies} REGIONS={REGIONS} tag={'야간'} />
 
-        {/* 유트브 */}
-        <div>{/* <Youtube /> */}</div>
-      </div>
+      {/* 주말 영업하는 약국 */}
+      <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
+
+      {/* 유트브 */}
+      <Youtube />
     </Article>
   );
 };

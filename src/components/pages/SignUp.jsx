@@ -28,7 +28,7 @@ const SignUp = () => {
       // console.log('회원가입 API 응답값: ', response);
 
       if (response) {
-        alert('회원가입 완료. 로그인 페이지로 이동합니다.');
+        console.log('회원가입 완료. 로그인 페이지로 이동합니다.');
         navigate('/signIn');
       }
     } catch (error) {
