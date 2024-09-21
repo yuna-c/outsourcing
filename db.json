@@ -589,6 +589,20 @@
           "nickname": "yuna-c",
           "content": "다시 만나요",
           "createdAt": "2024-09-21T20:50:46.105Z"
+        },
+        {
+          "id": 1726955611145,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "안녕하세요~",
+          "createdAt": "2024-09-21T21:53:31.145Z"
+        },
+        {
+          "id": 1726955615599,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "반가워요~",
+          "createdAt": "2024-09-21T21:53:35.599Z"
         }
       ]
     },
