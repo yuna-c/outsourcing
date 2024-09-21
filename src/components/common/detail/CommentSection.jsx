@@ -1,6 +1,6 @@
 import React from 'react';
-import { AiFillEdit } from 'react-icons/ai';
-import { MdDelete } from 'react-icons/md';
+import { AiFillEdit } from 'react-icons/ai'; //아이콘 가져오기
+import { MdDelete } from 'react-icons/md'; //아이콘 가져오기
 
 const CommentSection = ({
   comments,
@@ -45,20 +45,25 @@ const CommentSection = ({
                   value={editingCommentContent}
                   onChange={onEditCommentChange} // 직접 업데이트
                 />
+                {/* 리뷰 수정완료버튼 */}
                 <button className="text-sm text-blue-500" onClick={() => onUpdateComment(comment.id)}>
-                  수정 완료
+                  <AiFillEdit />
                 </button>
               </div>
             ) : (
               <div>
                 <p className="font-bold">{comment.nickname}</p>
                 <p>{comment.content}</p>
+                {/* 리뷰 작성 시간 */}
+                <p className="text-sm text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
+                {/* 유저가 일치할 경우 아래 수정, 삭제버튼 표시 */}
                 {comment.userId === userId && (
                   <div className="flex justify-end space-x-2">
-                    <p className="text-sm text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
+                    {/* 리뷰수정버튼 */}
                     <button className="text-sm text-blue-500" onClick={() => onEditComment(comment)}>
                       <AiFillEdit />
                     </button>
+                    {/* 리뷰삭제버튼 */}
                     <button className="text-sm text-red-500" onClick={() => onDeleteComment(comment.id)}>
                       <MdDelete />
                     </button>

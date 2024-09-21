@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { api, updateLikes } from '../../core/instance/axiosInstance';
-import PharmacyDetail from '../common/detail/PharmacyDetail';
-import CommentSection from '../common/detail/CommentSection';
-import MapSection from '../common/detail/MapSection';
-import useAuthStore from '../../core/stores/useAuthStore';
+import PharmacyDetail from '../common/detail/PharmacyDetail'; //약국정보 section
+import CommentSection from '../common/detail/CommentSection'; //댓글 section
+import MapSection from '../common/detail/MapSection'; //지도 section
+import useAuthStore from '../../core/stores/useAuthStore'; //zustand 회원정보
 
 const fetchData = async (id) => {
   try {
@@ -19,16 +19,17 @@ const Detail = () => {
   const { id } = useParams();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [liked, setLiked] = useState(false);
-  const [selectedPharmacy, setSelectedPharmacy] = useState(null);
-  const [newComment, setNewComment] = useState('');
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editingCommentContent, setEditingCommentContent] = useState('');
+  const [liked, setLiked] = useState(false); //좋아요
+  const [selectedPharmacy, setSelectedPharmacy] = useState(null); //약국정보저장
+  const [newComment, setNewComment] = useState(''); //새로운 리뷰
+  const [editingCommentId, setEditingCommentId] = useState(null); //수정중인 리뷰 id
+  const [editingCommentContent, setEditingCommentContent] = useState(''); //수정중인 리뷰 내용
   const navigate = useNavigate();
-  const userId = useAuthStore((state) => state.userId);
-  const nickname = useAuthStore((state) => state.nickname);
-  const [pharmacy, setPharmacy] = useState({ comments: [] });
+  const userId = useAuthStore((state) => state.userId); //zustand에서 가져온 사용자정보
+  const nickname = useAuthStore((state) => state.nickname); //zustand에서 가져온 닉네임
+  const [pharmacy, setPharmacy] = useState({ comments: [] }); //약국의 상세정보, 리뷰목록
 
+  //사용자의 좋아요 상태 업데이트
   useEffect(() => {
     if (userId) {
       const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
@@ -36,35 +37,7 @@ const Detail = () => {
     }
   }, [id, userId]);
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
-  const handleLike = async () => {
-    const newLikeCount = pharmacy.likes + (liked ? -1 : 1);
-    setPharmacy((prev) => ({ ...prev, likes: newLikeCount }));
-
-    try {
-      await updateLikes(id, newLikeCount);
-      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
-      if (liked) {
-        const updatedLikes = likedPharmacies.filter((pharmacyId) => pharmacyId !== id);
-        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes));
-      } else {
-        likedPharmacies.push(id);
-        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(likedPharmacies));
-      }
-    } catch (error) {
-      console.error('좋아요 업데이트 실패:', error);
-    } finally {
-      setLiked(!liked);
-    }
-  };
-
-  const handleCloseOverlay = () => {
-    setSelectedPharmacy(null);
-  };
-
+  //약국 데이터 가져오기
   useEffect(() => {
     const getPharmacyData = async () => {
       try {
@@ -88,6 +61,39 @@ const Detail = () => {
     return <div>오류 발생: {error}</div>;
   }
 
+  //이전 페이지로 돌아가기
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  //좋아요
+  const handleLike = async () => {
+    const newLikeCount = pharmacy.likes + (liked ? -1 : 1);
+    setPharmacy((prev) => ({ ...prev, likes: newLikeCount })); //setPharmacy를 사용해 즉시 업데이트(optimistic update)
+
+    try {
+      await updateLikes(id, newLikeCount); //서버에 좋아요 업데이트
+      const likedPharmacies = JSON.parse(localStorage.getItem(`likedPharmacies_${userId}`)) || [];
+      if (liked) {
+        const updatedLikes = likedPharmacies.filter((pharmacyId) => pharmacyId !== id);
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes)); //좋아요를 이미 한 경우
+      } else {
+        likedPharmacies.push(id);
+        localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(likedPharmacies)); //좋아요를 하지 않은 경우
+      }
+    } catch (error) {
+      console.error('좋아요 업데이트 실패:', error);
+    } finally {
+      setLiked(!liked);
+    } //좋아요 상태 반전
+  };
+
+  //지도에서 약국 정보 닫기
+  const handleCloseOverlay = () => {
+    setSelectedPharmacy(null);
+  };
+
+  // 리뷰 추가(db.json에 리뷰가 없는 경우, 새로 생성도함)
   const handleAddComment = async () => {
     if (!newComment.trim()) {
       alert('댓글 내용을 입력하세요.');
@@ -112,6 +118,7 @@ const Detail = () => {
     }
   };
 
+  //리뷰 삭제
   const handleDeleteComment = async (commentId) => {
     const updatedComments = pharmacy.comments.filter((comment) => comment.id !== commentId);
 
@@ -123,11 +130,13 @@ const Detail = () => {
     }
   };
 
+  //수정할 리뷰 id, 내용 저장
   const handleEditComment = (comment) => {
     setEditingCommentId(comment.id);
     setEditingCommentContent(comment.content);
   };
 
+  //리뷰 수정
   const handleUpdateComment = async (commentId) => {
     const updatedComments = pharmacy.comments.map((comment) =>
       comment.id === commentId ? { ...comment, content: editingCommentContent } : comment
@@ -139,7 +148,7 @@ const Detail = () => {
       setEditingCommentId(null);
       setEditingCommentContent('');
     } catch (error) {
-      console.error('댓글 수정 실패:', error);
+      console.error('리뷰 수정 실패:', error);
     }
   };
 
@@ -149,14 +158,14 @@ const Detail = () => {
         <PharmacyDetail pharmacy={pharmacy} liked={liked} onLike={handleLike} onGoBack={handleGoBack} />
         <CommentSection
           comments={pharmacy.comments || []}
-          newComment={newComment} // 상태 변수
-          onNewCommentChange={(e) => setNewComment(e.target.value)} // 상태 업데이트 함수
+          newComment={newComment}
+          onNewCommentChange={(e) => setNewComment(e.target.value)} // 리뷰입력
           onAddComment={handleAddComment}
           userId={userId}
           onEditComment={handleEditComment}
           editingCommentId={editingCommentId}
           editingCommentContent={editingCommentContent}
-          onEditCommentChange={(e) => setEditingCommentContent(e.target.value)} // 상태 업데이트 함수
+          onEditCommentChange={(e) => setEditingCommentContent(e.target.value)} // 수정 리뷰 입력
           onUpdateComment={handleUpdateComment}
           onDeleteComment={handleDeleteComment}
         />
