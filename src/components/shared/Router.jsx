@@ -8,8 +8,9 @@ import SignUp from '../pages/SignUp';
 import Sample from '../pages/Sample';
 import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
-import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
+import NotFound from '../pages/NotFound';
+
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -18,6 +19,14 @@ const Router = () => {
     {
       path: '/',
       element: <Main />
+    },
+    {
+      path: '/search',
+      element: <Search />
+    },
+    {
+      path: '/detail/:id',
+      element: <Detail />
     }
   ];
 
@@ -33,7 +42,6 @@ const Router = () => {
         }
       ]
     },
-
     {
       path: '/signUp',
       element: <GuestRoute />,
@@ -43,14 +51,6 @@ const Router = () => {
           element: <SignUp />
         }
       ]
-    },
-    {
-      path: '/search',
-      element: <Search />
-    },
-    {
-      path: '/detail/:id',
-      element: <Detail />
     }
   ];
 

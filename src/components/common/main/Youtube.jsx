@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Youtube = () => {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -26,7 +26,7 @@ const Youtube = () => {
 
   return (
     <div className="current_pharmacies">
-      <h1 className="pharmacy_selector_title text-2xl">약국 꿀팁 영상</h1>
+      <h1 className="text-2xl pharmacy_selector_title">YouTube Videos</h1>
       <div className="youtube_container">
         {videos.map((video) => (
           <div key={video.id.videoId} className="youtube_item">
