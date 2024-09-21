@@ -76,6 +76,13 @@
           "nickname": "테스트테스트",
           "content": "처음 입력",
           "createdAt": "2024-09-21T03:45:13.478Z"
+        },
+        {
+          "id": 1726891618468,
+          "userId": "wldndnwl",
+          "nickname": "쥬",
+          "content": "우와와",
+          "createdAt": "2024-09-21T04:06:58.468Z"
         }
       ]
     },
