@@ -1,56 +1,35 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../core/stores/useAuthStore'; // import the useAuthStore
+import useFormValidation from '../../core/hooks/useFormValidation';
 
 import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
-export default function SignUp() {
-  const [formData, setFormData] = useState({ id: '', password: '', nickname: '' });
+const SignUp = () => {
+  const [formData, setFormData] = useState({
+    password: '',
+    nickname: '',
+    id: ''
+  });
+
+  const { validateForm } = useFormValidation();
+
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth); // use setAuth from the store
-
-  const validateForm = () => {
-    const { id, password, nickname } = formData;
-
-    if (id.length < 4 || id.length > 10) {
-      alert('아이디는 4글자에서 10글자 이내로만 가능합니다');
-      return false;
-    }
-
-    if (password.length < 4 || password.length > 15) {
-      alert('비밀번호는 4글자에서 15글자 이내로만 가능합니다');
-      return false;
-    }
-
-    if (nickname.length < 1 || nickname.length > 15) {
-      alert('닉네임은 1글자에서 15글자 이내로만 가능합니다');
-      return false;
-    }
-
-    return true;
-  };
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateForm(formData)) return;
 
     try {
       const response = await register(formData);
-      console.log('회원가입 API 응답값: ', response);
+      // console.log('회원가입 API 응답값: ', response);
 
       if (response) {
-        // 자동 로그인
-        // const { accessToken, userId, nickname, avatar } = response;
-        // setAuth(accessToken, nickname, userId, avatar);
-        const { id: userId, nickname } = formData;
-        setAuth(null, nickname, userId);
-
-        alert('회원가입 및 자동 로그인 완료');
-        navigate('/');
+        alert('회원가입 완료. 로그인 페이지로 이동합니다.');
+        navigate('/signIn');
       }
     } catch (error) {
       console.error('회원가입 실패: ', error);
@@ -66,10 +45,10 @@ export default function SignUp() {
   };
 
   return (
-    <Article className="w-full xl:w-xl-1/2-important SignUp">
-      <h1 className="mb-6 text-2xl font-bold">회원가입</h1>
+    <Article className="flex justify-center min-h-[calc(100vh-16rem)] px-5 sm:py-2 py-6 md:px-5 w-[95%] md:w-[85%] lg:w-[50%] mx-auto xl:w-xl-1/2-important SignIn">
+      <h1 className="mb-6 text-2xl font-extrabold sm:text-3xl">회원가입</h1>
 
-      <form onSubmit={onHandleSubmit} className="w-full space-y-4">
+      <form onSubmit={onHandleSubmit} className="w-full space-y-2 sm:space-y-4">
         <Input
           type="text"
           name="nickname"
@@ -78,6 +57,7 @@ export default function SignUp() {
           placeholder="닉네임을 입력해 주세요"
           required
         />
+
         <Input
           type="text"
           name="id"
@@ -86,6 +66,7 @@ export default function SignUp() {
           placeholder="아이디를 입력해 주세요"
           required
         />
+
         <Input
           type="password"
           name="password"
@@ -94,10 +75,16 @@ export default function SignUp() {
           placeholder="비밀번호를 입력해 주세요"
           required
         />
-        <Button type="submit" className="w-full p-2">
+
+        <Button
+          type="submit"
+          className="sm:!mt-10 !mt-6 w-full py-2 font-bold !text-custom-deepblue  hover:!text-white bg-white border !border-custom-deepblue text-custom-deepblue hover:!border-custom-skyblue"
+        >
           회원가입
         </Button>
       </form>
     </Article>
   );
-}
+};
+
+export default SignUp;
