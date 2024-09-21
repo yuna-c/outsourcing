@@ -11,7 +11,22 @@
       "latitude": 37.5051069,
       "longitude": 127.0246713,
       "likes": 14,
-      "comments": []
+      "comments": [
+        {
+          "id": 1726920061759,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "리뷰써지는지",
+          "createdAt": "2024-09-21T12:01:01.759Z"
+        },
+        {
+          "id": 1726920783147,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "이제되나?",
+          "createdAt": "2024-09-21T12:13:03.147Z"
+        }
+      ]
     },
     {
       "id": "2",
@@ -24,7 +39,15 @@
       "latitude": 37.5196301,
       "longitude": 127.0381309,
       "likes": 8,
-      "comments": []
+      "comments": [
+        {
+          "id": 1726924135581,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "이제 되나? 아까는 왜 안되었을까..",
+          "createdAt": "2024-09-21T13:08:55.581Z"
+        }
+      ]
     },
     {
       "id": "3",
@@ -36,7 +59,16 @@
       "address": "서울 강동구 천호대로157길 54(천호동)",
       "latitude": 37.5420009,
       "longitude": 127.1377667,
-      "likes": 5
+      "likes": 5,
+      "comments": [
+        {
+          "id": 1726920970501,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "이제되나?",
+          "createdAt": "2024-09-21T12:16:10.501Z"
+        }
+      ]
     },
     {
       "id": "4",
@@ -174,7 +206,8 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 7
+      "likes": 6,
+      "comments": []
     },
     {
       "id": "16",
@@ -558,7 +591,17 @@
       "phone": "051-746-1131",
       "address": "부산광역시 해운대구 센텀2로 10",
       "latitude": 35.1678021,
-      "longitude": 129.1315549
+      "longitude": 129.1315549,
+      "comments": [
+        {
+          "id": 1726921711885,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "리뷰작성연습",
+          "createdAt": "2024-09-21T12:28:31.885Z"
+        }
+      ],
+      "likes": 0
     },
     {
       "id": "50",
