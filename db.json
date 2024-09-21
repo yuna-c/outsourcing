@@ -222,7 +222,8 @@
       "address": "서울 마포구 양화로 72, 118호(서교동)",
       "latitude": 37.5507977,
       "longitude": 126.9167221,
-      "likes": null
+      "likes": 1,
+      "comments": []
     },
     {
       "id": "18",
@@ -385,7 +386,7 @@
         {
           "id": 1726930281983,
           "userId": "wldndnwl",
-          "nickname": "지영",
+          "nickname": "지우",
           "content": "아ㅏㅏㅏㅏ",
           "createdAt": "2024-09-21T14:51:21.983Z"
         }
@@ -401,7 +402,16 @@
       "address": "서울 중랑구 면목로 421",
       "latitude": 37.5896475,
       "longitude": 127.0870515,
-      "likes": 2
+      "likes": 3,
+      "comments": [
+        {
+          "id": 1726938094090,
+          "userId": "qkrwnsgh",
+          "nickname": "주노준호",
+          "content": "안녕하세요? 준호입니다 :3\n준호입니다?",
+          "createdAt": "2024-09-21T17:01:34.090Z"
+        }
+      ]
     },
     {
       "id": "33",
@@ -1163,7 +1173,16 @@
       "address": "울산광역시 남구 삼산로 159-1",
       "latitude": 35.5370149,
       "longitude": 129.3246498,
-      "likes": null
+      "likes": null,
+      "comments": [
+        {
+          "id": 1726937264101,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "웅아앙ㅇ",
+          "createdAt": "2024-09-21T16:47:44.101Z"
+        }
+      ]
     },
     {
       "id": "98",
