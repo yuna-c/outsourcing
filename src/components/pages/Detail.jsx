@@ -7,7 +7,7 @@ import { AiFillHeart, AiOutlineHeart, AiFillEdit } from 'react-icons/ai';
 import { SlArrowLeft } from 'react-icons/sl';
 import useAuthStore from '../../core/stores/useAuthStore';
 import { MdDelete } from 'react-icons/md';
-import handleTimeCalculate from '../../core/stores/chageTime';
+import handleTimeCalculate from '../../core/stores/changeTime';
 
 const fetchData = async (id) => {
   try {

@@ -6,7 +6,7 @@ import { HiOutlineDotsVertical } from 'react-icons/hi';
 // import { FaCommentSlash } from 'react-icons/fa';
 import { BiSolidCommentX } from 'react-icons/bi';
 import { BiSolidCommentDetail } from 'react-icons/bi';
-import handleTimeCalculate from '../../core/stores/chageTime';
+import handleTimeCalculate from '../../core/stores/changeTime';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
