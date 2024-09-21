@@ -12,14 +12,7 @@
   @apply bg-custom-gradient;
 }
 .current_pharmacies select {
-<<<<<<< HEAD
   @apply border bg-transparent border-custom-deepblue focus:ring-white p-2 rounded-lg;
-=======
-  @apply bg-transparent border rounded-sm;
-}
-.pharmacy_selector_container {
-  @apply flex items-center justify-center flex-col h-[13rem] gap-[1.75rem];
->>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
 }
 .pharmacy_selector_title {
   @apply font-bold text-center text-[30px] p-[40px];

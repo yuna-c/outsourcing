@@ -23,8 +23,6 @@ const useAuthStore = create(
       setUserId: (userId) => set({ userId }),
       setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
       // 세션을 가져오고 사용자 상태를 설정
       getSession: async () => {
         const {
@@ -53,14 +51,8 @@ const useAuthStore = create(
       },
 
       // 사용자 인증 정보 설정
-=======
       // 객체 형태로 받아와야 함! 지금은 순서대로 받고 있어서 무조건 요 순서를 지켜서 넣어줘야함 예..
       // setAuth: ({accessToken, nickname, userId, avatar})
->>>>>>> 32de0e33973d3ae5bc17672c20f9ade30560baf9
-=======
-      // 객체 형태로 받아와야 함! 지금은 순서대로 받고 있어서 무조건 요 순서를 지켜서 넣어줘야함 예..
-      // setAuth: ({accessToken, nickname, userId, avatar})
->>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
       setAuth: (accessToken, nickname, userId, avatar) => {
         console.log('setAuth 호출됨:', { accessToken, nickname, userId, avatar });
         set({

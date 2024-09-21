@@ -89,18 +89,8 @@ const Nav = () => {
               <Link to="/myPage" label="마이페이지" />
             </li>
             <li className="flex items-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
-              <div className="flex items-center pr-1 mx-2">
-                <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full">
-=======
-              <div className="flex items-center pr-1 mr-2">
-                <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full border-custom-deepblue">
->>>>>>> 32de0e33973d3ae5bc17672c20f9ade30560baf9
-=======
               <div className="flex items-center pr-1 ml-2 mr-0">
                 <div className="inline-flex w-[32px] h-[32px] mr-2 overflow-hidden border rounded-full">
->>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
                   <img
                     src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
                     alt={nickname}

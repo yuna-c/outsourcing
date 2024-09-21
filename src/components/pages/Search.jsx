@@ -137,11 +137,7 @@ const Search = () => {
   };
   //1679ab
   return (
-<<<<<<< HEAD
     <section className="flex flex-row justify-center w-11/12  rounded-lg overflow-hidden shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)] m-auto p-5">
-=======
-    <section className="flex flex-row justify-center w-full mt-24 border-8 rounded-lg">
->>>>>>> ee5abbfcc4d382c942e16f6edb9e1cf6e3b82c77
       {/* 검색영역 */}
       <article className="flex flex-col items-start p-5 w-1/4 h-[800px] gap-5 ">
         <div className="flex flex-row items-center gap-1">
