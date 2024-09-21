@@ -9,7 +9,6 @@ import './../../assets/styles/main.css';
 import { REGIONS } from '../../core/utils/regions';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPharmacies } from './../../core/instance/axiosInstance';
-import Footer from '../common/Footer';
 
 const Main = () => {
   // const [data, setData] = useState(null);
