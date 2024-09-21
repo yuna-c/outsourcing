@@ -5,12 +5,14 @@ import useAuthStore from '../../core/stores/useAuthStore';
 
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
+import { api } from '../../core/instance/axiosInstance';
 
 const Profile = () => {
   const accessToken = useAuthStore((state) => state.accessToken);
   const setAuth = useAuthStore((state) => state.setAuth);
   const currentNickname = useAuthStore((state) => state.nickname);
   const currentAvatar = useAuthStore((state) => state.avatar);
+  const userId = useAuthStore((state) => state.userId);
 
   const [nickname, setNickname] = useState(currentNickname || '');
   const [avatar, setAvatar] = useState(null);
@@ -18,8 +20,9 @@ const Profile = () => {
 
   const onHandleUpdateProfile = async () => {
     const formData = new FormData();
-    console.log('currentAvatar=>', currentAvatar);
-    console.log('avatar=>', avatar);
+
+    // console.log('currentAvatar=>', currentAvatar);
+    // console.log('avatar=>', avatar);
 
     formData.append('nickname', nickname || currentNickname);
     if (avatar) {
@@ -29,7 +32,11 @@ const Profile = () => {
     const response = await updateProfile(formData);
 
     if (response && response.success) {
-      console.log('response =>', response);
+      // console.log('response =>', response);
+      if (nickname !== currentNickname) {
+        await updateCommentsNickname(userId, nickname);
+      }
+
       setAuth(
         accessToken,
         response.nickname || currentNickname,
@@ -37,6 +44,30 @@ const Profile = () => {
         response.avatar || currentAvatar
       );
       navigate('/mypage');
+    }
+  };
+
+  const updateCommentsNickname = async (userId, newNickname) => {
+    try {
+      const response = await api.get('/pharmacies');
+      const allPharmacies = response.data;
+
+      const updatedPharmacies = allPharmacies.map((pharmacy) => {
+        if (!pharmacy.comments) return pharmacy;
+
+        const updatedComments = pharmacy.comments.map((comment) => {
+          if (comment.userId === userId) {
+            return { ...comment, nickname: newNickname };
+          }
+          return comment;
+        });
+        return { ...pharmacy, comments: updatedComments };
+      });
+      for (const pharmacy of updatedPharmacies) {
+        await api.patch(`/pharmacies/${pharmacy.id}`, { comments: pharmacy.comments });
+      }
+    } catch (error) {
+      console.error('댓글 닉네임 업데이트 오류 => ', error);
     }
   };
 
