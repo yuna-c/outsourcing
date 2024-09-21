@@ -70,7 +70,7 @@ function SliderResponse({ pharmacies = [], tag }) {
                 className="slider_text_area top-[80px] mx-auto left-[50%] translate-x-[-50%] w-[80%] leading-[40px] absolute overflow-hidden
   whitespace-nowrap text-ellipsis"
               >
-                <h3 className="text-[23px] font-extrabold ">{item.name}</h3>
+                <h3 className="text-[23px] font-extrabold">{item.name}</h3>
                 <p className="highlight inline bg-[#C3EBFF] py-1 px-2 rounded-[8px] font-bold text-sm">{item.time}</p>
                 <p className="address block-text text-[14px] leading-[15px]">{item.address}</p>
               </div>

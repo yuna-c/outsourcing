@@ -30,6 +30,13 @@
           "nickname": "테스트테스트",
           "content": "닉네임나오는지 확인",
           "createdAt": "2024-09-21T03:09:40.452Z"
+        },
+        {
+          "id": 1726921046801,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "OMG!",
+          "createdAt": "2024-09-21T12:17:26.801Z"
         }
       ]
     },

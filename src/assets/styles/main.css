@@ -113,7 +113,7 @@
 /* main_banner css end */
 
 /* youtube css start */
-.youtube_container {
+/* .youtube_container {
   @apply flex flex-wrap items-center justify-center gap-12;
 }
 .youtube_container .youtube_item {
@@ -124,5 +124,5 @@
 }
 .youtube_item iframe {
   @apply rounded-md;
-}
+} */
 /* youtube css end */

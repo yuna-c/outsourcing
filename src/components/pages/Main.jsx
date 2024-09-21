@@ -78,12 +78,12 @@ const Main = () => {
         <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
 
         {/* 유트브 */}
-        <div>{/* <Youtube /> */}</div>
+        <div>
+          <Youtube />
+        </div>
       </div>
     </Article>
   );
 };
 
 export default Main;
-
-/* Rectangle 32 */
