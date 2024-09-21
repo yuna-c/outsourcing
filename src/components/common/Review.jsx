@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { api } from '../../core/instance/axiosInstance';
 
 const Review = () => {
@@ -15,10 +15,6 @@ const Review = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchReviews();
-  }, [userId]);
 
   return (
     <div>
