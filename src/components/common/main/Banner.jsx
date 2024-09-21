@@ -1,11 +1,10 @@
-import React from 'react';
-import { IoMdSearch } from 'react-icons/io';
-import Button from '../ui/Button';
-import mainIcon from '/src/assets/images/main_icon.png';
-import '../../../assets/styles/mainPage.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import mainBanner from '/src/assets/images/pills.jpg';
+
+import { IoMdSearch } from 'react-icons/io';
+
+import Button from '../ui/Button';
+import mainIcon from '/src/assets/images/main_icon.png';
 
 const Banner = () => {
   const [query, setQuery] = useState('');
@@ -20,13 +19,10 @@ const Banner = () => {
   };
 
   return (
-    <div
-      className="!h-screen pt-10 bg-left-top bg-cover md:!h-[750px] main_banner saturate-50 bg-custom-deepblue opacity-95"
-      style={{ backgroundImage: `linear-gradient(rgba(7, 65, 115, 0.922) , rgba(0, 0, 0, 0.5)), url(${mainBanner})` }}
-    >
-      <img src={mainIcon} alt="banner_icon" className="grayscale" />
+    <div className="!h-screen pt-10 !mt-2 bg-left-top bg-cover md:!h-[750px] main_banner saturate-50 bg-custom-deepblue bg-custom-main-gradient opacity-95 custom-main-gradient relative overflow-hidden bg-no-repeat flex flex-col justify-center items-center">
+      <img src={mainIcon} alt="banner_icon" className="grayscale absolute right-5 top-5 w-[150px] md:w-[200px]" />
 
-      <div className="flex flex-col w-full xl:w-[55%] lg:w-[85%] gap-2 mt-0 md:px-16 md:py-16 px-5 py:0 md:mt-0 mt-16 border-transparent xl:border-[1.5px] xl:border-[rgba(255,255,255,0.1)] rounded-lg">
+      <div className="flex flex-col w-full xl:w-[55%] lg:w-[85%] gap-2 mt-0 md:px-16 md:py-16 px-5 py:0 md:mt-0  border-transparent xl:border-[1.5px] xl:border-[rgba(255,255,255,0.1)] rounded-lg">
         <h3 className="text-[2.8rem] md:text-[3.8rem] leading-tight text-white font-bold md:mb-16 mb-8">
           <span className="bg-cyan-700">언제든,</span>
           <br />

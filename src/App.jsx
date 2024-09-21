@@ -3,7 +3,7 @@ import Router from './components/shared/Router';
 
 function App() {
   return (
-    <div className="relative mx-auto Wrap">
+    <div className="relative mx-auto wrap">
       {/* <UserProvider> */}
       <Router />
       {/* </UserProvider> */}

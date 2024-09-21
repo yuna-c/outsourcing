@@ -198,7 +198,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 6
+      "likes": 7
     },
     {
       "id": "16",
@@ -335,7 +335,7 @@
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
       "longitude": 126.9575191,
-      "likes": 6
+      "likes": 7
     },
     {
       "id": "28",
@@ -1284,7 +1284,31 @@
       "phone": "070-7576-2443",
       "address": "경기도 남양주시 다산순환로 350, 케이비 골든타워 106호",
       "latitude": 37.6257753,
-      "longitude": 127.1553694
+      "longitude": 127.1553694,
+      "likes": null,
+      "comments": [
+        {
+          "id": 1726900393699,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅇㄴㄹㄴㅇㄹ",
+          "createdAt": "2024-09-21T06:33:13.699Z"
+        },
+        {
+          "id": 1726900396050,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅁㄴㄻㄴㄹ",
+          "createdAt": "2024-09-21T06:33:16.050Z"
+        },
+        {
+          "id": 1726900397259,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅁㄴㄻㄹ",
+          "createdAt": "2024-09-21T06:33:17.259Z"
+        }
+      ]
     },
     {
       "id": "111",
