@@ -33,7 +33,7 @@ const Likes = () => {
 
   useEffect(() => {
     const likedPharmaciesStorage = localStorage.getItem(`likedPharmacies_${userId}`);
-    console.log('나오냐? =>', userId);
+    console.log('나오시나요? =>', userId);
 
     if (likedPharmaciesStorage) {
       setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
