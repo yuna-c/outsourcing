@@ -135,23 +135,23 @@ const Search = () => {
   const handleShowMore = () => {
     setVisiblePharmaciesCount((prevCount) => prevCount + 10);
   };
-
+  //1679ab
   return (
-    <section className="flex flex-row justify-center w-full mt-24 border-8 rounded-lg">
+    <section className="flex flex-row justify-center w-11/12  rounded-lg overflow-hidden shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)] m-auto p-5">
       {/* 검색영역 */}
       <article className="flex flex-col items-start p-5 w-1/4 h-[800px] gap-5 ">
         <div className="flex flex-row items-center gap-1">
           <button
-            className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
-              searchType === 'region' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+            className={`px-3 py-1 rounded-lg transition hover:bg-[#074173] hover:text-white ${
+              searchType === 'region' ? 'bg-[#074173] text-white' : 'bg-gray-200'
             } font-semibold text-sm font-custom`}
             onClick={() => handleSearchTypeChange('region')}
           >
             지역명
           </button>
           <button
-            className={`px-3 py-1 rounded-lg transition hover:bg-custom-teal ${
-              searchType === 'name' ? 'bg-custom-teal text-white' : 'bg-gray-200'
+            className={`px-3 py-1 rounded-lg transition hover:bg-[#074173] hover:text-white ${
+              searchType === 'name' ? 'bg-[#074173] text-white' : 'bg-gray-200'
             } font-semibold text-sm font-custom`}
             onClick={() => handleSearchTypeChange('name')}
           >
@@ -159,7 +159,7 @@ const Search = () => {
           </button>
           <span className="text-sm"> 으로 검색하기</span>
         </div>
-        <div className="flex flex-row w-full pr-3 border-8 rounded-lg">
+        <div className="flex flex-row w-full pr-3 border-4 rounded-lg border-[#074173]">
           <input
             type="text"
             value={keyword}
@@ -169,7 +169,7 @@ const Search = () => {
           />
           {/*돋보기아이콘 클릭시 검색된 핀들이 맵 중심으로 이동*/}
           <button onClick={handleCenterMap}>
-            <FaSearch size={25} />
+            <FaSearch size={25} color="#074173" />
           </button>
         </div>
         <ul className="flex flex-col gap-3 h-[100%]	overflow-auto w-full">
@@ -184,7 +184,7 @@ const Search = () => {
           {displayedPharmacies.map((pharmacy, id) => (
             <li
               key={id}
-              className="flex flex-row items-center justify-between w-full gap-3 p-3 transition-transform duration-500 transform rounded-lg shadow-lg cursor-pointer hover:-translate-y-1"
+              className="flex flex-row items-center justify-between w-full gap-3 p-3 transition-transform duration-500 transform rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 "
               onClick={() => handleMoveMap(pharmacy.latitude, pharmacy.longitude, pharmacy.id, pharmacy)} // 리스트 클릭시 맵의 중심 이동
             >
               <div className="w-10/12">
@@ -192,7 +192,7 @@ const Search = () => {
                 <p className="mb-1 text-sm text-gray-600 break-words">{pharmacy.address}</p>
                 <span className="mb-1 text-sm text-gray-600 break-words">{pharmacy.phone}</span>
               </div>
-              <div className="p-3 text-white rounded-full bg-custom-teal">
+              <div className="p-3 text-white rounded-full bg-[#074173]">
                 <SlArrowRight size={15} />
               </div>
             </li>
@@ -202,7 +202,7 @@ const Search = () => {
         {visiblePharmaciesCount < searchPharmacies.length && (
           <button
             onClick={handleShowMore}
-            className="w-full px-4 py-2 mt-3 text-center text-white transition rounded-lg bg-custom-teal hover:bg-custom-green"
+            className="w-full px-4 py-2 mt-3 text-center text-white transition rounded-lg bg-[#074173] hover:bg-[#1679ab]"
           >
             더 보기
           </button>
@@ -237,7 +237,7 @@ const Search = () => {
                 </div>
                 <button
                   onClick={() => handleGoToDetail(selectedPharmacy.id)}
-                  className="w-full px-4 py-2 mt-3 text-center text-white transition rounded-lg bg-custom-teal hover:bg-custom-green"
+                  className="w-full px-4 py-2 mt-3 text-center text-white transition rounded-lg bg-[#074173] hover:bg-[#1679ab]"
                 >
                   자세히 보기
                 </button>
