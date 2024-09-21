@@ -3,11 +3,12 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
 const MapSection = ({ pharmacy, selectedPharmacy, onSelectPharmacy, onCloseOverlay }) => {
   return (
-    <div className="flex items-center justify-center w-full rounded-lg h-96">
+    <div className="h-full">
       <Map
         center={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}
-        style={{ width: '100%', height: '800px' }}
-        level={3}
+        style={{ width: '100%', height: '100%' }}
+        className="h-full map"
+        level={1}
       >
         <MapMarker
           position={{ lat: pharmacy.latitude, lng: pharmacy.longitude }}

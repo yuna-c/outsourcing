@@ -557,7 +557,30 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": 1
+      "likes": 2,
+      "comments": [
+        {
+          "id": 1726951837066,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "오 다됬나?",
+          "createdAt": "2024-09-21T20:50:37.066Z"
+        },
+        {
+          "id": 1726951840210,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "잘있어요~",
+          "createdAt": "2024-09-21T20:50:40.210Z"
+        },
+        {
+          "id": 1726951846105,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "다시 만나요",
+          "createdAt": "2024-09-21T20:50:46.105Z"
+        }
+      ]
     },
     {
       "id": "47",
@@ -1683,7 +1706,7 @@
       "address": "경기도 화성시 우정읍 기아자동차 555",
       "latitude": 37.0807123,
       "longitude": 126.7888689,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "145",

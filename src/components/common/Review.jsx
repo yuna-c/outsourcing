@@ -6,7 +6,7 @@ import { HiOutlineDotsVertical } from 'react-icons/hi';
 // import { FaCommentSlash } from 'react-icons/fa';
 import { BiSolidCommentX } from 'react-icons/bi';
 import { BiSolidCommentDetail } from 'react-icons/bi';
-import handleTimeCalculate from '../../core/stores/changeTime';
+import handleTimeCalculate from '../../core/hooks/useChangeTime';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
@@ -92,10 +92,10 @@ const Review = () => {
           reviews.map((review) => (
             <li
               key={review.id}
-              className=" flex justify-between items-center w-full p-4 mb-4 border border-black rounded cursor-pointer"
+              className="flex items-center justify-between w-full p-4 mb-4 border border-black rounded cursor-pointer "
               onClick={() => navigate(`/detail/${review.pharmacyId}`)} // 클릭 시 약국 디테일 페이지로 이동
             >
-              <div className=" flex gap-4">
+              <div className="flex gap-4 ">
                 <BiSolidCommentDetail
                   size={37}
                   // className={likedPharmacies.includes(pharmacy.id) ? 'text-black' : 'text-gray-500'}
@@ -103,7 +103,7 @@ const Review = () => {
                 <div className="flex flex-col">
                   <span className="text-xl font-bold">{review.nickname}</span>
                   <p className="mt-2 font-medium text-black ">{review.content}</p>
-                  <p className=" mt-5 text-gray-600">{handleTimeCalculate(review.createdAt)}</p>
+                  <p className="mt-5 text-gray-600 ">{handleTimeCalculate(review.createdAt)}</p>
                 </div>
               </div>
               <div className="relative flex items-center justify-end">
