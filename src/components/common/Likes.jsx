@@ -7,7 +7,7 @@ import { api } from '../../core/instance/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
-  const userId = useAuthStore((state) => state);
+  const userId = useAuthStore((state) => state.userId);
   const [pharmacies, setPharmacies] = useState([]);
   const [likedPharmacies, setLikedPharmacies] = useState([]);
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
