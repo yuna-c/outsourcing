@@ -40,8 +40,19 @@ const SignUp = () => {
 
       console.log('회원가입 API 응답값: ', response);
       if (response) {
+<<<<<<< HEAD
         alert('회원가입 완료. 로그인 페이지로 이동합니다.');
         navigate('/signIn');
+=======
+        // 자동 로그인
+        // const { accessToken, userId, nickname, avatar } = response;
+        // setAuth(accessToken, nickname, userId, avatar);
+        const { id: userId, nickname } = formData;
+        setAuth(null, nickname, userId);
+
+        alert('회원가입 및 자동 로그인 완료');
+        navigate('/');
+>>>>>>> 32de0e33973d3ae5bc17672c20f9ade30560baf9
       }
     } catch (error) {
       console.error('회원가입 실패: ', error);

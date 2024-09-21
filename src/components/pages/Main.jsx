@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import Article from '../common/ui/Article';
-import Banner from '../common/ui/Banner';
+import Banner from '../common/ui/main/Banner';
 import './../../assets/styles/mainPage.css';
 
-import CurrentPharmaciesSection from '../common/ui/CurrentPharmaciesSection';
-import WeekendPharmaciesSection from '../common/ui/WeekendPharmaciesSection';
+import CurrentPharmaciesSection from '../common/ui/main/CurrentPharmaciesSection';
+import WeekendPharmaciesSection from '../common/ui/main/WeekendPharmaciesSection';
 import { REGIONS } from '../../core/utils/regions';
 import { api } from '../../core/instance/axiosInstance';
+import Youtube from '../common/ui/main/Youtube';
 
 const Main = () => {
   const [data, setData] = useState(null);
@@ -75,6 +76,9 @@ const Main = () => {
 
         {/* 주말 영업하는 약국 */}
         <WeekendPharmaciesSection pharmacies={weekendPharmacies} REGIONS={REGIONS} tag={'주말'} />
+
+        {/* 유트브 */}
+        <div>{/* <Youtube /> */}</div>
       </div>
     </Article>
   );

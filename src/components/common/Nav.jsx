@@ -92,10 +92,15 @@ const Nav = () => {
               <Link to="/myPage" label="마이페이지" />
             </li>
             <li className="flex items-center">
+<<<<<<< HEAD
               <div className="flex items-center pr-1 mx-2">
                 <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full">
+=======
+              <div className="flex items-center pr-1 mr-2">
+                <div className="inline-flex w-8 h-8 mr-2 overflow-hidden border rounded-full border-custom-deepblue">
+>>>>>>> 32de0e33973d3ae5bc17672c20f9ade30560baf9
                   <img
-                    src={avatar || 'https://via.placeholder.com/30'}
+                    src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
                     alt={nickname}
                     className="object-cover w-full h-full"
                   />

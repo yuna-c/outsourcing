@@ -20,14 +20,24 @@ const Profile = () => {
 
   const onHandleUpdateProfile = async () => {
     const formData = new FormData();
+    console.log('currentAvatar=>', currentAvatar);
+    console.log('avatar=>', avatar);
 
     formData.append('nickname', nickname || currentNickname);
-    formData.append('avatar', avatar || currentAvatar);
+    if (avatar) {
+      formData.append('avatar', avatar);
+    }
 
     const response = await updateProfile(formData);
 
     if (response && response.success) {
-      setAuth(accessToken, response.nickname, response.userId, response.avatar);
+      console.log('response =>', response);
+      setAuth(
+        accessToken,
+        response.nickname || currentNickname,
+        response.userId || useAuthStore.getState().userId,
+        response.avatar || currentAvatar
+      );
       navigate('/mypage');
     }
   };
@@ -69,7 +79,7 @@ const Profile = () => {
       <div className="flex justify-end">
         <Button
           onClick={onHandleUpdateProfile}
-          className="w-full p-2 text-white bg-custom-skyblue hover:bg-custom-deepblue"
+          className="w-full p-2 text-white bg-custom-deepblue hover:bg-custom-skyblue"
         >
           변경 하기
         </Button>
