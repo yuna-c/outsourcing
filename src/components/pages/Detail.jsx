@@ -4,7 +4,9 @@ import { api, updateLikes } from '../../core/instance/axiosInstance';
 import PharmacyDetail from '../common/detail/PharmacyDetail'; //약국정보 section
 import CommentSection from '../common/detail/CommentSection'; //댓글 section
 import MapSection from '../common/detail/MapSection'; //지도 section
-import useAuthStore from '../../core/stores/useAuthStore'; //zustand 회원정보
+import useAuthStore from '../../core/stores/useAuthStore'; //zustand 회원정보;
+
+import { IoMdSearch } from 'react-icons/io';
 
 const fetchData = async (id) => {
   try {
@@ -27,7 +29,8 @@ const Detail = () => {
   const navigate = useNavigate();
   const userId = useAuthStore((state) => state.userId); //zustand에서 가져온 사용자정보
   const nickname = useAuthStore((state) => state.nickname); //zustand에서 가져온 닉네임
-  const [pharmacy, setPharmacy] = useState({ comments: [] }); //약국의 상세정보, 리뷰목록
+  const [pharmacy, setPharmacy] = useState({ comments: [] }); //약국의 상세정보,
+  const [isSearchVisible, setIsSearchVisible] = useState(false); // 모바일에서 검색영역 토글
 
   //사용자의 좋아요 상태 업데이트
   useEffect(() => {
@@ -153,8 +156,23 @@ const Detail = () => {
   };
 
   return (
-    <div className="flex items-start justify-center min-h-screen p-8">
-      <div>
+    <article className="relative flex flex-row justify-center h-full m-auto overflow-hidden">
+      {/* 모바일에서 검색영역 토글 버튼 */}
+      <button
+        className="absolute z-40 block w-10 h-10 p-2 mb-4 bg-white border rounded-full border-custom-deepblue bottom-1 right-3 lg:hidden"
+        onClick={() => setIsSearchVisible(!isSearchVisible)}
+      >
+        {isSearchVisible ? (
+          <IoMdSearch className="w-6 h-6 text-custom-deepblue" />
+        ) : (
+          <IoMdSearch className="w-6 h-6 text-custom-skyblue" />
+        )}
+      </button>
+      <div
+        className={`absolute top-0 left-0 right-0 bottom-0 z-30 bg-white p-5 h-full ${
+          isSearchVisible ? 'block' : 'hidden'
+        } lg:relative lg:block lg:w-1/3 xl:w-1/4 lg:h-[calc(100vh-10rem)] `}
+      >
         <PharmacyDetail pharmacy={pharmacy} liked={liked} onLike={handleLike} onGoBack={handleGoBack} />
         <CommentSection
           comments={pharmacy.comments || []}
@@ -171,7 +189,7 @@ const Detail = () => {
         />
       </div>
 
-      <div className="w-2/3 pl-8">
+      <div className="w-full h-full lg:w-9/12">
         <MapSection
           pharmacy={pharmacy}
           selectedPharmacy={selectedPharmacy}
@@ -179,7 +197,7 @@ const Detail = () => {
           onCloseOverlay={handleCloseOverlay}
         />
       </div>
-    </div>
+    </article>
   );
 };
 
