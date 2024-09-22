@@ -5,36 +5,27 @@ import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { fetchPharmacies } from '../../core/api/pharm';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const Likes = () => {
   const userId = useAuthStore((state) => state.userId);
-  const [pharmacies, setPharmacies] = useState([]);
   const [likedPharmacies, setLikedPharmacies] = useState([]);
   const [showDeleteOptions, setShowDeleteOptions] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  // 약국 데이터 불러오기
-  useEffect(() => {
-    const loadPharmacies = async () => {
-      try {
-        const data = await fetchPharmacies();
-        setPharmacies(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPharmacies();
-  }, []);
+  // 약국 데이터 쿼리
+  const {
+    data: pharmacies = [],
+    error,
+    isLoading
+  } = useQuery({
+    queryKey: ['pharmacies'],
+    queryFn: fetchPharmacies
+  });
 
   useEffect(() => {
     const likedPharmaciesStorage = localStorage.getItem(`likedPharmacies_${userId}`);
-    console.log('나오시나요? =>', userId);
 
     if (likedPharmaciesStorage) {
       setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
@@ -52,12 +43,10 @@ const Likes = () => {
     localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikes));
   };
 
-  // 삭제
+  //삭제
   const handleDelete = (pharmacyId) => {
-    const updatedPharmacies = pharmacies.filter((pharmacy) => pharmacy.id !== pharmacyId);
     const updatedLikedPharmacies = likedPharmacies.filter((id) => id !== pharmacyId);
 
-    setPharmacies(updatedPharmacies);
     setLikedPharmacies(updatedLikedPharmacies);
     localStorage.setItem(`likedPharmacies_${userId}`, JSON.stringify(updatedLikedPharmacies));
     setShowDeleteOptions(null);
@@ -70,11 +59,7 @@ const Likes = () => {
 
   // 삭제 버튼 보이기, 숨기기
   const toggleDeleteOptions = (pharmacyId) => {
-    if (showDeleteOptions === pharmacyId) {
-      setShowDeleteOptions(null);
-    } else {
-      setShowDeleteOptions(pharmacyId);
-    }
+    setShowDeleteOptions(showDeleteOptions === pharmacyId ? null : pharmacyId);
   };
 
   // 여백 클릭 시 삭제 버튼 숨기기
@@ -89,7 +74,7 @@ const Likes = () => {
   }, []);
 
   // 로딩 및 에러 상태 처리
-  if (loading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading pharmacies: {error.message}</div>;
 
   return (
@@ -107,9 +92,7 @@ const Likes = () => {
               <li
                 key={pharmacy.id}
                 className="flex items-center justify-between w-full p-4 mb-4 border border-black rounded cursor-pointer"
-                onClick={() => {
-                  navigate(`/detail/${pharmacy.id}`);
-                }} // 클릭 시 디테일 페이지로
+                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 디테일 페이지로
               >
                 <div className="flex gap-4">
                   <button
@@ -119,10 +102,7 @@ const Likes = () => {
                     }}
                     className="mb-auto"
                   >
-                    <IoHeartCircleSharp
-                      size={45}
-                      // className={likedPharmacies.includes(pharmacy.id) ? 'text-black' : 'text-gray-500'}
-                    />
+                    <IoHeartCircleSharp size={45} />
                   </button>
 
                   <div>
