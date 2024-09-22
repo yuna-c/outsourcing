@@ -37,12 +37,12 @@ const Profile = () => {
         await updateCommentsNickname(userId, nickname);
       }
 
-      setAuth(
-        accessToken,
-        response.nickname || currentNickname,
-        response.userId || useAuthStore.getState().userId,
-        response.avatar || currentAvatar
-      );
+      setAuth({
+        accessToken: accessToken,
+        nickname: response.nickname || currentNickname,
+        userId: response.userId || useAuthStore.getState().userId,
+        avatar: response.avatar || currentAvatar
+      });
       navigate('/mypage');
     }
   };
@@ -108,7 +108,7 @@ const Profile = () => {
       <div className="flex justify-end">
         <Button
           onClick={onHandleUpdateProfile}
-          className="w-full h-11 p-2 text-white bg-custom-deepblue hover:bg-custom-skyblue"
+          className="w-full p-2 text-white h-11 bg-custom-deepblue hover:bg-custom-skyblue"
         >
           변경 하기
         </Button>

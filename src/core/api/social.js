@@ -14,7 +14,7 @@ export const loginWithGithub = async () => {
     }
 
     const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-    console.log('세션 데이터:', sessionData);
+    // console.log('세션 데이터:', sessionData);
     if (sessionError) {
       console.error('세션 가져오기 에러:', sessionError.message);
       return { success: false };
@@ -25,7 +25,7 @@ export const loginWithGithub = async () => {
     if (session) {
       const user = session.user;
       const setAuth = useAuthStore.getState().setAuth;
-      console.log('GitHub 로그인 성공:', user);
+      // console.log('GitHub 로그인 성공:', user);
 
       setAuth({
         accessToken: session.access_token,
@@ -34,7 +34,7 @@ export const loginWithGithub = async () => {
         avatar: user.user_metadata.avatar_url
       });
 
-      console.log('setAuth 이후 상태:', useAuthStore.getState());
+      // console.log('setAuth 이후 상태:', useAuthStore.getState());
       return { success: true, accessToken: session.access_token };
     }
 

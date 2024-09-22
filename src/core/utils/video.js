@@ -1,4 +1,4 @@
-export const VIDIOED = [
+export const VIDEOED = [
   {
     title: '탕탕후루후루',
     videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',

@@ -1,5 +1,5 @@
 import { FaGithub } from 'react-icons/fa';
-import { TeamInfo } from '../../core/hooks/useTeamInfo';
+import { TeamInfo } from '../../core/utils/teamInfo';
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="flex items-center justify-center mx-auto mt-6 text-xs text-white sm:text-sm md:px-2">
         {TeamInfo.map((info, index) => {
           return (
-            <div key={index} className="flex items-center space-x-2 mx-4">
+            <div key={index} className="flex items-center mx-4 space-x-2">
               <a
                 href={info.github}
                 target="_blank"
