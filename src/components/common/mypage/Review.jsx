@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import useAuthStore from '../../core/stores/useAuthStore';
-import { api } from '../../core/instance/axiosInstance';
+import useAuthStore from '../../../core/stores/useAuthStore';
+import { api } from '../../../core/instance/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { BiSolidCommentX } from 'react-icons/bi';
 import { BiSolidCommentDetail } from 'react-icons/bi';
-import handleTimeCalculate from '../../core/hooks/useChangeTime';
+import handleTimeCalculate from '../../../core/hooks/useChangeTime';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);

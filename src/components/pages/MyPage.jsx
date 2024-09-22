@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
 
-import Likes from '../common/Likes';
-import Review from '../common/Review';
-import Profile from '../common/Profile';
+import Likes from '../common/mypage/Likes';
+import Review from '../common/mypage/Review';
+import Profile from '../common/mypage/Profile';
 import Article from '../common/ui/Article';
 
 const MyPage = () => {
