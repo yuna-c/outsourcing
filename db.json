@@ -10,7 +10,7 @@
       "address": "서울 강남구 강남대로 478, 1층 (논현동)",
       "latitude": 37.5051069,
       "longitude": 127.0246713,
-      "likes": 15,
+      "likes": 16,
       "comments": [
         {
           "id": 1726920061759,
@@ -32,6 +32,20 @@
           "nickname": "**냐미냐미**",
           "content": "헤헤 미리 알아서 다행이다 ㅎ",
           "createdAt": "2024-09-22T06:39:08.239Z"
+        },
+        {
+          "id": 1726999956389,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "테스트",
+          "createdAt": "2024-09-22T10:12:36.389Z"
+        },
+        {
+          "id": 1726999968108,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
+          "createdAt": "2024-09-22T10:12:48.108Z"
         }
       ]
     },
@@ -45,8 +59,16 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 8,
-      "comments": []
+      "likes": 9,
+      "comments": [
+        {
+          "id": 1727000030991,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "으애앵",
+          "createdAt": "2024-09-22T10:13:50.991Z"
+        }
+      ]
     },
     {
       "id": "3",
@@ -58,7 +80,7 @@
       "address": "서울 강동구 천호대로157길 54(천호동)",
       "latitude": 37.5420009,
       "longitude": 127.1377667,
-      "likes": 5,
+      "likes": 6,
       "comments": [
         {
           "id": 1726920970501,
@@ -79,8 +101,16 @@
       "address": "서울 강동구 올림픽로 781 (암사동)",
       "latitude": 37.5510138,
       "longitude": 127.1275517,
-      "likes": null,
-      "comments": []
+      "likes": 1,
+      "comments": [
+        {
+          "id": 1727000042853,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "으앵으앵우앵",
+          "createdAt": "2024-09-22T10:14:02.853Z"
+        }
+      ]
     },
     {
       "id": "5",
@@ -126,7 +156,8 @@
       "phone": "02-455-4565",
       "address": "서울 광진구 능동로 90, 1층 104-2호(자양동, 더클래식500)",
       "latitude": 37.5387882,
-      "longitude": 127.0711369
+      "longitude": 127.0711369,
+      "likes": null
     },
     {
       "id": "9",
@@ -206,15 +237,7 @@
       "latitude": 37.5080446,
       "longitude": 126.961344,
       "likes": 7,
-      "comments": [
-        {
-          "id": 1726982428648,
-          "userId": "wldndnwl",
-          "nickname": "지우",
-          "content": "우앵",
-          "createdAt": "2024-09-22T05:20:28.648Z"
-        }
-      ]
+      "comments": []
     },
     {
       "id": "16",
@@ -398,15 +421,7 @@
       "latitude": 37.5533356,
       "longitude": 127.0090626,
       "likes": 6,
-      "comments": [
-        {
-          "id": 1726930281983,
-          "userId": "wldndnwl",
-          "nickname": "지우",
-          "content": "아ㅏㅏㅏㅏ",
-          "createdAt": "2024-09-21T14:51:21.983Z"
-        }
-      ]
+      "comments": []
     },
     {
       "id": "32",
@@ -821,7 +836,8 @@
       "phone": "032-421-8642",
       "address": "인천광역시 부평구 열우물로 50 (십정동)",
       "latitude": 37.4726074,
-      "longitude": 126.7008306
+      "longitude": 126.7008306,
+      "likes": null
     },
     {
       "id": "64",
@@ -1204,15 +1220,7 @@
       "latitude": 35.5370149,
       "longitude": 129.3246498,
       "likes": null,
-      "comments": [
-        {
-          "id": 1726937264101,
-          "userId": "wldndnwl",
-          "nickname": "지우",
-          "content": "웅아앙ㅇ",
-          "createdAt": "2024-09-21T16:47:44.101Z"
-        }
-      ]
+      "comments": []
     },
     {
       "id": "98",

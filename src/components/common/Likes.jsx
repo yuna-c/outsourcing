@@ -33,6 +33,8 @@ const Likes = () => {
 
   useEffect(() => {
     const likedPharmaciesStorage = localStorage.getItem(`likedPharmacies_${userId}`);
+    console.log('나오시나요? =>', userId);
+
     if (likedPharmaciesStorage) {
       setLikedPharmacies(JSON.parse(likedPharmaciesStorage));
     } else {
@@ -91,11 +93,15 @@ const Likes = () => {
 
   return (
     <div className="relative">
-      <ul className="flex-wrap items-center justify-between mb-4">
+      <ul className="flex-wrap items-center justify-between mb-4 ">
         {likedPharmacies.length === 0 ? (
-          <div className="flex items-center w-full gap-4 p-3 border border-black rounded">
-            <IoHeartDislikeCircleSharp className="text-4xl md:text-6xl" />
-            <span className="text-base md:text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
+          <div className="flex items-center w-full gap-4 p-3 border shadow-md rounded">
+            <div className="flex items-center justify-center w-10 h-10">
+              {' '}
+              {/* 아이콘 감싸는 div */}
+              <IoHeartDislikeCircleSharp size={45} />
+            </div>
+            <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
           </div>
         ) : (
           pharmacies
@@ -103,12 +109,13 @@ const Likes = () => {
             .map((pharmacy) => (
               <li
                 key={pharmacy.id}
-                className="flex items-center justify-between w-full p-3 md:p-4 mb-4 border border-black rounded cursor-pointer"
+                className="flex items-center justify-between w-full p-4 mb-4 border shadow-md rounded cursor-pointer"
+                // className="flex items-center justify-between w-full p-4 mb-4 border border-black rounded cursor-pointer"
                 onClick={() => {
                   navigate(`/detail/${pharmacy.id}`);
                 }} // 클릭 시 디테일 페이지로
               >
-                <div className="flex gap-3 md:gap-4">
+                <div className="flex gap-4">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -116,13 +123,17 @@ const Likes = () => {
                     }}
                     className="mb-auto"
                   >
-                    <IoHeartCircleSharp className="text-4xl md:text-6xl" />
+                    <div className="flex items-center justify-center w-10 h-10">
+                      {' '}
+                      {/* 아이콘 감싸는 div */}
+                      <IoHeartCircleSharp size={45} />
+                    </div>
                   </button>
 
-                  <div className="flex flex-col gap-2">
-                    <span className="text-base md:text-xl font-bold">{pharmacy.name}</span>
-                    <p className="text-sm md:text-base text-gray-600">{pharmacy.address}</p>
-                    <p className="mt-3 text-base md:text-xl font-bold text-black">{pharmacy.time}</p>
+                  <div>
+                    <span className="text-xl font-bold">{pharmacy.name}</span>
+                    <p className="text-gray-600">{pharmacy.address}</p>
+                    <p className="mt-5 text-xl font-bold text-black">{pharmacy.time}</p>
                   </div>
                 </div>
                 <div className="relative">
@@ -133,16 +144,20 @@ const Likes = () => {
                     }}
                     className="text-black"
                   >
-                    <HiOutlineDotsVertical className="text-lg md:text-xl" />
+                    <div className="flex items-center justify-center w-10 h-10">
+                      {' '}
+                      {/* 아이콘 감싸는 div */}
+                      <HiOutlineDotsVertical size={24} />
+                    </div>
                   </button>
                   {showDeleteOptions === pharmacy.id && (
-                    <div className="absolute z-10 w-20 md:w-24 bg-white border border-gray-300 rounded shadow-lg right-3 top-8">
+                    <div className="absolute z-10 w-24 bg-white border border-gray-300 rounded shadow-lg right-3 top-8">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(pharmacy.id);
                         }}
-                        className="block w-full px-2 md:px-4 py-1 md:py-2 text-left text-black rounded hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-black rounded hover:bg-gray-100"
                       >
                         삭제
                       </button>
@@ -151,7 +166,7 @@ const Likes = () => {
                           e.stopPropagation();
                           handleShare(pharmacy.name);
                         }}
-                        className="block w-full px-2 md:px-4 py-1 md:py-2 text-left text-black rounded hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-black rounded hover:bg-gray-100"
                       >
                         공유
                       </button>
