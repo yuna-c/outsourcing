@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateProfile } from '../../core/api/auth';
-import useAuthStore from '../../core/stores/useAuthStore';
+import { updateProfile } from '../../../core/api/auth';
+import useAuthStore from '../../../core/stores/useAuthStore';
 
-import Button from '../common/ui/Button';
-import Input from '../common/ui/Input';
-import { api } from '../../core/instance/axiosInstance';
+import Button from '../ui/Button';
+import Input from '../ui/Input';
+import { api } from '../../../core/instance/axiosInstance';
 
 const Profile = () => {
   const accessToken = useAuthStore((state) => state.accessToken);

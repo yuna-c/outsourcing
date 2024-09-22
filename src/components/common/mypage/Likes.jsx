@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import useAuthStore from '../../core/stores/useAuthStore';
+import useAuthStore from '../../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { fetchPharmacies } from '../../core/api/pharm';
+import { fetchPharmacies } from '../../../core/api/pharm';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
