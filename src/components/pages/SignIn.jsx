@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { login } from '../../core/api/auth';
-import { loginWithGithub, loginWithKakao } from '../../core/api/social';
-
-import useAuthStore from '../../core/stores/useAuthStore';
-import { useMutation } from '@tanstack/react-query';
+import { useLoginMutation } from '../../core/hooks/useLoginMutation';
+import { useGithubLoginMutation } from '../../core/hooks/useLoginMutation';
+import { useKakaoLoginMutation } from '../../core/hooks/useLoginMutation';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';
@@ -15,9 +11,7 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const SignIn = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ id: '', password: '' });
-  const setAuth = useAuthStore((state) => state.setAuth);
 
   // Kakao SDK를 초기화
   useEffect(() => {
@@ -28,65 +22,21 @@ const SignIn = () => {
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const loginMutation = useMutation({
-    mutationFn: login,
-    onSuccess: (data) => {
-      const { accessToken, userId, nickname, avatar } = data;
-      setAuth(accessToken, userId, nickname, avatar);
-      console.log('로그인 성공');
-      navigate('/');
-    },
-    onError: (error) => {
-      console.error('로그인 실패', error);
-      alert(`로그인 실패: ${error.message}`);
-    }
-  });
+  const loginMutation = useLoginMutation();
+  const githubMutation = useGithubLoginMutation();
+  const kakaoMutation = useKakaoLoginMutation();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     loginMutation.mutate(formData);
   };
 
-  const githubMutation = useMutation({
-    mutationFn: loginWithGithub,
-    onSuccess: (data) => {
-      if (data.success) {
-        console.log('Github 로그인 성공');
-      } else {
-        console.error('GitHub 로그인 실패');
-      }
-    },
-    onError: (error) => {
-      console.error('GitHub 로그인 중 에러 발생', error.message);
-      alert(`GitHub 로그인 중 에러가 발생했습니다: ${error.message}`);
-    }
-  });
-
   const onHandleGithubLogin = async () => {
     githubMutation.mutate();
   };
-
-  const kakaoMutation = useMutation({
-    mutationFn: loginWithKakao,
-    onSuccess: (data) => {
-      if (data.success) {
-        console.log('Kakao 로그인 성공');
-        navigate('/');
-      } else {
-        console.error('Kakao 로그인 실패');
-      }
-    },
-    onError: (error) => {
-      console.error('Kakao 로그인 에러:', error.message);
-      alert('Kakao 로그인 중 에러가 발생했습니다.');
-    }
-  });
 
   const onHandleKakaoLogin = async () => {
     kakaoMutation.mutate();
