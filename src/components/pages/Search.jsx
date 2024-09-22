@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { api, fetchPharmacies } from '../../core/instance/axiosInstance';
+import { api } from '../../core/instance/axiosInstance';
+import { fetchPharmacies } from '../../core/api/pharm';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { SlArrowRight } from 'react-icons/sl';
 import { FaSearch } from 'react-icons/fa';
@@ -32,6 +33,7 @@ const Search = () => {
   // 검색한 약국의 id값을 searchParams로 가져옴
   const searchId = searchParams.get('id');
 
+  //로직변경이 필요하다.
   useEffect(() => {
     const fetchPharmacy = async () => {
       try {
@@ -39,6 +41,7 @@ const Search = () => {
           // searchId가 존재할 때만 API 요청 실행
           const response = await api.get(`pharmacies/${searchId}`);
           const data = response.data;
+          // 아래 두 줄은 필요하다.
           setMapCenter({ lat: data?.latitude, lng: data?.longitude }); // searchParams로 가져온 약국 데이터의 위경도값으로 바꿔줌
           setSelectedPharmacy(data); // 커스텀 오버레이도 유지시킴
         }

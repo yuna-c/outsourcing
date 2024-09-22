@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdModeEdit } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md'; //아이콘 가져오기
-import handleTimeCalculate from '../../../core/stores/changeTime';
+import handleTimeCalculate from '../../../core/hooks/useChangeTime';
 import Button from '../ui/Button';
 
 const CommentSection = ({

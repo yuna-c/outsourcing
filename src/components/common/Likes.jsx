@@ -3,7 +3,7 @@ import useAuthStore from '../../core/stores/useAuthStore';
 import { IoHeartCircleSharp } from 'react-icons/io5';
 import { IoHeartDislikeCircleSharp } from 'react-icons/io5';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { api } from '../../core/instance/axiosInstance';
+import { fetchPharmacies } from '../../core/api/pharm';
 import { useNavigate } from 'react-router-dom';
 
 const Likes = () => {
@@ -18,17 +18,18 @@ const Likes = () => {
 
   // 약국 데이터 불러오기
   useEffect(() => {
-    const fetchPharmacies = async () => {
+    const loadPharmacies = async () => {
       try {
-        const response = await api.get(`/pharmacies`);
-        setPharmacies(response.data);
-        setLoading(false);
+        const data = await fetchPharmacies();
+        setPharmacies(data);
       } catch (error) {
         setError(error);
+      } finally {
         setLoading(false);
       }
     };
-    fetchPharmacies();
+
+    loadPharmacies();
   }, []);
 
   useEffect(() => {
