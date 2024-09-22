@@ -149,7 +149,8 @@
       "phone": "02-993-7378",
       "address": "서울 강북구 삼각산로 71",
       "latitude": 37.6401185,
-      "longitude": 127.0122657
+      "longitude": 127.0122657,
+      "likes": null
     },
     {
       "id": "6",
@@ -448,7 +449,7 @@
       "address": "서울 중구 동호로11길 43(신당동)",
       "latitude": 37.5533356,
       "longitude": 127.0090626,
-      "likes": 6,
+      "likes": 8,
       "comments": []
     },
     {
@@ -626,7 +627,7 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": 3,
+      "likes": 4,
       "comments": [
         {
           "id": 1726951837066,
