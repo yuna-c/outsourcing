@@ -4,7 +4,8 @@ import useAuthStore from '../stores/useAuthStore';
 export const loginWithGithub = async () => {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github'
+      provider: 'github',
+      options: { redirectTo: 'https://outsourcing-gray.vercel.app/' }
       // options: { redirectTo: 'http://localhost:5173', scopes: 'read:user user:email' }
     });
 
