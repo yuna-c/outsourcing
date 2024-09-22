@@ -96,19 +96,16 @@ const Review = () => {
             >
               <div className="flex gap-4 ">
                 <div className="flex items-center justify-center w-10 h-10">
-                  <div className="flex items-center justify-center w-10 h-10">
-                    {' '}
-                    {/* 아이콘 감싸는 div */}
-                    <BiSolidCommentDetail size={35} />
-                  </div>
+                  <BiSolidCommentDetail size={35} />
                 </div>
+
                 <div className="flex flex-col">
                   <span className="text-xl font-bold">{review.nickname}</span>
                   <p className="mt-2 font-medium text-black ">{review.content}</p>
                   <p className="mt-5 text-gray-600 ">{handleTimeCalculate(review.createdAt)}</p>
                 </div>
               </div>
-              <div className="relative flex items-center justify-end">
+              <div className="relative flex items-center justify-end w-10 h-10">
                 <button
                   onClick={(e) => {
                     e.stopPropagation(); // 삭제 버튼을 클릭해도 리스트 클릭 이벤트가 발생하지 않도록
@@ -116,11 +113,7 @@ const Review = () => {
                   }}
                   className="text-black"
                 >
-                  <div className="flex items-center justify-center w-10 h-10">
-                    {' '}
-                    {/* 아이콘 감싸는 div */}
-                    <HiOutlineDotsVertical size={24} />
-                  </div>
+                  <HiOutlineDotsVertical size={24} />
                 </button>
                 {showDeleteOptions === review.id && (
                   <div className="absolute z-10 w-24 bg-white border border-gray-300 rounded shadow-lg right-3 top-8">
