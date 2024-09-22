@@ -19,6 +19,13 @@ const SignIn = () => {
   const [formData, setFormData] = useState({ id: '', password: '' });
   const setAuth = useAuthStore((state) => state.setAuth);
 
+  // Kakao SDK를 초기화
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(import.meta.env.VITE_KAKAOLOGIN_KEY);
+    }
+  }, []);
+
   const onHandleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -60,32 +67,29 @@ const SignIn = () => {
       alert(`GitHub 로그인 중 에러가 발생했습니다: ${error.message}`);
     }
   });
+
   const onHandleGithubLogin = async () => {
     githubMutation.mutate();
   };
 
-  useEffect(() => {
-    if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init(import.meta.env.VITE_KAKAOLOGIN_KEY);
-    }
-  }, []);
-
-  const onHandleKakaoLogin = async () => {
-    try {
-      const { success } = await loginWithKakao();
-
-      if (success) {
+  const kakaoMutation = useMutation({
+    mutationFn: loginWithKakao,
+    onSuccess: (data) => {
+      if (data.success) {
         console.log('Kakao 로그인 성공');
         navigate('/');
-        return;
       } else {
-        console.error('Kakao 로그인에 실패했습니다.');
-        return;
+        console.error('Kakao 로그인 실패');
       }
-    } catch (error) {
+    },
+    onError: (error) => {
       console.error('Kakao 로그인 에러:', error.message);
       alert('Kakao 로그인 중 에러가 발생했습니다.');
     }
+  });
+
+  const onHandleKakaoLogin = async () => {
+    kakaoMutation.mutate();
   };
 
   return (
