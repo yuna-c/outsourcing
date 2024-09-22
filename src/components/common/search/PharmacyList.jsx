@@ -9,7 +9,9 @@ const PharmacyList = ({
   searchParams,
   setSearchParams,
   setSelectedPharmacy,
-  setVisiblePharmaciesCount
+  setVisiblePharmaciesCount,
+  searchType,
+  keyword
 }) => {
   const handleShowMore = () => {
     setVisiblePharmaciesCount((prevCount) => prevCount + 10);

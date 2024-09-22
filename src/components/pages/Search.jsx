@@ -111,6 +111,8 @@ const Search = () => {
           setSearchParams={setSearchParams}
           setSelectedPharmacy={setSelectedPharmacy}
           setVisiblePharmaciesCount={setVisiblePharmaciesCount}
+          searchType={searchType}
+          keyword={keyword}
         />
       </div>
       {/* 지도영역 */}
