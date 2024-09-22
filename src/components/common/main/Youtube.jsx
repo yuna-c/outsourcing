@@ -1,28 +1,76 @@
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+const VideoCard = ({ video }) => (
+  <div className="relative flex flex-col items-start justify-start overflow-hidden border rounded-lg shadow-md youtube_item border-custom-gray">
+    <strong className="py-4 text-[23px] font-extrabold text-center max-w-[350px] truncate px-6">
+      {video.snippet ? video.snippet.title : '제목 없음'}
+    </strong>
+
+    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+      <iframe
+        className="absolute top-0 left-0 w-full h-full border-none"
+        src={`https://www.youtube.com/embed/${video.id ? video.id.videoId : ''}`}
+        frameBorder="0"
+        allowFullScreen
+      ></iframe>
+    </div>
+
+    <div className="inline-block px-2 py-2 content-section">
+      {video.snippet
+        ? video.snippet.description.split(',').map((word, idx) => (
+            <span key={idx} className="mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
+              {word.trim()}
+            </span>
+          ))
+        : video.content.split(',').map((word, idx) => (
+            <span key={idx} className="mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
+              {word.trim()}
+            </span>
+          ))}
+    </div>
+  </div>
+);
 
 const Youtube = () => {
-  // const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
-  // console.log('API Key:', API_KEY);
-  // const apiUrl = 'https://www.googleapis.com/youtube/v3/search';
-  // const search = '약국';
-  // const channelId = 'UC5_8MDCy7gSLCgig10C8MoQ';
-  // const url = `${apiUrl}?q=${encodeURIComponent(search)}&key=${API_KEY}&type=video&part=snippet&channelId=${channelId}`;
+  const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const apiUrl = 'https://www.googleapis.com/youtube/v3/search';
+  const search = '약국';
+  const channelId = 'UC5_8MDCy7gSLCgig10C8MoQ';
 
-  // const [videos, setVideos] = useState([]);
+  const fetchYoutube = async () => {
+    const url = `${apiUrl}?q=${encodeURIComponent(
+      search
+    )}&key=${API_KEY}&type=video&part=snippet&channelId=${channelId}&maxResults=9`;
+    const response = await axios.get(url);
 
-  // const fetchYoutube = async () => {
-  //   try {
-  //     const response = await axios.get(url);
-  //     setVideos(response.data.items);
-  //   } catch (error) {
-  //     console.error('Error fetching YouTube data:', error);
-  //   }
-  // };
+    // API 응답을 콘솔에 출력하여 확인
+    console.log('YouTube API Response:', response.data);
 
-  // useEffect(() => {
-  //   fetchYoutube();
-  // }, []);
+    // items 배열이 존재하고, 최대 9개로 제한하여 반환
+    return response.data.items && Array.isArray(response.data.items)
+      ? response.data.items.slice(0, 9) // 9개로 제한
+      : []; // 없을 경우 빈 배열 반환
+  };
+  // console.log('리렌더링 횟수 확인');
+  const {
+    data: videos = [],
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['youtubeVideos'], // 배열 대신 queryKey를 객체로 전달
+    queryFn: fetchYoutube,
+    refetchInterval: 6 * 60 * 60 * 1000, // 6시간마다 자동으로 데이터 새로고침
+    staleTime: 6 * 60 * 60 * 1000, // 6시간 동안 데이터가 신선하다고 간주
+    retry: 3,
+    select: (data) => {
+      // 데이터가 유효한 경우만 반환
+      if (data && Array.isArray(data)) {
+        return data;
+      }
+      return []; // 유효하지 않은 경우 빈 배열 반환
+    }
+  });
 
   const videoed = [
     {
@@ -57,59 +105,23 @@ const Youtube = () => {
     }
   ];
 
+  if (isLoading) {
+    return <div>로딩 중...</div>; // 로딩 중일 때 표시
+  }
+
+  if (isError) {
+    return <div>오류 발생: 데이터를 가져오는 데 실패했습니다.</div>; // 오류 발생 시 표시
+  }
+
   return (
     <div className="current_pharmacies m-auto md:max-w-7xl md:min-h-[800px] p-[30px] py-[60px] pb-52">
       <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
         약 정보 알아보기
       </h3>
-      {/* <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 youtube_container">
-        {videos.map((video) => (
-          <div
-            key={video.id.videoId}
-            className="youtube_item border border-custom-gray shadow-md min-h-[350px] relative rounded-lg flex flex-col items-center justify-center"
-          >
-            <strong className="py-2 mb-10 text-sm font-bold text-center text-wrap font-custom">
-              {video.snippet.title}
-            </strong>
-            <iframe
-              width="100%"
-              className=""
-              src={`https://www.youtube.com/embed/${video.id.videoId}`}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
-        ))}
-      </div> */}
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3" /*lg:grid-cols-4 xl:grid-cols-5*/>
-        {videoed.map((video, index) => (
-          <div
-            key={index}
-            className="relative flex flex-col items-start justify-start overflow-hidden border rounded-lg shadow-md youtube_item border-custom-gray"
-          >
-            <strong className="py-4 text-[23px] font-extrabold text-center max-w-[350px] truncate px-6">
-              {video.title}
-            </strong>
-
-            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-              {/* 16:9 Aspect Ratio */}
-              <iframe
-                className="absolute top-0 left-0 w-full h-full border-none"
-                src={`https://www.youtube.com/embed/${video.videoId}`}
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-            </div>
-
-            <div className="inline-block px-2 py-2 content-section">
-              {video.content.split(',').map((word, idx) => (
-                <span key={idx} className=" mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
-                  {word.trim()}
-                </span>
-              ))}
-            </div>
-          </div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {(videos.length > 0 ? videos : videoed).map((video, index) => (
+          <VideoCard key={video.id ? video.id.videoId : index} video={video} />
         ))}
       </div>
     </div>
