@@ -83,6 +83,7 @@ const Search = () => {
           <IoMdSearch className="w-6 h-6 text-custom-skyblue" />
         )}
       </button>
+
       <div
         className={`absolute top-0 left-0 right-0 bottom-0 z-30 bg-white p-5 h-full ${
           isSearchVisible ? 'block' : 'hidden'
@@ -92,7 +93,6 @@ const Search = () => {
         <SearchInput
           searchParams={searchParams}
           setSearchParams={setSearchParams}
-          isSearchVisible={isSearchVisible}
           searchType={searchType}
           keyword={keyword}
           setKeyword={setKeyword}
@@ -106,6 +106,8 @@ const Search = () => {
           searchPharmacies={searchPharmacies}
           visiblePharmaciesCount={visiblePharmaciesCount}
           setMapCenter={setMapCenter}
+          isSearchVisible={isSearchVisible}
+          setIsSearchVisible={setIsSearchVisible}
           map={map}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
@@ -115,6 +117,7 @@ const Search = () => {
           keyword={keyword}
         />
       </div>
+
       {/* 지도영역 */}
       <PharmacyMap
         mapCenter={mapCenter}

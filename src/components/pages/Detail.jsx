@@ -72,6 +72,11 @@ const Detail = () => {
 
   //좋아요
   const handleLike = async () => {
+    if (!userId) {
+      alert('로그인 후 좋아요를 할 수 있습니다.');
+      return;
+    }
+
     const newLikeCount = pharmacy.likes + (liked ? -1 : 1);
     setPharmacy((prev) => ({ ...prev, likes: newLikeCount })); //setPharmacy를 사용해 즉시 업데이트(optimistic update)
 
@@ -99,6 +104,11 @@ const Detail = () => {
 
   // 리뷰 추가(db.json에 리뷰가 없는 경우, 새로 생성도함)
   const handleAddComment = async () => {
+    if (!userId) {
+      alert('로그인 후 댓글을 작성할 수 있습니다.');
+      return;
+    }
+
     if (!newComment.trim()) {
       alert('댓글 내용을 입력하세요.');
       return;

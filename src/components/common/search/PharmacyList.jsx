@@ -7,6 +7,7 @@ const PharmacyList = ({
   setMapCenter,
   map,
   searchParams,
+  setIsSearchVisible,
   setSearchParams,
   setSelectedPharmacy,
   setVisiblePharmaciesCount,

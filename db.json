@@ -87,7 +87,7 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 9,
+      "likes": 10,
       "comments": [
         {
           "id": 1727011357655,
@@ -95,6 +95,13 @@
           "nickname": "wldndnwl",
           "content": "하..",
           "createdAt": "2024-09-22T13:22:37.655Z"
+        },
+        {
+          "id": 1727028797087,
+          "userId": null,
+          "nickname": null,
+          "content": "ㅁㄴㅇㅁㄴ",
+          "createdAt": "2024-09-22T18:13:17.087Z"
         }
       ]
     },
@@ -129,7 +136,7 @@
       "address": "서울 강동구 올림픽로 781 (암사동)",
       "latitude": 37.5510138,
       "longitude": 127.1275517,
-      "likes": 1,
+      "likes": 2,
       "comments": [
         {
           "id": 1727000042853,
@@ -635,7 +642,7 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": 4,
+      "likes": 5,
       "comments": [
         {
           "id": 1726951837066,
