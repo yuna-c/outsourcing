@@ -44,12 +44,13 @@ const MyPage = () => {
         <p className="text-xl md:text-2xl font-bold">{nickname || 'Guest'}</p>
       </div>
 
-      <div className="flex justify-around w-full h-12 m-0 mb-10">
+      {/* 반응형 탭 메뉴 */}
+      <div className="flex justify-around w-full m-0 mb-10">
         <button
           onClick={() => handleTabChange('likes')}
           className={`flex-1 px-4 py-2 text-base font-semibold rounded-l-full ${
             currentTab === 'likes' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Likes
         </button>
@@ -57,7 +58,7 @@ const MyPage = () => {
           onClick={() => handleTabChange('review')}
           className={`flex-1 px-4 py-2 text-base font-semibold ${
             currentTab === 'review' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Review
         </button>
@@ -65,7 +66,7 @@ const MyPage = () => {
           onClick={() => handleTabChange('profile')}
           className={`flex-1 px-4 py-2 text-base font-semibold rounded-r-full ${
             currentTab === 'profile' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Profile
         </button>

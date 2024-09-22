@@ -198,7 +198,16 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 7
+      "likes": 7,
+      "comments": [
+        {
+          "id": 1726982428648,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "우앵",
+          "createdAt": "2024-09-22T05:20:28.648Z"
+        }
+      ]
     },
     {
       "id": "16",
