@@ -1,4 +1,4 @@
-import Article from '../common/ui/Article';
+import Article from '../../components/common/ui/Article';
 
 const Sample = () => {
   return (
