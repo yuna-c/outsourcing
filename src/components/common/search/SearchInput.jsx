@@ -4,7 +4,6 @@ import { FaSearch } from 'react-icons/fa';
 const SearchInput = ({
   searchParams,
   setSearchParams,
-  isSearchVisible,
   searchType,
   keyword,
   setKeyword,
