@@ -1,13 +1,14 @@
 import { NavLink as RouterNavLink } from 'react-router-dom';
-const Link = ({ label, className = '', ...props }) => {
+
+const Link = ({ label, children, className = '', ...props }) => {
   return (
     <RouterNavLink
       className={({ isActive }) =>
-        `inline-flex ${className} ${isActive ? 'active text-custom-teal font-bold' : 'text-black'}`
+        `inline-flex ${className} ${isActive ? 'active text-custom-deepblue font-bold' : 'text-black'}`
       }
       {...props}
     >
-      {label}
+      {label || children}
     </RouterNavLink>
   );
 };
