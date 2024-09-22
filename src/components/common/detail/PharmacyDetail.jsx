@@ -18,7 +18,7 @@ const PharmacyDetail = ({ pharmacy, liked, onLike, onGoBack }) => {
           {liked ? (
             <AiFillHeart className="text-3xl text-red-700" />
           ) : (
-            <AiOutlineHeart size={30} className="text-3xl text-custom-gray" />
+            <AiOutlineHeart size={30} className="text-3xl text-gray-300" />
           )}
         </button>
       </div>
