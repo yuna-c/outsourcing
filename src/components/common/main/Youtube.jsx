@@ -58,7 +58,7 @@ const Youtube = () => {
   ];
 
   return (
-    <div className="current_pharmacies m-auto md:max-w-7xl md:min-h-[800px] p-[30px] py-[60px] pb-52">
+    <div className="current_pharmacies m-auto md:w-full md:min-h-[800px] p-[30px] py-[60px] pb-52">
       <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
         약 정보 알아보기
       </h3>

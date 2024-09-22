@@ -45,7 +45,7 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 8,
+      "likes": 9,
       "comments": []
     },
     {
@@ -58,7 +58,7 @@
       "address": "서울 강동구 천호대로157길 54(천호동)",
       "latitude": 37.5420009,
       "longitude": 127.1377667,
-      "likes": 5,
+      "likes": 6,
       "comments": [
         {
           "id": 1726920970501,
@@ -1823,7 +1823,30 @@
       "phone": "043-262-7907",
       "address": "충청북도 청주시 서원구 흥덕로 70",
       "latitude": 36.6416398,
-      "longitude": 127.4725961
+      "longitude": 127.4725961,
+      "comments": [
+        {
+          "id": 1727010387597,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sfddsfdd",
+          "createdAt": "2024-09-22T13:06:27.597Z"
+        },
+        {
+          "id": 1727010389899,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sdfds",
+          "createdAt": "2024-09-22T13:06:29.899Z"
+        },
+        {
+          "id": 1727010390922,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sdfsdf",
+          "createdAt": "2024-09-22T13:06:30.922Z"
+        }
+      ]
     },
     {
       "id": "152",
