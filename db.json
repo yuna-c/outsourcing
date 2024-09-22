@@ -23,7 +23,7 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 10,
+      "likes": 11,
       "comments": [
         {
           "id": 1726935145062,
@@ -31,6 +31,13 @@
           "nickname": "테스트2",
           "content": "리뷰연습수정",
           "createdAt": "2024-09-21T16:12:25.062Z"
+        },
+        {
+          "id": 1727011891401,
+          "userId": "닉네임입니다",
+          "nickname": "test00000",
+          "content": "리뷰",
+          "createdAt": "2024-09-22T13:31:31.401Z"
         }
       ]
     },
@@ -45,7 +52,15 @@
       "latitude": 37.5420009,
       "longitude": 127.1377667,
       "likes": 7,
-      "comments": []
+      "comments": [
+        {
+          "id": 1727010240003,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "가나다",
+          "createdAt": "2024-09-22T13:04:00.003Z"
+        }
+      ]
     },
     {
       "id": "4",
