@@ -27,12 +27,12 @@ export const loginWithGithub = async () => {
       const setAuth = useAuthStore.getState().setAuth;
       console.log('GitHub 로그인 성공:', user);
 
-      setAuth(
-        session.access_token,
-        user.user_metadata.user_name || user.user_metadata.full_name || 'user',
-        user.id,
-        user.user_metadata.avatar_url
-      );
+      setAuth({
+        accessToken: session.access_token,
+        nickname: user.user_metadata.user_name || user.user_metadata.full_name || 'user',
+        userId: user.id,
+        avatar: user.user_metadata.avatar_url
+      });
 
       console.log('setAuth 이후 상태:', useAuthStore.getState());
       return { success: true, accessToken: session.access_token };
@@ -63,7 +63,12 @@ export const loginWithKakao = async () => {
               const { nickname, profile_image } = properties;
 
               const setAuth = useAuthStore.getState().setAuth;
-              setAuth(authObj.access_token, nickname, id, profile_image);
+              setAuth({
+                accessToken: authObj.access_token,
+                nickname: nickname,
+                userId: id,
+                avatar: profile_image
+              });
 
               resolve({ success: true, accessToken: authObj.access_token });
             },

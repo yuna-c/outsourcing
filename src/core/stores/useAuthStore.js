@@ -26,13 +26,13 @@ const useAuthStore = create(
       // 사용자 인증 정보 설정
       // 객체 형태로 받아와야 함! 지금은 순서대로 받고 있어서 무조건 요 순서를 지켜서 넣어줘야함 예..
       // setAuth: ({accessToken, nickname, userId, avatar})
-      setAuth: (accessToken, nickname, userId, avatar) => {
+      setAuth: ({ accessToken, nickname, userId, avatar }) => {
         // console.log('setAuth 호출됨:', { accessToken, nickname, userId, avatar });
         set({
-          accessToken,
-          nickname,
-          userId,
-          avatar,
+          accessToken: accessToken,
+          nickname: nickname,
+          userId: userId,
+          avatar: avatar,
           isLoggedIn: true,
           success: true
         });
