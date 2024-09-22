@@ -8,7 +8,7 @@ import WeekendPharmaciesSection from '../common/main/WeekendPharmaciesSection';
 import './../../assets/styles/main.css';
 import { REGIONS } from '../../core/utils/regions';
 import { useQuery } from '@tanstack/react-query';
-import { fetchPharmacies } from './../../core/instance/axiosInstance';
+import { fetchPharmacies } from '../../core/api/pharm';
 
 const Main = () => {
   const {
@@ -40,7 +40,7 @@ const Main = () => {
         {/* 주말 영업하는 약국 */}
         <MemoizedWeekendPharmacies pharmacies={pharmacies} />
       </div>
-      {/* <Youtube /> */}
+      <Youtube />
     </Article>
   );
 };

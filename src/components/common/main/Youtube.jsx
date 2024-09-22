@@ -74,7 +74,7 @@ const Youtube = () => {
   ];
 
   const renderVideos = (videoList) => (
-    <div className="grid grid-cols-1 gap-10 md:gap-8 lg:gap-14 sm:grid-cols-2 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
       {videoList.map((video, index) => (
         <VideoCard key={video.videoId || index} video={video} />
       ))}
@@ -106,8 +106,8 @@ const Youtube = () => {
   }
 
   return (
-    <div className="current_pharmacies m-auto w-[90%] md:max-w-[90%] md:min-h-[800px] p-[30px] py-[60px] pb-52">
-      <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
+    <div className="video_pharmacies m-auto w-[100%] xl:w-[70%] md:min-h-[800px] p-[30px] py-[60px] pb-52">
+      <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 video_pharmacy_selector_title">
         약 정보 알아보기
       </h3>
       {renderVideos(videos.length > 0 ? videos : videoed)} {/* 정상 데이터 출력 */}

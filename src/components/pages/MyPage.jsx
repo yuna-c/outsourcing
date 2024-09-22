@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
 
-import Likes from '../common/Likes';
-import Review from '../common/Review';
-import Profile from '../common/Profile';
+import Likes from '../common/mypage/Likes';
+import Review from '../common/mypage/Review';
+import Profile from '../common/mypage/Profile';
 import Article from '../common/ui/Article';
 
 const MyPage = () => {
@@ -37,35 +37,36 @@ const MyPage = () => {
         <img
           src={avatar || 'https://github.com/user-attachments/assets/1b04919e-9f84-4816-b8cc-655d0792f60b'}
           alt={nickname}
-          className="object-cover w-48 h-48 mx-auto mb-8 border-4 rounded-full border-custom-deepblue"
+          className="object-cover w-32 h-32 md:w-48 md:h-48 mx-auto mb-8 border-4 rounded-full border-custom-deepblue"
         />
 
         {/* 로그인한 사용자의 닉네임 */}
-        <p className="text-2xl font-bold">{nickname || 'Guest'}</p>
+        <p className="text-xl md:text-2xl font-bold">{nickname || 'Guest'}</p>
       </div>
 
-      <div className="flex justify-center w-full h-12 m-0 mb-10">
+      {/* 반응형 탭 메뉴 */}
+      <div className="flex justify-around w-full m-0 mb-10">
         <button
           onClick={() => handleTabChange('likes')}
-          className={`w-1/2 px-16 py-2 rounded-s-full text-base font-semibold ${
+          className={`flex-1 px-4 py-2 text-base font-semibold rounded-l-full ${
             currentTab === 'likes' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Likes
         </button>
         <button
           onClick={() => handleTabChange('review')}
-          className={`w-1/2 px-16 py-2  text-base font-semibold ${
+          className={`flex-1 px-4 py-2 text-base font-semibold ${
             currentTab === 'review' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Review
         </button>
         <button
           onClick={() => handleTabChange('profile')}
-          className={`w-1/2 px-16 py-2 rounded-r-full text-base font-semibold ${
+          className={`flex-1 px-4 py-2 text-base font-semibold rounded-r-full ${
             currentTab === 'profile' ? 'bg-custom-deepblue text-white' : 'bg-custom-gray'
-          }`}
+          } md:h-12 h-10`}
         >
           Profile
         </button>
