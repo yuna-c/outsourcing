@@ -29,7 +29,7 @@
         {
           "id": 1726987148239,
           "userId": "냐미냐미*",
-          "nickname": "**냐미냐미**",
+          "nickname": "탕탕후루후루",
           "content": "헤헤 미리 알아서 다행이다 ㅎ",
           "createdAt": "2024-09-22T06:39:08.239Z"
         },
@@ -161,7 +161,16 @@
       "address": "서울 강서구 공항대로 41길 52",
       "latitude": 37.5600424,
       "longitude": 126.8462313,
-      "likes": null
+      "likes": 1,
+      "comments": [
+        {
+          "id": 1727023393159,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "그럼 제가 선배 맘에",
+          "createdAt": "2024-09-22T16:43:13.159Z"
+        }
+      ]
     },
     {
       "id": "7",
@@ -1398,21 +1407,21 @@
         {
           "id": 1726900393699,
           "userId": "냐미냐미*",
-          "nickname": "yuna-c",
+          "nickname": "탕탕후루후루",
           "content": "ㅇㄴㄹㄴㅇㄹ",
           "createdAt": "2024-09-21T06:33:13.699Z"
         },
         {
           "id": 1726900396050,
           "userId": "냐미냐미*",
-          "nickname": "yuna-c",
+          "nickname": "탕탕후루후루",
           "content": "ㅁㄴㄻㄴㄹ",
           "createdAt": "2024-09-21T06:33:16.050Z"
         },
         {
           "id": 1726900397259,
           "userId": "냐미냐미*",
-          "nickname": "yuna-c",
+          "nickname": "탕탕후루후루",
           "content": "ㅁㄴㄻㄹ",
           "createdAt": "2024-09-21T06:33:17.259Z"
         }

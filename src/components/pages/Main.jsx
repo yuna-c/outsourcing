@@ -34,7 +34,7 @@ const Main = () => {
   return (
     <Article className="!-mt-2 overflow-x-hidden mx-auto main">
       <Banner pharmacies={pharmacies} />
-      <div>
+      <div className="pharmacies">
         {/* 지금 영업중인 약국 */}
         <MemoizedCurrentPharmacies pharmacies={pharmacies} />
         {/* 주말 영업하는 약국 */}
