@@ -40,7 +40,7 @@ const Main = () => {
         {/* 주말 영업하는 약국 */}
         <MemoizedWeekendPharmacies pharmacies={pharmacies} />
       </div>
-      <Youtube />
+      {/* <Youtube /> */}
     </Article>
   );
 };
