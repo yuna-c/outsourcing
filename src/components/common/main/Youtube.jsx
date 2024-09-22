@@ -66,9 +66,9 @@ const Youtube = () => {
       <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 video_pharmacy_selector_title">
         약 정보 알아보기
       </h3>
-      {/* {renderVideos(videos.length > 0 ? videos : VIDEOED)} */}
+      {renderVideos(videos.length > 0 ? videos : VIDEOED)}
       {/* 정상 데이터 출력 */}
-      {renderVideos(VIDEOED)}
+      {/* {renderVideos(VIDEOED)} */}
     </div>
   );
 };

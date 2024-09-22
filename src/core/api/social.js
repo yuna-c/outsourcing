@@ -5,7 +5,7 @@ export const loginWithGithub = async () => {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
-      options: { redirectTo: 'https://outsourcing-gray.vercel.app/auth/callback' }
+      options: { redirectTo: import.meta.env.VITE_GITHUB_LOGIN_URL }
       // options: { redirectTo: 'http://localhost:5173', scopes: 'read:user user:email' }
     });
 
