@@ -1,6 +1,8 @@
 import { register } from '../../core/api/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+
 import useFormValidation from '../../core/hooks/useFormValidation';
 
 import Article from '../common/ui/Article';
@@ -8,40 +10,30 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    password: '',
-    nickname: '',
-    id: ''
-  });
-
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ password: '', nickname: '', id: '' });
   const { validateForm } = useFormValidation();
 
-  const navigate = useNavigate();
-
-  const onHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm(formData)) return;
-
-    try {
-      const response = await register(formData);
-      // console.log('회원가입 API 응답값: ', response);
-
-      if (response) {
-        console.log('회원가입 완료. 로그인 페이지로 이동합니다.');
-        navigate('/signIn');
-      }
-    } catch (error) {
+  const registerMutation = useMutation({
+    mutationFn: register,
+    onSuccess: () => {
+      alert('회원가입 완료하였습니다. 로그인 페이지로 이동합니다.');
+      navigate('/signIn');
+    },
+    onError: (error) => {
       console.error('회원가입 실패: ', error);
       alert('회원가입에 실패했습니다. 다시 시도해 주세요.');
     }
+  });
+
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm(formData)) return;
+    registerMutation.mutate(formData);
   };
 
   const onHandleChange = ({ target: { name, value } }) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
