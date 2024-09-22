@@ -5,5 +5,6 @@ export const auth = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: 'https://likeable-piquant-jasmine.glitch.me'
+  // http://localhost:5000
 });
