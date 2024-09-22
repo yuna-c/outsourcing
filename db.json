@@ -13,13 +13,6 @@
       "likes": 18,
       "comments": [
         {
-<<<<<<< HEAD
-          "id": 1727025576934,
-          "userId": "닉네임입니다",
-          "nickname": "test00000",
-          "content": "이 약국 너무 좋아요",
-          "createdAt": "2024-09-22T17:19:36.934Z"
-=======
           "id": 1726920061759,
           "userId": "test6789",
           "nickname": "test6789",
@@ -81,7 +74,13 @@
           "nickname": "ㅇㄴㄹㅈㄷㄻㅁ",
           "content": "ㄴㅇㄹㅇㄴㄹㅇㄴ\nㅎㅁㅇㄴㅍㅅㅎㄹ,ㄷㄱ러,ㅡㅎㄴㅇ람ㅇㅀ파ㅠㅡㅍㅎㅈ쇼ㅓㅇ르9ㅐ7ㅅ횩ㄷㅁㄴㅇ,ㄱㅊ랑ㄹ휴ㅛ,.;ㄹ,ㅎ.ㅑㅍㅇㄹ/,ㅊ;ㄺ\nㅍ[ㅈㄱㄷ]ㅔㅣ[ㅇㅊㅀ",
           "createdAt": "2024-09-22T14:58:17.198Z"
->>>>>>> efe288e9a5c87cddd163a569dba8e2565c7089a9
+        },
+        {
+          "id": 1727029443168,
+          "userId": "ㅇㄴㄹㄴㅇ",
+          "nickname": "진짜야? 잘수있어?",
+          "content": "dfsdfdsf",
+          "createdAt": "2024-09-22T18:24:03.168Z"
         }
       ]
     },
@@ -95,21 +94,21 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 11,
+      "likes": 10,
       "comments": [
         {
-          "id": 1726935145062,
-          "userId": "test9876",
-          "nickname": "테스트2",
-          "content": "리뷰연습수정",
-          "createdAt": "2024-09-21T16:12:25.062Z"
+          "id": 1727011357655,
+          "userId": "지우",
+          "nickname": "wldndnwl",
+          "content": "하..",
+          "createdAt": "2024-09-22T13:22:37.655Z"
         },
         {
-          "id": 1727025590780,
-          "userId": "닉네임입니다",
-          "nickname": "test00000",
-          "content": "이 약국은 너무 멀어요!",
-          "createdAt": "2024-09-22T17:19:50.780Z"
+          "id": 1727028797087,
+          "userId": null,
+          "nickname": null,
+          "content": "ㅁㄴㅇㅁㄴ",
+          "createdAt": "2024-09-22T18:13:17.087Z"
         }
       ]
     },
@@ -123,14 +122,14 @@
       "address": "서울 강동구 천호대로157길 54(천호동)",
       "latitude": 37.5420009,
       "longitude": 127.1377667,
-      "likes": 7,
+      "likes": 6,
       "comments": [
         {
-          "id": 1727010240003,
+          "id": 1726920970501,
           "userId": "test6789",
           "nickname": "test6789",
-          "content": "가나다",
-          "createdAt": "2024-09-22T13:04:00.003Z"
+          "content": "이제되나?",
+          "createdAt": "2024-09-21T12:16:10.501Z"
         }
       ]
     },
@@ -145,7 +144,15 @@
       "latitude": 37.5510138,
       "longitude": 127.1275517,
       "likes": 2,
-      "comments": []
+      "comments": [
+        {
+          "id": 1727000042853,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "으앵으앵우앵",
+          "createdAt": "2024-09-22T10:14:02.853Z"
+        }
+      ]
     },
     {
       "id": "5",
@@ -200,7 +207,8 @@
       "phone": "02-455-4565",
       "address": "서울 광진구 능동로 90, 1층 104-2호(자양동, 더클래식500)",
       "latitude": 37.5387882,
-      "longitude": 127.0711369
+      "longitude": 127.0711369,
+      "likes": null
     },
     {
       "id": "9",
@@ -279,7 +287,8 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 7
+      "likes": 7,
+      "comments": []
     },
     {
       "id": "16",
@@ -463,15 +472,7 @@
       "latitude": 37.5533356,
       "longitude": 127.0090626,
       "likes": 6,
-      "comments": [
-        {
-          "id": 1726930281983,
-          "userId": "wldndnwl",
-          "nickname": "지우",
-          "content": "아ㅏㅏㅏㅏ",
-          "createdAt": "2024-09-21T14:51:21.983Z"
-        }
-      ]
+      "comments": []
     },
     {
       "id": "32",
@@ -648,7 +649,7 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": 5,
+      "likes": 6,
       "comments": [
         {
           "id": 1726951837066,
@@ -720,7 +721,15 @@
       "address": "부산광역시 해운대구 센텀2로 10",
       "latitude": 35.1678021,
       "longitude": 129.1315549,
-      "comments": [],
+      "comments": [
+        {
+          "id": 1726921711885,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "리뷰작성연습",
+          "createdAt": "2024-09-21T12:28:31.885Z"
+        }
+      ],
       "likes": 0
     },
     {
@@ -799,9 +808,7 @@
       "phone": "053-768-3679",
       "address": "대구광역시 수성구 희망로 175 대구시약사회관",
       "latitude": 35.8468835,
-      "longitude": 128.6179993,
-      "likes": null,
-      "comments": []
+      "longitude": 128.6179993
     },
     {
       "id": "57",
@@ -880,7 +887,8 @@
       "phone": "032-421-8642",
       "address": "인천광역시 부평구 열우물로 50 (십정동)",
       "latitude": 37.4726074,
-      "longitude": 126.7008306
+      "longitude": 126.7008306,
+      "likes": null
     },
     {
       "id": "64",
@@ -1263,15 +1271,7 @@
       "latitude": 35.5370149,
       "longitude": 129.3246498,
       "likes": null,
-      "comments": [
-        {
-          "id": 1726937264101,
-          "userId": "wldndnwl",
-          "nickname": "지우",
-          "content": "웅아앙ㅇ",
-          "createdAt": "2024-09-21T16:47:44.101Z"
-        }
-      ]
+      "comments": []
     },
     {
       "id": "98",
@@ -1891,7 +1891,30 @@
       "phone": "043-262-7907",
       "address": "충청북도 청주시 서원구 흥덕로 70",
       "latitude": 36.6416398,
-      "longitude": 127.4725961
+      "longitude": 127.4725961,
+      "comments": [
+        {
+          "id": 1727010387597,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sfddsfdd",
+          "createdAt": "2024-09-22T13:06:27.597Z"
+        },
+        {
+          "id": 1727010389899,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sdfds",
+          "createdAt": "2024-09-22T13:06:29.899Z"
+        },
+        {
+          "id": 1727010390922,
+          "userId": "ㅇㄹㄴㅇㄹㅇㄴ",
+          "nickname": "닉네임을 바꿔보아요",
+          "content": "sdfsdf",
+          "createdAt": "2024-09-22T13:06:30.922Z"
+        }
+      ]
     },
     {
       "id": "152",
