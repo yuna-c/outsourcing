@@ -188,7 +188,7 @@ const Search = () => {
           </button>
         </div>
 
-        <ul className="flex flex-col gap-3 xl:h-[680px] md:h-[80%] h-[70%] overflow-auto">
+        <ul className="flex flex-col gap-3 xl:h-[550px] md:h-[80%] h-[70%] overflow-auto">
           {searchPharmacies.length === 0 && (
             <li>
               <p>
