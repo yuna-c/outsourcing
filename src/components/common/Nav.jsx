@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../../core/hooks/useLogoutMutation';
+
 import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
-import { useMutation } from '@tanstack/react-query';
 
 import psmLogo from '../../assets/images/psm_logo.png';
 import { HiMenu, HiX } from 'react-icons/hi';
@@ -12,30 +12,12 @@ import Button from './ui/Button';
 import Link from './ui/Link';
 
 const Nav = () => {
-  const navigate = useNavigate();
   const navRef = useRef(null);
-
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const avatar = useAuthStore((state) => state.avatar);
   const nickname = useAuthStore((state) => state.nickname);
-  const clearAuth = useAuthStore((state) => state.clearAuth);
-
   const { isOpen, isScrolled, setIsOpen, toggleIsOpen, setIsScrolled } = useNavStore();
-
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      // 서버 통신 없이 클라이언트 상태만 처리
-      clearAuth();
-    },
-    onSuccess: () => {
-      navigate('/');
-      setIsOpen(false);
-    },
-    onError: (error) => {
-      console.error('로그아웃 중 에러 발생:', error);
-      alert('로그아웃 실패. 다시 시도해 주세요.');
-    }
-  });
+  const logoutMutation = useLogoutMutation(setIsOpen);
 
   const onHandleLogout = () => {
     logoutMutation.mutate();
@@ -43,9 +25,7 @@ const Nav = () => {
 
   const handleClickOutside = useCallback(
     (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
+      if (navRef.current && !navRef.current.contains(e.target)) setIsOpen(false);
     },
     [setIsOpen]
   );
