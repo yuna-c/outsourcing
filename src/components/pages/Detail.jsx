@@ -99,6 +99,11 @@ const Detail = () => {
 
   // 리뷰 추가(db.json에 리뷰가 없는 경우, 새로 생성도함)
   const handleAddComment = async () => {
+    if (!userId) {
+      alert('로그인 후 댓글을 작성할 수 있습니다.');
+      return;
+    }
+
     if (!newComment.trim()) {
       alert('댓글 내용을 입력하세요.');
       return;
