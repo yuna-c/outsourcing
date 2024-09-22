@@ -86,7 +86,7 @@ const Profile = () => {
           maxLength={10}
           onChange={(e) => setNickname(e.target.value)}
           placeholder={currentNickname || '변경하실 닉네임을 입력해 주세요'}
-          className={'border border-black rounded'}
+          className={'border border-custom-gray rounded'}
         />
       </fieldset>
 
@@ -101,7 +101,7 @@ const Profile = () => {
           id="avatar"
           onChange={(e) => setAvatar(e.target.files[0])}
           placeholder="업로드 할 파일을 선택해 주세요"
-          className={'border border-black rounded'}
+          className={'border border-custom-gray rounded'}
         />
       </fieldset>
 
