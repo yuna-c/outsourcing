@@ -168,6 +168,7 @@ const Detail = () => {
           <IoMdSearch className="w-6 h-6 text-custom-skyblue" />
         )}
       </button>
+
       <div
         className={`absolute top-0 left-0 right-0 bottom-0 z-30 bg-white p-5 h-full ${
           isSearchVisible ? 'block' : 'hidden'
