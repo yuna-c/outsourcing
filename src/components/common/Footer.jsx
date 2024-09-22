@@ -1,5 +1,5 @@
 import { FaGithub } from 'react-icons/fa';
-import { TeamInfo } from '../../core/hooks/teamInfo';
+import { TeamInfo } from '../../core/hooks/useTeamInfo';
 
 const Footer = () => {
   return (
