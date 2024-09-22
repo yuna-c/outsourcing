@@ -53,8 +53,26 @@ const Likes = () => {
   };
 
   // 공유 기능 (단순히 콘솔 로그로 시뮬레이션)
-  const handleShare = (pharmacyName) => {
-    alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+  // const handleShare = (pharmacyName) => {
+  //   alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+  // };
+
+  const handleShare = (pharmacyId, pharmacyName) => {
+    const shareLink = `${window.location.origin}/detail/${pharmacyId}`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(shareLink)
+        .then(() => {
+          alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+        })
+        .catch((error) => {
+          console.error('링크 복사 실패:', error);
+          alert('링크 복사 실패');
+        });
+    } else {
+      alert('localhost, https만 지원 가능합니다.');
+    }
   };
 
   // 삭제 버튼 보이기, 숨기기
@@ -124,7 +142,7 @@ const Likes = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleShare(pharmacy.name);
+                          handleShare(pharmacy.id, pharmacy.name);
                         }}
                         className="block w-full px-4 py-2 text-left text-black rounded hover:bg-gray-100"
                       >
