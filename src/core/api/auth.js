@@ -7,8 +7,10 @@ export const register = async (formData) => {
 
     return response.data;
   } catch (error) {
-    console.log(error?.response?.data.message);
-    alert(error?.response?.data.message);
+    const errorMessage = error?.response?.data?.message || '회원가입 중 오류가 발생했습니다.';
+    console.log(errorMessage);
+    alert(errorMessage);
+    throw new Error(errorMessage);
   }
 };
 
