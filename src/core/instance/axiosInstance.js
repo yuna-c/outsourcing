@@ -5,6 +5,5 @@ export const auth = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: 'https://likeable-piquant-jasmine.glitch.me'
-  // http://localhost:5000
+  baseURL: import.meta.env.MODE === 'development' ? 'http://localhost:5000' : import.meta.env.VITE_API_BASE_URL
 });
