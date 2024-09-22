@@ -5,6 +5,28 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-custom;
+/* 전역 */
+@layer base {
+  body {
+    @apply font-custom;
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root,
+  .wrap,
+  .main {
+    height: 100%;
+  }
+
+  .main {
+    min-height: calc(100vh - 7.5rem) !important;
+  }
+
+  .map {
+    pointer-events: auto;
+  }
 }

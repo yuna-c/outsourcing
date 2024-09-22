@@ -80,11 +80,11 @@ const Nav = () => {
         } md:opacity-100 md:max-h-full overflow-hidden`}
         onClick={() => setIsOpen(false)}
       >
+        <li className="mx-3">
+          <Link to="/search" label="약국" />
+        </li>
         {isLoggedIn ? (
           <>
-            <li className="mx-3">
-              <Link to="/sample" label="샘플" />
-            </li>
             <li className="mx-3">
               <Link to="/myPage" label="마이페이지" />
             </li>

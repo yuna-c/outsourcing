@@ -29,28 +29,32 @@ const SignIn = () => {
     e.preventDefault();
 
     const { accessToken, userId, nickname, avatar } = await login(formData);
-    console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
+    // console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
 
     if (accessToken) {
       setAuth(accessToken, nickname, userId, avatar);
-      alert('로그인 성공');
+      console.log('로그인 성공');
       navigate('/');
+
+      return;
     } else {
-      alert('로그인 실패');
+      console.error('로그인 실패');
+      alert(`로그인 실패: ${error.message}`);
+
+      return;
     }
   };
 
   const onHandleGithubLogin = async () => {
     try {
       const { success } = await loginWithGithub();
-      console.log('GitHub 로그인 결과:', success);
+      // console.log('GitHub 로그인 결과:', success);
 
       if (success) {
-        alert('GitHub 로그인 성공');
+        console.log('GitHub 로그인 성공');
         return;
       } else {
-        alert('GitHub 로그인 실패');
-        console.log('로그인 실패 시 세부 로그를 확인하세요.');
+        console.error('GitHub 로그인 실패');
         return;
       }
     } catch (error) {
@@ -71,10 +75,12 @@ const SignIn = () => {
       const { success } = await loginWithKakao();
 
       if (success) {
-        alert('Kakao 로그인 성공');
+        console.log('Kakao 로그인 성공');
         navigate('/');
+        return;
       } else {
-        alert('Kakao 로그인에 실패했습니다.');
+        console.error('Kakao 로그인에 실패했습니다.');
+        return;
       }
     } catch (error) {
       console.error('Kakao 로그인 에러:', error.message);

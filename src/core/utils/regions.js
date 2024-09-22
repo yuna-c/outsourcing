@@ -1,4 +1,5 @@
 export const REGIONS = [
+  '전국',
   '서울',
   '부산',
   '대구',

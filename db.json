@@ -183,7 +183,7 @@
       "address": "서울 동작구 흑석로 108",
       "latitude": 37.5080446,
       "longitude": 126.961344,
-      "likes": 6
+      "likes": 7
     },
     {
       "id": "16",
@@ -207,7 +207,8 @@
       "address": "서울 마포구 양화로 72, 118호(서교동)",
       "latitude": 37.5507977,
       "longitude": 126.9167221,
-      "likes": null
+      "likes": 1,
+      "comments": []
     },
     {
       "id": "18",
@@ -320,7 +321,7 @@
       "address": "서울 용산구 새창로12길 12(도원동)",
       "latitude": 37.5392671,
       "longitude": 126.9575191,
-      "likes": 6
+      "likes": 7
     },
     {
       "id": "28",
@@ -366,7 +367,15 @@
       "latitude": 37.5533356,
       "longitude": 127.0090626,
       "likes": 6,
-      "comments": []
+      "comments": [
+        {
+          "id": 1726930281983,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "아ㅏㅏㅏㅏ",
+          "createdAt": "2024-09-21T14:51:21.983Z"
+        }
+      ]
     },
     {
       "id": "32",
@@ -378,7 +387,16 @@
       "address": "서울 중랑구 면목로 421",
       "latitude": 37.5896475,
       "longitude": 127.0870515,
-      "likes": 2
+      "likes": 3,
+      "comments": [
+        {
+          "id": 1726938094090,
+          "userId": "qkrwnsgh",
+          "nickname": "주노준호",
+          "content": "안녕하세요? 준호입니다 :3\n준호입니다?",
+          "createdAt": "2024-09-21T17:01:34.090Z"
+        }
+      ]
     },
     {
       "id": "33",
@@ -534,7 +552,44 @@
       "address": "부산광역시 영도구 상리로 25(동삼동)",
       "latitude": 35.0848303,
       "longitude": 129.0676483,
-      "likes": 1
+      "likes": 3,
+      "comments": [
+        {
+          "id": 1726951837066,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "오 다됬나?",
+          "createdAt": "2024-09-21T20:50:37.066Z"
+        },
+        {
+          "id": 1726951840210,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "잘있어요~",
+          "createdAt": "2024-09-21T20:50:40.210Z"
+        },
+        {
+          "id": 1726951846105,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "다시 만나요",
+          "createdAt": "2024-09-21T20:50:46.105Z"
+        },
+        {
+          "id": 1726955611145,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "안녕하세요~",
+          "createdAt": "2024-09-21T21:53:31.145Z"
+        },
+        {
+          "id": 1726955615599,
+          "userId": "ecb9ba02-0030-42c9-90fc-2e0f5f163e39",
+          "nickname": "yuna-c",
+          "content": "반가워요~",
+          "createdAt": "2024-09-21T21:53:35.599Z"
+        }
+      ]
     },
     {
       "id": "47",
@@ -1109,7 +1164,16 @@
       "address": "울산광역시 남구 삼산로 159-1",
       "latitude": 35.5370149,
       "longitude": 129.3246498,
-      "likes": null
+      "likes": null,
+      "comments": [
+        {
+          "id": 1726937264101,
+          "userId": "wldndnwl",
+          "nickname": "지우",
+          "content": "웅아앙ㅇ",
+          "createdAt": "2024-09-21T16:47:44.101Z"
+        }
+      ]
     },
     {
       "id": "98",
@@ -1253,7 +1317,31 @@
       "phone": "070-7576-2443",
       "address": "경기도 남양주시 다산순환로 350, 케이비 골든타워 106호",
       "latitude": 37.6257753,
-      "longitude": 127.1553694
+      "longitude": 127.1553694,
+      "likes": null,
+      "comments": [
+        {
+          "id": 1726900393699,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅇㄴㄹㄴㅇㄹ",
+          "createdAt": "2024-09-21T06:33:13.699Z"
+        },
+        {
+          "id": 1726900396050,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅁㄴㄻㄴㄹ",
+          "createdAt": "2024-09-21T06:33:16.050Z"
+        },
+        {
+          "id": 1726900397259,
+          "userId": "냐미냐미*",
+          "nickname": "yuna-c",
+          "content": "ㅁㄴㄻㄹ",
+          "createdAt": "2024-09-21T06:33:17.259Z"
+        }
+      ]
     },
     {
       "id": "111",
@@ -1628,7 +1716,7 @@
       "address": "경기도 화성시 우정읍 기아자동차 555",
       "latitude": 37.0807123,
       "longitude": 126.7888689,
-      "likes": null
+      "likes": 1
     },
     {
       "id": "145",
