@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
-import { login } from '../../core/api/auth';
-import { useNavigate } from 'react-router-dom';
-
-import useAuthStore from '../../core/stores/useAuthStore';
-import { loginWithGithub, loginWithKakao } from '../../core/api/social';
+import { useLoginMutation, useGithubLoginMutation, useKakaoLoginMutation } from '../../core/hooks/useLoginMutation';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';
@@ -13,79 +9,34 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const SignIn = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ id: '', password: '' });
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const loginMutation = useLoginMutation();
+  const githubMutation = useGithubLoginMutation();
+  const kakaoMutation = useKakaoLoginMutation();
 
-  const onHandleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const onHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { accessToken, userId, nickname, avatar } = await login(formData);
-    // console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
-
-    if (accessToken) {
-      setAuth(accessToken, nickname, userId, avatar);
-      console.log('로그인 성공');
-      navigate('/');
-
-      return;
-    } else {
-      console.error('로그인 실패');
-      alert(`로그인 실패: ${error.message}`);
-
-      return;
-    }
-  };
-
-  const onHandleGithubLogin = async () => {
-    try {
-      const { success } = await loginWithGithub();
-      // console.log('GitHub 로그인 결과:', success);
-
-      if (success) {
-        console.log('GitHub 로그인 성공');
-        return;
-      } else {
-        console.error('GitHub 로그인 실패');
-        return;
-      }
-    } catch (error) {
-      console.error('GitHub 로그인 중 에러 발생:', error.message);
-      console.log('전체 에러 정보:', error);
-      alert(`GitHub 로그인 중 에러가 발생했습니다: ${error.message}`);
-    }
-  };
-
+  // Kakao SDK를 초기화
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(import.meta.env.VITE_KAKAOLOGIN_KEY);
     }
   }, []);
 
-  const onHandleKakaoLogin = async () => {
-    try {
-      const { success } = await loginWithKakao();
+  const onHandleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-      if (success) {
-        console.log('Kakao 로그인 성공');
-        navigate('/');
-        return;
-      } else {
-        console.error('Kakao 로그인에 실패했습니다.');
-        return;
-      }
-    } catch (error) {
-      console.error('Kakao 로그인 에러:', error.message);
-      alert('Kakao 로그인 중 에러가 발생했습니다.');
-    }
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    loginMutation.mutate(formData);
+  };
+
+  const onHandleGithubLogin = async () => {
+    githubMutation.mutate();
+  };
+
+  const onHandleKakaoLogin = async () => {
+    kakaoMutation.mutate();
   };
 
   return (
