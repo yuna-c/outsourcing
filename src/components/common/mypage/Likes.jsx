@@ -96,7 +96,7 @@ const Likes = () => {
 
                   <div className="flex flex-col ">
                     <span className="text-xl font-bold">{pharmacy.name}</span>
-                    <p className="text-base  text-gray-600 truncate md">{pharmacy.address}</p>
+                    <p className="text-base  text-gray-600">{pharmacy.address}</p>
                     <p className="mt-5 text-xl font-bold text-black ">{pharmacy.time}</p>
                   </div>
                 </div>
