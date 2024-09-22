@@ -80,41 +80,30 @@ const Likes = () => {
   return (
     <div className="relative">
       <ul className="flex-wrap items-center justify-between mb-4 ">
-        {likedPharmacies.length === 0 ? (
-          <div className="flex items-center w-full gap-4 p-3 border border-black rounded">
-            <IoHeartDislikeCircleSharp size={45} />
-            <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
-          </div>
-        ) : (
+        {likedPharmacies.length > 0 ? (
           pharmacies
             .filter((pharmacy) => likedPharmacies.includes(pharmacy.id))
             .map((pharmacy) => (
               <li
                 key={pharmacy.id}
-                className="flex items-center justify-between w-full p-4 mb-4 border border-black rounded cursor-pointer"
-                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 디테일 페이지로
+                className="flex items-center justify-between w-full p-4 mb-4 border shadow-md rounded cursor-pointer"
+                onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 약국 디테일 페이지로 이동
               >
                 <div className="flex gap-4">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLike(pharmacy.id);
-                    }}
-                    className="mb-auto"
-                  >
+                  <div className="flex items-center justify-center w-10 h-10">
                     <IoHeartCircleSharp size={45} />
-                  </button>
+                  </div>
 
-                  <div>
+                  <div className="flex flex-col ">
                     <span className="text-xl font-bold">{pharmacy.name}</span>
-                    <p className="text-gray-600">{pharmacy.address}</p>
-                    <p className="mt-5 text-xl font-bold text-black">{pharmacy.time}</p>
+                    <p className="text-base  text-gray-600">{pharmacy.address}</p>
+                    <p className="mt-5 text-xl font-bold text-black ">{pharmacy.time}</p>
                   </div>
                 </div>
-                <div className="relative">
+                <div className="relative flex items-center justify-end w-10 h-10">
                   <button
                     onClick={(e) => {
-                      e.stopPropagation();
+                      e.stopPropagation(); // 삭제 버튼을 클릭해도 리스트 클릭 이벤트가 발생하지 않도록
                       toggleDeleteOptions(pharmacy.id);
                     }}
                     className="text-black"
@@ -146,6 +135,13 @@ const Likes = () => {
                 </div>
               </li>
             ))
+        ) : (
+          <div className="flex items-center w-full gap-4 p-3 border shadow-md rounded">
+            <div className="flex items-center justify-center w-10 h-10">
+              <IoHeartDislikeCircleSharp size={45} />
+            </div>
+            <span className="text-xl font-bold">아직 좋아요한 약국이 없어요!</span>
+          </div>
         )}
       </ul>
     </div>
