@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { login } from '../../core/api/auth';
 import { useNavigate } from 'react-router-dom';
 
-import useAuthStore from '../../core/stores/useAuthStore';
+import { login } from '../../core/api/auth';
 import { loginWithGithub, loginWithKakao } from '../../core/api/social';
+
+import useAuthStore from '../../core/stores/useAuthStore';
+import { useMutation } from '@tanstack/react-query';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';
@@ -25,24 +27,23 @@ const SignIn = () => {
     }));
   };
 
-  const onHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { accessToken, userId, nickname, avatar } = await login(formData);
-    // console.log('로그인 API 응답값: ', accessToken, userId, nickname, avatar);
-
-    if (accessToken) {
-      setAuth(accessToken, nickname, userId, avatar);
+  const loginMutation = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      const { accessToken, userId, nickname, avatar } = data;
+      setAuth(accessToken, userId, nickname, avatar);
       console.log('로그인 성공');
       navigate('/');
-
-      return;
-    } else {
-      console.error('로그인 실패');
+    },
+    onError: (error) => {
+      console.error('로그인 실패', error);
       alert(`로그인 실패: ${error.message}`);
-
-      return;
     }
+  });
+
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    loginMutation.mutate(formData);
   };
 
   const onHandleGithubLogin = async () => {
