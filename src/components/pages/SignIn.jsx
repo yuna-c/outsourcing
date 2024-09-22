@@ -10,6 +10,9 @@ import Input from '../common/ui/Input';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({ id: '', password: '' });
+  const loginMutation = useLoginMutation();
+  const githubMutation = useGithubLoginMutation();
+  const kakaoMutation = useKakaoLoginMutation();
 
   // Kakao SDK를 초기화
   useEffect(() => {
@@ -22,10 +25,6 @@ const SignIn = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const loginMutation = useLoginMutation();
-  const githubMutation = useGithubLoginMutation();
-  const kakaoMutation = useKakaoLoginMutation();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();

@@ -1,8 +1,5 @@
-import { register } from '../../core/api/auth';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-
+import { useRegisterMutation } from '../../core/hooks/useRegisterMutation';
 import useFormValidation from '../../core/hooks/useFormValidation';
 
 import Article from '../common/ui/Article';
@@ -10,21 +7,9 @@ import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ password: '', nickname: '', id: '' });
   const { validateForm } = useFormValidation();
-
-  const registerMutation = useMutation({
-    mutationFn: register,
-    onSuccess: () => {
-      alert('회원가입 완료하였습니다. 로그인 페이지로 이동합니다.');
-      navigate('/signIn');
-    },
-    onError: (error) => {
-      console.error('회원가입 실패: ', error);
-      alert('회원가입에 실패했습니다. 다시 시도해 주세요.');
-    }
-  });
+  const registerMutation = useRegisterMutation();
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
