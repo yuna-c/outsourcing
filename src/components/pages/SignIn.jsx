@@ -46,23 +46,22 @@ const SignIn = () => {
     loginMutation.mutate(formData);
   };
 
-  const onHandleGithubLogin = async () => {
-    try {
-      const { success } = await loginWithGithub();
-      // console.log('GitHub 로그인 결과:', success);
-
-      if (success) {
-        console.log('GitHub 로그인 성공');
-        return;
+  const githubMutation = useMutation({
+    mutationFn: loginWithGithub,
+    onSuccess: (data) => {
+      if (data.success) {
+        console.log('Github 로그인 성공');
       } else {
         console.error('GitHub 로그인 실패');
-        return;
       }
-    } catch (error) {
-      console.error('GitHub 로그인 중 에러 발생:', error.message);
-      console.log('전체 에러 정보:', error);
+    },
+    onError: (error) => {
+      console.error('GitHub 로그인 중 에러 발생', error.message);
       alert(`GitHub 로그인 중 에러가 발생했습니다: ${error.message}`);
     }
+  });
+  const onHandleGithubLogin = async () => {
+    githubMutation.mutate();
   };
 
   useEffect(() => {
