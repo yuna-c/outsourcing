@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLoginMutation } from '../../core/hooks/useLoginMutation';
-import { useGithubLoginMutation } from '../../core/hooks/useLoginMutation';
-import { useKakaoLoginMutation } from '../../core/hooks/useLoginMutation';
+import { useLoginMutation, useGithubLoginMutation, useKakaoLoginMutation } from '../../core/hooks/useLoginMutation';
 
 import { FaGithub } from 'react-icons/fa6';
 import { RiKakaoTalkFill } from 'react-icons/ri';
