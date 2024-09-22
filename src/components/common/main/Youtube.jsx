@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { VIDIOED } from '../../../core/utils/video';
 
 const VideoCard = ({ video }) => (
   <div className="relative flex flex-col items-start justify-start overflow-hidden border rounded-lg shadow-md youtube_item border-custom-gray">
-    <strong className="py-4 text-[23px] font-extrabold text-center max-w-[350px] truncate px-6">
+    <strong className="py-6 text-[21px] font-bold text-center max-w-[350px] md:max-w-full truncate px-6">
       {video.snippet ? video.snippet.title : '제목 없음'}
     </strong>
 
@@ -16,19 +17,15 @@ const VideoCard = ({ video }) => (
       ></iframe>
     </div>
 
-    <div className="inline-block px-2 py-2 content-section">
-      {video.snippet
-        ? video.snippet.description.split(',').map((word, idx) => (
-            <span key={idx} className="mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
+    {video.snippet
+      ? video.snippet.description.split(',').map((word, idx) => (
+          <div key={idx} className="inline-block px-2 py-6 content-section">
+            <span className="px-2 py-1 mx-1 my-4 text-base font-bold leading-loose rounded-full inl bg-custom-gray">
               {word.trim()}
             </span>
-          ))
-        : video.content.split(',').map((word, idx) => (
-            <span key={idx} className="mx-1 bg-[#C3EBFF] px-2 py-1 rounded-full font-bold text-sm my-4">
-              {word.trim()}
-            </span>
-          ))}
-    </div>
+          </div>
+        ))
+      : ''}
   </div>
 );
 
@@ -72,39 +69,6 @@ const Youtube = () => {
     }
   });
 
-  const videoed = [
-    {
-      title: '탕탕후루후루',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '약 정보 , 약은 무엇인가, 약 알고싶어?'
-    },
-    {
-      title: '대풍약국 어때요?',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '올바른 약 정보 '
-    },
-    {
-      title: '탕탕후루후루',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '약 정보, 돗자리 깔고 맥주 먹을까?'
-    },
-    {
-      title: '탕탕후루후루탕탕후루후루!',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '약 정보'
-    },
-    {
-      title: '검단아라태평양약국',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '약 정보'
-    },
-    {
-      title: '검단아라태평양약국',
-      videoId: 'DzZbAekBLes?si=lQ3rTiKTonroX_q7',
-      content: '약 정보'
-    }
-  ];
-
   if (isLoading) {
     return <div>로딩 중...</div>; // 로딩 중일 때 표시
   }
@@ -114,13 +78,13 @@ const Youtube = () => {
   }
 
   return (
-    <div className="current_pharmacies m-auto md:max-w-7xl md:min-h-[800px] p-[30px] py-[60px] pb-52">
-      <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
+    <div className="video_pharmacies m-auto w-[100%] xl:w-[70%] md:min-h-[800px] p-[30px] py-[60px] pb-52">
+      <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 video_pharmacy_selector_title">
         약 정보 알아보기
       </h3>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {(videos.length > 0 ? videos : videoed).map((video, index) => (
+      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
+        {(videos.length > 0 ? videos : VIDIOED).map((video, index) => (
           <VideoCard key={video.id ? video.id.videoId : index} video={video} />
         ))}
       </div>

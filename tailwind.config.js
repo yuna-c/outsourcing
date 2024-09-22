@@ -23,6 +23,9 @@ export default {
           'sans-serif'
         ]
       },
+      screens: {
+        xs: { min: '350px' }
+      },
       colors: {
         'custom-gray': '#ededed',
         'custom-deepblue': '#074173',

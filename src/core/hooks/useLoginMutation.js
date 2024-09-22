@@ -16,7 +16,14 @@ export const useLoginMutation = () => {
 
     onSuccess: (data) => {
       const { accessToken, userId, nickname, avatar } = data;
-      setAuth(accessToken, userId, nickname, avatar);
+
+      // 객체 형태로
+      setAuth({
+        accessToken: accessToken,
+        userId: userId,
+        nickname: nickname,
+        avatar: avatar
+      });
       console.log('로그인 성공');
       navigate('/');
     },
