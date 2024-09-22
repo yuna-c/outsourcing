@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { api, updateLikes } from '../../core/instance/axiosInstance';
+import { api } from '../../core/instance/axiosInstance';
+import { updateLikes } from '../../core/api/like';
 import PharmacyDetail from '../common/detail/PharmacyDetail'; //약국정보 section
 import CommentSection from '../common/detail/CommentSection'; //댓글 section
 import MapSection from '../common/detail/MapSection'; //지도 section
