@@ -24,7 +24,7 @@ export default {
         ]
       },
       screens: {
-        xs: { min: '350px' }
+        xs: { min: '420px' }
       },
       colors: {
         'custom-gray': '#ededed',
