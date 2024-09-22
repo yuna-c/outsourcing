@@ -10,11 +10,7 @@
       "address": "서울 강남구 강남대로 478, 1층 (논현동)",
       "latitude": 37.5051069,
       "longitude": 127.0246713,
-<<<<<<< HEAD
-      "likes": 16,
-      "comments": []
-=======
-      "likes": 15,
+      "likes": 14,
       "comments": [
         {
           "id": 1726920061759,
@@ -29,16 +25,8 @@
           "nickname": "test6789",
           "content": "이제되나?",
           "createdAt": "2024-09-21T12:13:03.147Z"
-        },
-        {
-          "id": 1726987148239,
-          "userId": "냐미냐미*",
-          "nickname": "**냐미냐미**",
-          "content": "헤헤 미리 알아서 다행이다 ㅎ",
-          "createdAt": "2024-09-22T06:39:08.239Z"
         }
       ]
->>>>>>> 8dcd49558ee02c82ae3be51dc9fb4aaae804de61
     },
     {
       "id": "2",
@@ -50,16 +38,8 @@
       "address": "서울 강남구 강남대로118번길 51, 103호 (논현동)",
       "latitude": 37.5196301,
       "longitude": 127.0381309,
-      "likes": 9,
-      "comments": [
-        {
-          "id": 1726935145062,
-          "userId": "test9876",
-          "nickname": "테스트2",
-          "content": "리뷰연습수정",
-          "createdAt": "2024-09-21T16:12:25.062Z"
-        }
-      ]
+      "likes": 8,
+      "comments": []
     },
     {
       "id": "3",
@@ -72,7 +52,15 @@
       "latitude": 37.5420009,
       "longitude": 127.1377667,
       "likes": 5,
-      "comments": []
+      "comments": [
+        {
+          "id": 1726920970501,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "이제되나?",
+          "createdAt": "2024-09-21T12:16:10.501Z"
+        }
+      ]
     },
     {
       "id": "4",
@@ -651,7 +639,15 @@
       "address": "부산광역시 해운대구 센텀2로 10",
       "latitude": 35.1678021,
       "longitude": 129.1315549,
-      "comments": [],
+      "comments": [
+        {
+          "id": 1726921711885,
+          "userId": "test6789",
+          "nickname": "test6789",
+          "content": "리뷰작성연습",
+          "createdAt": "2024-09-21T12:28:31.885Z"
+        }
+      ],
       "likes": 0
     },
     {

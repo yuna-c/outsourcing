@@ -4,7 +4,7 @@ import { MdArrowBackIos } from 'react-icons/md';
 
 const PharmacyDetail = ({ pharmacy, liked, onLike, onGoBack }) => {
   return (
-    <div className="p-5 mt-0 mb-4 border rounded-lg shadow-md lg:mt-12">
+    <div className="p-5 mt-0 mb-4 border rounded-lg shadow-md">
       {/* p-4 mb-6 bg-white rounded-lg shadow-md */}
       <div className="flex items-center justify-start my-2 text-4xl font-bold">
         {/* 뒤로가기 */}

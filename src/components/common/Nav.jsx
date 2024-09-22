@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../../core/hooks/useLogoutMutation';
+
 import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
 
@@ -11,27 +12,20 @@ import Button from './ui/Button';
 import Link from './ui/Link';
 
 const Nav = () => {
-  const navigate = useNavigate();
   const navRef = useRef(null);
-
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const avatar = useAuthStore((state) => state.avatar);
   const nickname = useAuthStore((state) => state.nickname);
-  const clearAuth = useAuthStore((state) => state.clearAuth);
-
   const { isOpen, isScrolled, setIsOpen, toggleIsOpen, setIsScrolled } = useNavStore();
+  const logoutMutation = useLogoutMutation(setIsOpen);
 
-  const onHandleLogout = useCallback(() => {
-    clearAuth();
-    navigate('/');
-    setIsOpen(false);
-  }, [clearAuth, navigate, setIsOpen]);
+  const onHandleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   const handleClickOutside = useCallback(
     (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
+      if (navRef.current && !navRef.current.contains(e.target)) setIsOpen(false);
     },
     [setIsOpen]
   );
@@ -39,18 +33,12 @@ const Nav = () => {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     document.addEventListener('scroll', handleScroll);
-
-    return () => {
-      document.removeEventListener('scroll', handleScroll);
-    };
+    return () => document.removeEventListener('scroll', handleScroll);
   }, [setIsScrolled]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [handleClickOutside]);
 
   return (

@@ -18,7 +18,7 @@ const CommentSection = ({
   onDeleteComment
 }) => {
   return (
-    <div className="p-5 pb-4 mt-0 overflow-auto border rounded-lg shadow-md h-[50%] md:h-[70%] xl:h-[80%] md:mt-4">
+    <div className="p-5 pb-4 mt-0 overflow-auto border rounded-lg shadow-md h-[50%] md:h-[70%] xl:h-[82%] md:mt-4">
       <div>
         <h3 className="mb-2 text-lg font-bold">리뷰</h3>
 
