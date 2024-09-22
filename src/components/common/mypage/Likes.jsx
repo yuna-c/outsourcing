@@ -53,8 +53,26 @@ const Likes = () => {
   };
 
   // 공유 기능 (단순히 콘솔 로그로 시뮬레이션)
-  const handleShare = (pharmacyName) => {
-    alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+  // const handleShare = (pharmacyName) => {
+  //   alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+  // };
+
+  const handleShare = (pharmacyId, pharmacyName) => {
+    const shareLink = `${window.location.origin}/detail/${pharmacyId}`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(shareLink)
+        .then(() => {
+          alert(`${pharmacyName} 공유 링크가 복사되었습니다!`);
+        })
+        .catch((error) => {
+          console.error('링크 복사 실패:', error);
+          alert('링크 복사 실패');
+        });
+    } else {
+      alert('localhost, https만 지원 가능합니다.');
+    }
   };
 
   // 삭제 버튼 보이기, 숨기기
@@ -86,7 +104,7 @@ const Likes = () => {
             .map((pharmacy) => (
               <li
                 key={pharmacy.id}
-                className="flex items-center justify-between w-full p-4 mb-4 border shadow-md rounded cursor-pointer"
+                className="flex items-center justify-between w-full p-4 mb-4 border rounded shadow-md cursor-pointer"
                 onClick={() => navigate(`/detail/${pharmacy.id}`)} // 클릭 시 약국 디테일 페이지로 이동
               >
                 <div className="flex gap-4">
@@ -96,7 +114,7 @@ const Likes = () => {
 
                   <div className="flex flex-col ">
                     <span className="text-xl font-bold">{pharmacy.name}</span>
-                    <p className="text-base  text-gray-600">{pharmacy.address}</p>
+                    <p className="text-base text-gray-600">{pharmacy.address}</p>
                     <p className="mt-5 text-xl font-bold text-black ">{pharmacy.time}</p>
                   </div>
                 </div>
@@ -124,7 +142,7 @@ const Likes = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleShare(pharmacy.name);
+                          handleShare(pharmacy.id, pharmacy.name);
                         }}
                         className="block w-full px-4 py-2 text-left text-black rounded hover:bg-gray-100"
                       >
@@ -136,7 +154,7 @@ const Likes = () => {
               </li>
             ))
         ) : (
-          <div className="flex items-center w-full gap-4 p-3 border shadow-md rounded">
+          <div className="flex items-center w-full gap-4 p-3 border rounded shadow-md">
             <div className="flex items-center justify-center w-10 h-10">
               <IoHeartDislikeCircleSharp size={45} />
             </div>
