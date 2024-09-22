@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../core/stores/useAuthStore';
 import useNavStore from '../../core/stores/useNavStore';
+import { useMutation } from '@tanstack/react-query';
 
 import psmLogo from '../../assets/images/psm_logo.png';
 import { HiMenu, HiX } from 'react-icons/hi';
@@ -21,11 +22,24 @@ const Nav = () => {
 
   const { isOpen, isScrolled, setIsOpen, toggleIsOpen, setIsScrolled } = useNavStore();
 
-  const onHandleLogout = useCallback(() => {
-    clearAuth();
-    navigate('/');
-    setIsOpen(false);
-  }, [clearAuth, navigate, setIsOpen]);
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      // 서버 통신 없이 클라이언트 상태만 처리
+      clearAuth();
+    },
+    onSuccess: () => {
+      navigate('/');
+      setIsOpen(false);
+    },
+    onError: (error) => {
+      console.error('로그아웃 중 에러 발생:', error);
+      alert('로그아웃 실패. 다시 시도해 주세요.');
+    }
+  });
+
+  const onHandleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   const handleClickOutside = useCallback(
     (e) => {
@@ -39,18 +53,12 @@ const Nav = () => {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     document.addEventListener('scroll', handleScroll);
-
-    return () => {
-      document.removeEventListener('scroll', handleScroll);
-    };
+    return () => document.removeEventListener('scroll', handleScroll);
   }, [setIsScrolled]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [handleClickOutside]);
 
   return (
