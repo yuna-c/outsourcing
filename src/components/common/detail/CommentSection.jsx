@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdModeEdit } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md'; //아이콘 가져오기
+import handleTimeCalculate from '../../../core/hooks/useChangeTime';
 import Button from '../ui/Button';
 
 const CommentSection = ({
@@ -59,7 +60,7 @@ const CommentSection = ({
                   <p className="font-bold">{comment.nickname}</p>
                   <p>{comment.content}</p>
                   {/* 리뷰 작성 시간 */}
-                  <p className="text-sm text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
+                  <p className="text-sm text-gray-500">{handleTimeCalculate(comment.createdAt)}</p>
                   {/* 유저가 일치할 경우 아래 수정, 삭제버튼 표시 */}
                   {comment.userId === userId && (
                     <div className="flex justify-end space-x-1">
