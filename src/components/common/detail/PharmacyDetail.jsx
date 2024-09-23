@@ -12,7 +12,7 @@ const PharmacyDetail = ({ pharmacy, liked, onLike, onGoBack }) => {
           <MdArrowBackIos className="mr-2 text-2xl text-custom-deepblue" />
         </button>
         {/* 약국이름 */}
-        <span className="mr-auto text-[23px] font-extrabold">{pharmacy.name}</span>
+        <span className="mr-auto !text-lg font-bold">{pharmacy.name}</span>
         {/* 좋아요 */}
         <button onClick={onLike}>
           {liked ? (
@@ -22,7 +22,7 @@ const PharmacyDetail = ({ pharmacy, liked, onLike, onGoBack }) => {
           )}
         </button>
       </div>
-      <div className="text-[15px] leading-5 block px-3">
+      <div className="text-[15px] leading-5 block pl-3">
         <p>주소 : {pharmacy.address}</p>
         <p>전화번호 : {pharmacy.phone}</p>
         <p>영업시간 : {pharmacy.time}</p>
