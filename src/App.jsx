@@ -4,9 +4,8 @@ import Router from './components/shared/Router';
 function App() {
   return (
     <div className="relative mx-auto wrap">
-      {/* <UserProvider> */}
+      {/* <UserProvider></UserProvider> */}
       <Router />
-      {/* </UserProvider> */}
     </div>
   );
 }

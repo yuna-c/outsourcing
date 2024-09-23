@@ -20,6 +20,7 @@ const fetchData = async (id) => {
 
 const Detail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState(false); //좋아요
@@ -27,7 +28,6 @@ const Detail = () => {
   const [newComment, setNewComment] = useState(''); //새로운 리뷰
   const [editingCommentId, setEditingCommentId] = useState(null); //수정중인 리뷰 id
   const [editingCommentContent, setEditingCommentContent] = useState(''); //수정중인 리뷰 내용
-  const navigate = useNavigate();
   const userId = useAuthStore((state) => state.userId); //zustand에서 가져온 사용자정보
   const nickname = useAuthStore((state) => state.nickname); //zustand에서 가져온 닉네임
   const [pharmacy, setPharmacy] = useState({ comments: [] }); //약국의 상세정보,
@@ -74,6 +74,7 @@ const Detail = () => {
   const handleLike = async () => {
     if (!userId) {
       alert('로그인 후 좋아요를 할 수 있습니다.');
+      navigate('/signIn');
       return;
     }
 
@@ -106,6 +107,7 @@ const Detail = () => {
   const handleAddComment = async () => {
     if (!userId) {
       alert('로그인 후 댓글을 작성할 수 있습니다.');
+      navigate('/signIn');
       return;
     }
 
