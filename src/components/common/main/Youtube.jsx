@@ -43,7 +43,7 @@ const Youtube = () => {
         <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
           약 정보 알아보기
         </h3>
-        <p className="pb-16 text-xl text-center">데이터 로딩중...</p>
+        {/* <p className="pb-16 text-xl text-center">데이터 로딩중...</p> */}
         {renderVideos(VIDEOED)} {/* Loading 상태에서도 videoed 렌더링 */}
       </div>
     );
@@ -55,7 +55,7 @@ const Youtube = () => {
         <h3 className="text-[2rem] md:text-[2.3rem] font-extrabold text-center mb-10 md:mb-16 md:p-[40px] p-0 pharmacy_selector_title">
           약 정보 알아보기
         </h3>
-        <p className="pb-16 text-xl text-center">데이터 에러가 발생했습니다.</p>
+        {/* <p className="pb-16 text-xl text-center">데이터 에러가 발생했습니다.</p> */}
         {renderVideos(VIDEOED)} {/* Error 상태에서도 videoed 렌더링 */}
       </div>
     );
