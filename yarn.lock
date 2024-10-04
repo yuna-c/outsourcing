@@ -547,10 +547,7 @@
 
 "@supabase/node-fetch@2.6.15", "@supabase/node-fetch@^2.6.14":
   version "2.6.15"
-
-  resolved "https://registry.yarnpkg.com/@supabase/node-fetch/-/node-fetch-2.6.15.tgz#731271430e276983191930816303c44159e7226c"
   resolved "https://registry.npmjs.org/@supabase/node-fetch/-/node-fetch-2.6.15.tgz"
-
   integrity sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==
   dependencies:
     whatwg-url "^5.0.0"
@@ -2626,6 +2623,11 @@ react-kakao-maps-sdk@^1.1.27:
   dependencies:
     "@babel/runtime" "^7.22.15"
     kakao.maps.d.ts "^0.1.39"
+
+react-lite-youtube-embed@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-lite-youtube-embed/-/react-lite-youtube-embed-2.4.0.tgz#1f56a12be1061d50431444d52d836bd09a1283a2"
+  integrity sha512-Xo6cM1zPlROvvM97JkqQIoXstlQDaC4+DawmM7BB7Hh1cXrkBHEGq1iJlQxBTUWAUklmpcC7ph7qg7CztXtABQ==
 
 react-refresh@^0.14.2:
   version "0.14.2"
