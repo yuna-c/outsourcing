@@ -1,5 +1,4 @@
-import { FaGithub } from 'react-icons/fa';
-import { RiKakaoTalkFill } from 'react-icons/ri';
+import { FaGithub, RiKakaoTalkFill } from '../../../core/constans/Icons';
 
 const COMMON_BUTTON_STYLE =
   'text-white border px-3 py-1 text-base border-transparent rounded-full overflow-hidden bg-custom-deepblue hover:bg-custom-skyblue hover:border-custom-skyblue hover:text-white transition-none';
