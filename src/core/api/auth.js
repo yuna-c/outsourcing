@@ -1,10 +1,10 @@
 import { auth } from '../instance/axiosInstance';
+import useAuthStore from '../stores/useAuthStore';
 
 // 회원가입
 export const register = async (formData) => {
   try {
     const response = await auth.post(`/register`, formData);
-
     return response.data;
   } catch (error) {
     const errorMessage = error?.response?.data?.message || '회원가입 중 오류가 발생했습니다.';
@@ -18,9 +18,12 @@ export const register = async (formData) => {
 export const login = async (formData) => {
   try {
     const response = await auth.post(`/login?expiresIn=60m`, formData);
-
-    localStorage.setItem('accessToken', response.data.accessToken);
-
+    useAuthStore.getState().setAuth({
+      accessToken: response.data.accessToken,
+      nickname: response.data.nickname,
+      userId: response.data.userId,
+      avatar: response.data.avatar
+    });
     return response.data;
   } catch (error) {
     console.log(error?.response?.data.message);
@@ -30,7 +33,7 @@ export const login = async (formData) => {
 
 // 회원정보 가져오기
 export const getUserInfo = async () => {
-  const accessToken = localStorage.getItem('accessToken');
+  const { accessToken } = useAuthStore.getState();
   if (accessToken) {
     try {
       const response = await auth.get(`/user`, {
@@ -43,15 +46,14 @@ export const getUserInfo = async () => {
     } catch (error) {
       console.log(error?.response?.data.message);
       alert('accessToken이 만료되었습니다');
-      localStorage.clear();
+      useAuthStore.getState().clearAuth();
     }
   }
 };
 
-// 업데이트 프로필
+// 프로필 업데이트
 export const updateProfile = async (formData) => {
-  console.log(formData);
-  const accessToken = localStorage.getItem('accessToken');
+  const { accessToken } = useAuthStore.getState();
   if (accessToken) {
     try {
       const response = await auth.patch(`/profile`, formData, {
@@ -64,7 +66,7 @@ export const updateProfile = async (formData) => {
     } catch (error) {
       console.log(error?.response?.data.message);
       alert(error?.response?.data.message);
-      localStorage.clear();
+      useAuthStore.getState().clearAuth();
     }
   }
 };
