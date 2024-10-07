@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoginMutation, useGithubLoginMutation, useKakaoLoginMutation } from '../../core/hooks/useLoginMutation';
 
-import { FaGithub } from 'react-icons/fa6';
-import { RiKakaoTalkFill } from 'react-icons/ri';
-
 import Article from '../common/ui/Article';
 import Button from '../common/ui/Button';
 import Input from '../common/ui/Input';
@@ -71,18 +68,12 @@ const SignIn = () => {
       </form>
 
       <div className="flex flex-col w-full mt-2 sm:mt-5 sm:flex-row">
-        <Button onClick={onHandleGithubLogin} className="w-full py-2 mb-2 mr-2 sm:mb-0">
-          <span className="flex items-center justify-center">
-            <FaGithub className="mr-2 -mt-[2px] text-lg" />
-            GitHub 로그인
-          </span>
+        <Button variant="github" onClick={onHandleGithubLogin} className="w-full py-2 mb-2 mr-2 sm:mb-0">
+          GitHub 로그인
         </Button>
 
-        <Button onClick={onHandleKakaoLogin} className="w-full py-2">
-          <span className="flex items-center justify-center">
-            <RiKakaoTalkFill className="mr-2 -mt-[2px] text-lg" />
-            Kakao 로그인
-          </span>
+        <Button variant="kakao" onClick={onHandleKakaoLogin} className="w-full py-2">
+          Kakao 로그인
         </Button>
       </div>
     </Article>

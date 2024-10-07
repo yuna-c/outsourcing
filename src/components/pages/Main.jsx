@@ -9,6 +9,7 @@ import './../../assets/styles/main.css';
 import { REGIONS } from '../../core/utils/regions';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPharmacies } from '../../core/api/pharm';
+import { FIVE_MINUTES, TEN_MINUTES } from '../../core/constans';
 
 const Main = () => {
   const {
@@ -20,8 +21,8 @@ const Main = () => {
     queryFn: fetchPharmacies,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000, // 5분 동안 데이터를 신선하게 유지
-    cacheTime: 10 * 60 * 1000 // 10분 동안 캐시 데이터 유지
+    staleTime: FIVE_MINUTES,
+    cacheTime: TEN_MINUTES
   });
 
   if (isPending) {
