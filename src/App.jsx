@@ -1,11 +1,7 @@
 import Router from './components/shared/Router';
 
 function App() {
-  return (
-    <>
-      <Router />
-    </>
-  );
+  return <Router />;
 }
 
 export default App;
