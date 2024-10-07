@@ -9,7 +9,7 @@ const Layout = () => {
   const isMyPage = location.pathname === '/myPage' || location.pathname === '/myPage?tab=review';
 
   return (
-    <>
+    <div className="relative mx-auto wrap">
       <Header />
       <main className={`relative p-0 bg-white md:bg-white main ${isMainPage || isMyPage ? 'h-auto' : 'h-full'}`}>
         <section
@@ -22,7 +22,7 @@ const Layout = () => {
       </main>
       <Footer />
       <ScrollTop />
-    </>
+    </div>
   );
 };
 
