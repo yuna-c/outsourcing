@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import Layout from '../common/Layout';
-
 import Main from './../pages/Main';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -9,7 +7,6 @@ import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
 import Search from '../pages/Search';
 import NotFound from '../pages/NotFound';
-
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
 

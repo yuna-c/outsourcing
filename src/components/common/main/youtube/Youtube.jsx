@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import VideoCard from './VideoCard';
-import { VIDEOED } from '../../../core/utils/video';
+import { VIDEOED } from '../../../../core/utils/video';
 
 const Youtube = () => {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;

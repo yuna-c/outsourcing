@@ -3,8 +3,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { MdArrowForwardIos } from 'react-icons/md';
 
-import Button from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
+import { ONE_SECOND } from '../../../../core/constants';
+import Button from '../../ui/Button';
 
 function SliderResponse({ pharmacies = [], tag }) {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function SliderResponse({ pharmacies = [], tag }) {
     dots: false,
     infinite: pharmacies.length > 1, // 약국 수가 2개 이상일 때 무한 스크롤 활성화
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 3 * ONE_SECOND,
     speed: 500,
     slidesToShow: Math.min(pharmacies.length, 3), // 최대 3개, 아이템 수에 따라 조정
     slidesToScroll: Math.min(pharmacies.length, 3), // 최대 3개, 아이템 수에 따라 조정

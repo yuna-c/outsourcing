@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
 
 const VideoCard = ({ video }) => (
   <div className="relative flex flex-col items-start justify-start overflow-hidden border shadow-md rounded-xl youtube_item border-custom-gray">
@@ -7,12 +8,13 @@ const VideoCard = ({ video }) => (
     </strong>
 
     <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-      <iframe
+      <ReactPlayer
         className="absolute top-0 left-0 w-full h-full border-none rounded-xl"
-        src={`https://www.youtube.com/embed/${video.id ? video.id.videoId : ''}`}
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
+        url={`https://www.youtube.com/watch?v=${video.id ? video.id.videoId : ''}`}
+        width="100%"
+        height="100%"
+        controls={true}
+      />
     </div>
 
     <div className="inline-block px-4 py-4 content-section">
